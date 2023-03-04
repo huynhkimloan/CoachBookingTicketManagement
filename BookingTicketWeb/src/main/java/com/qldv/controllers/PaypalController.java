@@ -63,7 +63,9 @@ public class PaypalController {
     
     private List<Transaction> getTransactionI(Seat seat){
         Details details = new Details();
-        details.setSubtotal(String.valueOf(seat.getPrice()));
+//        String sub = String.valueOf(seat.getPrice()* seat.getQuantity());
+        details.setSubtotal(String.valueOf(seat.getAmount()));
+        
 //        details.setShipping("0");
 //        details.setTax("0");
         
@@ -80,9 +82,9 @@ public class PaypalController {
         List<Item> items = new ArrayList<Item>();
         
         Item  item = new Item();
-        item.setCurrency("USD"). setName(seat.getName())
+        item.setCurrency("USD").setSku(String.valueOf(seat.getTripId()))
                 .setPrice(String.valueOf(seat.getPrice()))
-                .setQuantity("1");
+                .setQuantity(String.valueOf(seat.getQuantity()));
         
         items.add(item);
         itemList.setItems(items);

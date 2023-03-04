@@ -43,7 +43,7 @@ public class ExecutePaymentServlet {
 
             request.setAttribute("payer", payerInfo);
 
-            request.getRequestDispatcher("/WEB-INF/jsp/paybypaypal.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/successpage.jsp").forward(request, response);
         
         } catch (PayPalRESTException ex) {
             ex.printStackTrace();

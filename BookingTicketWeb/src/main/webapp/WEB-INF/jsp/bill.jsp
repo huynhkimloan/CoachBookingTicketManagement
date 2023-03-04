@@ -40,30 +40,27 @@
                             </div>
                         </div>
                     </div> 
-                    <!--                    <div>
-                                            <h6 style="text-align: right;"> <i class="fa-solid fa-hand-holding-dollar"></i>
-                                                Tổng tiền: <span id="amount" class="text-success" style="font-weight: bold"><fmt:formatNumber value="${seatStats.amount}" maxFractionDigits="3" type = "number" /></span> VNĐ  </h6>
-                                        </div>-->
                     <div>
                         <h6 style="text-align: right;"> <i class="fa-solid fa-hand-holding-dollar"></i>
-                            Tổng tiền: <input type="text" name="amount" id="amount" value="${seatStats.amount}"/>
-                    </div>-->
+                            Tổng tiền: <span id="amount" class="text-success" style="font-weight: bold"><fmt:formatNumber value="${seatStats.amount}" maxFractionDigits="3" type = "number" /></span> VNĐ  </h6>
+                    </div>
+                    <div>
+                        <input type="hidden" name="tripId" value="${tripId}"/>
+                        <input type="hidden" name="amount" value="${seatStats.amount}"/>
+                        <input type="hidden" name="price" value="${trip.routeId.price}"/>
+                        <input type="hidden" name="quantity" value="${counter}"/>
+                    </div>
 
                     <div>  
                         <h5 class="alert alert-secondary">Phương thức thanh toán</h5> 
                         <div class="row" style="margin-right: 7px">
                             <div class="col-sm-6 form-check" style="width: 50%">
-                                <!--<a href="<c:url value="/reservation/${tripId}/confirm-seat/user-information/success-momo"/>">-->
-                                    <!--                                    <div class="col">
-                                                                            <span class="btn border border-warning">
-                                                                                <img class="img-fluid icon" src="<c:url value="/img/momo.jpg"/>" alt="Momo" />
-                                                                                <p style="margin-bottom: 0">Ví MoMo</p>
-                                                                            </span>
-                                                                        </div>-->
-                                    <div>
+                                <div class="col">
+                                    <span class="btn border border-warning">
+                                        <img class="img-fluid icon" src="<c:url value="/img/paypal.jpg"/>" alt="Paypal" />
                                         <input type="submit" value="Ví paypal"/>
-                                    </div>
-                                <!--</a>-->                              
+                                    </span>
+                                </div>                         
                             </div>
                             <c:if test="${user.userrole=='Employee'||user.userrole=='Admin'}">  
                                 <div class="col-sm-6 form-check" style="width: 50%"> 

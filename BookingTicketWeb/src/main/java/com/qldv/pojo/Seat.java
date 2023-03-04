@@ -87,10 +87,11 @@ public class Seat implements Serializable {
         this.seatrow = seatrow;
     }
     
-    public Seat(String name, Long price, Long amount) {
-        this.price = price;
-        this.name = name;
+    public Seat(Long price, Long amount, int quantity, int tripId) {
+        this.price = price; 
         this.amount = amount;
+        this.quantity = quantity;
+        this.tripId = tripId;
     }
 
     public Integer getId() {
