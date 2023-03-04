@@ -13,16 +13,14 @@ import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payer;
 import com.paypal.api.payments.PayerInfo;
 import com.paypal.api.payments.Payment;
+import com.paypal.api.payments.PaymentExecution;
 import com.paypal.api.payments.RedirectUrls;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 import com.qldv.pojo.Seat;
-import com.qldv.pojo.Ticketdetail;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.soap.Detail;
-import org.springframework.stereotype.Controller;
 
 /**
  *
@@ -46,8 +44,9 @@ public class PaypalController {
         APIContext aPIContext = new APIContext(CLIENT_ID, CLIENT_SECRET, MODE);
         Payment approvePayment = requestPayment.create(aPIContext);
         
+        System.out.println(approvePayment);
         
-        return null;
+        return getApprovalLink(approvePayment);
     }
     
     private String getApprovalLink(Payment approvePayment){
@@ -65,9 +64,11 @@ public class PaypalController {
     private List<Transaction> getTransactionI(Seat seat){
         Details details = new Details();
         details.setSubtotal(String.valueOf(seat.getPrice()));
+//        details.setShipping("0");
+//        details.setTax("0");
         
         Amount amount = new Amount();
-        amount.setCurrency("VND");
+        amount.setCurrency("USD");
         amount.setTotal(String.valueOf(seat.getAmount()));
         amount.setDetails(details);
         
@@ -79,7 +80,7 @@ public class PaypalController {
         List<Item> items = new ArrayList<Item>();
         
         Item  item = new Item();
-        item.setCurrency("VND"). setName(seat.getName())
+        item.setCurrency("USD"). setName(seat.getName())
                 .setPrice(String.valueOf(seat.getPrice()))
                 .setQuantity("1");
         
@@ -96,10 +97,26 @@ public class PaypalController {
 
     private RedirectUrls getRedirectURLs() {
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl("http://localhost:8080/BookingTicketWeb");
-        redirectUrls.setReturnUrl("http://localhost:8080/BookingTicketWeb");
+        redirectUrls.setCancelUrl("http://localhost:8080/BookingTicketWeb/cancel");
+        redirectUrls.setReturnUrl("http://localhost:8080/BookingTicketWeb/review-payment");
     
         return redirectUrls;
+    }
+    
+    public Payment getPaymentDetails(String paymentId) throws PayPalRESTException{
+        APIContext aPIContext = new APIContext(CLIENT_ID, CLIENT_SECRET, MODE);
+        return Payment.get(aPIContext, paymentId);
+    }
+    
+    public Payment excutePayment(String paymentId, String payerId) throws PayPalRESTException{
+        PaymentExecution paymentExecution = new PaymentExecution();
+        paymentExecution.setPayerId(payerId);
+        
+        Payment payment = new Payment().setId(paymentId);
+        
+        APIContext aPIContext = new APIContext(CLIENT_ID, CLIENT_SECRET, MODE);
+        
+        return payment.execute(aPIContext, paymentExecution);
     }
 
     private Payer getPayerInformation() {

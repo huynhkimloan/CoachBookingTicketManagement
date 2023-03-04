@@ -62,10 +62,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/bill.jsp" />
     </definition>
-    <definition name="paybymomo" extends="baseLayout">
+    <definition name="paybypaypal" extends="baseLayout">
         <put-attribute name="title" value="Thanh toán momo" />
         <put-attribute name="content"
-                       value="/WEB-INF/jsp/paybymomo.jsp" />
+                       value="/WEB-INF/jsp/paybypaypal.jsp" />
     </definition>
     <definition name="confirmseat" extends="baseLayout">
         <put-attribute name="title" value="Xác nhận đặt ghế" />
@@ -96,6 +96,16 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Về chúng tôi" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/about.jsp" />
+    </definition>
+    <definition name="cancel" extends="baseLayout">
+        <put-attribute name="title" value="Hủy thanh toán" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/cancel.jsp" />
+    </definition>
+    <definition name="review-payment" extends="baseLayout">
+        <put-attribute name="title" value="Xem trước thanh toán" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/review-payment.jsp" />
     </definition>
     
     <!-- ADMIN -->
