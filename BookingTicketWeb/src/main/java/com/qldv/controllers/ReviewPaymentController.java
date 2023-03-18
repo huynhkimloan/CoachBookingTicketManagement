@@ -65,6 +65,8 @@ public class ReviewPaymentController {
 
             Trip trip = tripService.tripById(Integer.parseInt(item.get(0).getSku()));
             request.setAttribute("trip", trip);
+            request.setAttribute("counter", Utils.count((Map<Integer, Seat>) session.getAttribute("seat")));
+            request.setAttribute("seatStats", Utils.seatStats((Map<Integer, Seat>) session.getAttribute("seat")));
 
             request.setAttribute("counter", Utils.count((Map<Integer, Seat>) session.getAttribute("seat")));
             request.setAttribute("seatStats", Utils.seatStats((Map<Integer, Seat>) session.getAttribute("seat")));

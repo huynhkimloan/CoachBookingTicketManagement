@@ -5,6 +5,7 @@
  */
 package com.qldv.controllers;
 
+import com.qldv.pojo.Route;
 import com.qldv.pojo.Trip;
 import com.qldv.service.RouteService;
 import com.qldv.service.TripService;
@@ -32,10 +33,10 @@ public class TripContronller {
 
     @Autowired
     private TripService tripService;
-    
+
     @Autowired
     private RouteService routeService;
-    
+
     @RequestMapping("/trip")
     public String trip(Model model, @RequestParam(required = false) Map<String, String> params) throws ParseException {
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
@@ -51,8 +52,16 @@ public class TripContronller {
         }
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         model.addAttribute("trips", this.tripService.getRouteTrips(kw, kw1, fromDate, page));
-        model.addAttribute("counter", this.tripService.countTrip(this.tripService.getRouteTrips(kw, kw1, fromDate, page)));
+        model.addAttribute("counter", this.tripService.countTrip(kw, kw1, fromDate));
         return "trip";
     }
-    
+
+    @RequestMapping("/trip/{routeId}")
+    public String trip(Model model, @PathVariable("routeId") int routeId) {
+        Route route = this.routeService.findById(routeId);
+        model.addAttribute("trips", this.tripService.getDeparturedayTrips(routeId));
+        model.addAttribute("counter", this.tripService.countTrip(route.getStartingpoint(),route.getDestination(), null));
+        return "trip";
+    }
+
 }

@@ -272,15 +272,50 @@ public class TripRepositoryImpl implements TripRepository {
     }
 
     @Override
-    public long countTrip(Object obj) {
+    public long countTrip(String kw, String kw1, Date fromDate) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        try {
-            Query q = session.createQuery("SELECT count(*) FROM Object");
-            return Integer.parseInt(q.getSingleResult().toString());
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+        Root rootT = query.from(Trip.class);
+        Root rootR = query.from(Route.class);
+        List<Predicate> predicates = new ArrayList<>();
+
+        predicates.add(builder.equal(rootT.get("routeId"), rootR.get("id")));
+
+        predicates.add(builder.equal(rootT.get("active"), 1));
+
+        if (fromDate != null) {
+            predicates.add(builder.equal(rootT.get("departureday"), fromDate));
         }
-        return 0;
+        if (kw != null && !kw.isEmpty() && kw1 != null && !kw1.isEmpty()) {
+            predicates.add(builder.like(rootR.get("startingpoint").as(String.class),
+                    String.format("%%%s%%", kw)));
+            predicates.add(builder.like(rootR.get("destination").as(String.class),
+                    String.format("%%%s%%", kw1)));
+        }
+        
+        query.where(predicates.toArray(new Predicate[]{}));
+        query = query.multiselect(builder.count(rootT));
+        org.hibernate.query.Query q = session.createQuery(query);
+        return Long.parseLong(q.getSingleResult().toString());
+    }
+
+    @Override
+    public List<Trip> getDeparturedayTrips(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Trip> query = builder.createQuery(Trip.class);
+        Root rootT = query.from(Trip.class);
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.equal(rootT.get("routeId"), id));
+        predicates.add(builder.equal(rootT.get("active"), 1));
+        
+        
+        query.where(predicates.toArray(new Predicate[]{}));
+        query.orderBy(builder.asc(rootT.get("departureday")));
+        query = query.select(rootT);
+        org.hibernate.query.Query q = session.createQuery(query);
+        return q.getResultList();
     }
 
 }

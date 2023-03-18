@@ -97,7 +97,7 @@
         <c:forEach var="i" begin="0" end="${totalItem}">
             <c:url value="/admin/trips/list/${i+1}" var="action" />
             <li class="page-item"><a class="page-link" href="${action}"><c:out value="${i+1}"/></a></li>
-        </c:forEach>
+            </c:forEach>
     </ul>
 </nav>
 

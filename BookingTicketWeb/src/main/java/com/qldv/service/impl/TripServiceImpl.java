@@ -114,8 +114,13 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public long countTrip(Object obj) {
-        return this.tripRepository.countTrip(obj);
+    public long countTrip(String kw, String kw1, Date fromDate) {
+        return this.tripRepository.countTrip(kw, kw1, fromDate);
+    }
+
+    @Override
+    public List<Trip> getDeparturedayTrips(int id) {
+        return this.tripRepository.getDeparturedayTrips(id);
     }
 
 }

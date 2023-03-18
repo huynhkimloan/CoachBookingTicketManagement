@@ -46,5 +46,7 @@ public interface TripService {
     
     List<Trip> getListTripComment();
     
-    long countTrip(Object obj);
+    long countTrip(String kw, String kw1, Date fromDate);
+    
+    public List<Trip> getDeparturedayTrips(int id);
 }

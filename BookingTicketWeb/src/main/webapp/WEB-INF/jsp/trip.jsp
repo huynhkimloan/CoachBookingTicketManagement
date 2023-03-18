@@ -75,14 +75,13 @@
     <c:if test="${trips.size() != 0}">
         <div>
             <ul class="pagination">
-                <c:forEach begin="1" end="${counter}" var="a">
+                <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="a">
                     <li class="page-item"><a class="page-link" href="<c:url value="/trip" />?page=${a}">${a}</a></li>
                 </c:forEach>
             </ul>
         </div>
     </c:if>
     <hr> 
-    <h1>${counter}</h1>
     <c:forEach var="trip" items="${trips}">
         <div id="blocktrip">  
             <div class="card" style="width: 35%;">

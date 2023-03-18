@@ -100,8 +100,6 @@ public class User implements Serializable {
     @Size(max = 8)
     @Column(name = "userrole")
     private String userrole;
-    @Column(name = "pointplus")
-    private Integer pointplus;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Driver driver;
