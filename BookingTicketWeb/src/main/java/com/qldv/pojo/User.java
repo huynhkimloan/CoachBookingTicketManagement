@@ -288,19 +288,6 @@ public class User implements Serializable {
         this.avt = avt;
     }
 
-    /**
-     * @return the pointplus
-     */
-    public Integer getPointplus() {
-        return pointplus;
-    }
-
-    /**
-     * @param pointplus the pointplus to set
-     */
-    public void setPointplus(Integer pointplus) {
-        this.pointplus = pointplus;
-    }
 
     
 

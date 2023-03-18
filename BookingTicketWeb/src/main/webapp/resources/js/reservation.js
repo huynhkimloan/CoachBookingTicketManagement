@@ -118,7 +118,7 @@ function deleteSeat(seatId) {
 }
 
 function pay(tripId, method) {
-    var option = confirm('Bạn chắc chắn muốn thanh toán?');
+    var option = confirm('Bạn có chắc chắn muốn xóa không?');
     if (option === true) {
         fetch("/BookingTicketWeb/api/pay", {
             method: 'post',

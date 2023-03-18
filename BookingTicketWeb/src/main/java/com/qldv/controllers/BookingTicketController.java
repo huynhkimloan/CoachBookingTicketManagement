@@ -13,6 +13,7 @@ import com.qldv.service.TicketDetailService;
 import com.qldv.service.TripService;
 import com.qldv.service.UserService;
 import com.qldv.utils.Utils;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +45,7 @@ public class BookingTicketController {
     public String BookingTicket(Model model, @PathVariable("tripId") int tripId) {
         Trip t = tripService.tripById(tripId);
         Route r = t.getRouteId();
-        long price = r.getPrice();
+        long price = (long)Utils.sumMoney(new Date(), r);
         List<Seat> newSeatA = ticketDetailService.getSeat("A");
         List<Seat> newSeatB = ticketDetailService.getSeat("B");
         List<Object[]> occupiedSeats = ticketDetailService.findTicketsByTripId(tripId);
@@ -90,6 +91,8 @@ public class BookingTicketController {
             HttpServletRequest request, Authentication au) {
         User u = this.userDetailService.getUsers(au.getName()).get(0);
         Trip t = tripService.tripById(tripId);
+        Route r = t.getRouteId();
+        long price = (long)Utils.sumMoney(new Date(), r);
         Map<Integer, Seat> seat = (Map<Integer, Seat>) session.getAttribute("seat");
         if (seat != null) {
             model.addAttribute("seat", seat.values());
@@ -101,6 +104,7 @@ public class BookingTicketController {
         model.addAttribute("tripId", tripId);
         model.addAttribute("user", u);
         model.addAttribute("trip", t);
+        model.addAttribute("price", price);
         return "bill";
     }
     

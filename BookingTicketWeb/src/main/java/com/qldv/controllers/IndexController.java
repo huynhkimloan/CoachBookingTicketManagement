@@ -85,8 +85,9 @@ public class IndexController {
         String kw1 = params.getOrDefault("kw1", null);
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         List<Route> route = this.routeService.getRoutes(kw, kw1, page);
-        for (Route r : route) {
-            r.setPrice((long) Utils.sumMoney(new Date(), r));
+
+        for (Route r : route ){
+              r.setPrice((long)Utils.sumMoney(new Date(), r));
         }
 
         model.addAttribute("routes", route);
@@ -100,6 +101,7 @@ public class IndexController {
     public String userProfile(Authentication a, HttpServletRequest request) {
         User u = this.userDetailService.getUsers(a.getName()).get(0);
         request.getSession().setAttribute("user", u);
+        request.setAttribute("pointPlus", this.ticketDetailService.sumPointPlus(u.getId()));
         return "userprofile";
     }
 

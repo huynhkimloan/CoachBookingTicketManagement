@@ -193,7 +193,16 @@
                                 ${user.userrole}
                             </div>
                         </div>
-                        <hr>     
+                        <hr>   
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Điểm tích lũy</h6>
+                            </div>
+                            <div class="col-sm-9 text-danger" style="font-weight: bold">
+                                ${pointPlus}
+                            </div>
+                        </div>
+                        <hr> 
                         <c:if test="${user.userrole=='Employee'||user.userrole=='Driver'}">
                             <div class="row">
                                 <div class="col-sm-12">
@@ -263,21 +272,21 @@
 </div>
 <script src="<c:url value="/js/user.js"/>"></script>
 <script type="text/javascript">
-    function getImage()
-    {
-        const fileChoose = document.getElementById('firstimg');
-        document.getElementById('display-image').setAttribute('value',
-                fileChoose.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]);
-    }
-    function myFunction() {
-        var x = document.getElementById("passwordN");
-        var z = document.getElementById("confirmPassword");
-        if (x.type === "password" || z.type === "password") {
-            x.type = "text";
-            z.type = "text";
-        } else {
-            x.type = "password";
-            z.type = "password";
-        }
-    }
+                                                        function getImage()
+                                                        {
+                                                            const fileChoose = document.getElementById('firstimg');
+                                                            document.getElementById('display-image').setAttribute('value',
+                                                                    fileChoose.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]);
+                                                        }
+                                                        function myFunction() {
+                                                            var x = document.getElementById("passwordN");
+                                                            var z = document.getElementById("confirmPassword");
+                                                            if (x.type === "password" || z.type === "password") {
+                                                                x.type = "text";
+                                                                z.type = "text";
+                                                            } else {
+                                                                x.type = "password";
+                                                                z.type = "password";
+                                                            }
+                                                        }
 </script>

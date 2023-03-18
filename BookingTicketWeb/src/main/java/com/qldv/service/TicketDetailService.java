@@ -45,4 +45,6 @@ public interface TicketDetailService {
     boolean cancelTicket(Ticketdetail cancel);
     
     Ticketdetail getTicketById(int id);
+    
+    long sumPointPlus(int userId);
 }
