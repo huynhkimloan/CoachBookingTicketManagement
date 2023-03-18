@@ -44,8 +44,6 @@ public class PaypalController {
         APIContext aPIContext = new APIContext(CLIENT_ID, CLIENT_SECRET, MODE);
         Payment approvePayment = requestPayment.create(aPIContext);
         
-        System.out.println(approvePayment);
-        
         return getApprovalLink(approvePayment);
     }
     

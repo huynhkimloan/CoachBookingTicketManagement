@@ -78,6 +78,7 @@ public class ApiBookingController {
         String method = params.get("method");
 
         if (this.ticketDetailService.addReceipt((Map<Integer, Seat>) session.getAttribute("seat"), u.getId(), method) == true) {
+            
             session.removeAttribute("seat");
             return HttpStatus.OK;
         }

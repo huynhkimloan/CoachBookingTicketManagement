@@ -79,9 +79,6 @@ public class IndexController {
 //        List<Double> prices = new ArrayList<>();
         List<Route> route = this.routeService.getRoutes(kw, kw1, page);
         for (Route r : route ){
-//            for (double obj : prices){
-//                obj = Utils.sumMoney(new Date(), r);
-//            }
               r.setPrice((long)Utils.sumMoney(new Date(), r));
         }
         
@@ -95,6 +92,7 @@ public class IndexController {
     public String userProfile(Authentication a, HttpServletRequest request) {
         User u = this.userDetailService.getUsers(a.getName()).get(0);
         request.getSession().setAttribute("user", u);
+        request.setAttribute("pointPlus", this.ticketDetailService.sumPointPlus(u.getId()));
         return "userprofile";
     }
     

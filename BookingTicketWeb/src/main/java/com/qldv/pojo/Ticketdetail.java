@@ -66,6 +66,9 @@ public class Ticketdetail implements Serializable {
     @Column(name = "active")
     private Boolean active;
     
+    @Column(name = "pointplus")
+    private Integer pointplus;
+    
     @JoinColumn(name = "passengercar_id", referencedColumnName = "id")
     @ManyToOne
     private Passengercar passengercarId;
@@ -208,6 +211,20 @@ public class Ticketdetail implements Serializable {
      */
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    /**
+     * @return the pointplus
+     */
+    public Integer getPointplus() {
+        return pointplus;
+    }
+
+    /**
+     * @param pointplus the pointplus to set
+     */
+    public void setPointplus(Integer pointplus) {
+        this.pointplus = pointplus;
     }
     
 }

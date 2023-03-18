@@ -28,6 +28,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -133,9 +134,14 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
     }
 
     @Override
+    @Transactional(propagation = Propagation.NESTED)
     public boolean addReceipt(Map<Integer, Seat> seat, int uId, String method) {
         try {
             Session session = this.sessionFactory.getObject().getCurrentSession();
+//            
+//            User user = this.userRepository.getById(uId);
+//            user.setPointplus(point);
+//            this.userRepository.editUser(user);
 
             for (Seat s : seat.values()) {
                 Ticketdetail ticket = new Ticketdetail();
@@ -146,9 +152,13 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
                 ticket.setTripId(this.tripRepository.tripById(s.getTripId()));
                 ticket.setUserId(this.userRepository.getById(uId));
                 ticket.setPassengercarId(this.passengerRepository.getById(s.getPasCarId()));
+                ticket.setActive(Boolean.TRUE);
+                ticket.setPointplus((int)(s.getPrice()*0.001));
 
                 session.save(ticket);
             }
+            
+           
 
             return true;
         } catch (HibernateException ex) {
@@ -217,7 +227,7 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
         Predicate p = builder.equal(root.get("userId"), rootU.get("id"));
         Predicate pp = builder.equal(root.get("passengercarId"), rootP.get("id"));
         Predicate ppp = builder.equal(root.get("tripId"), rootT.get("id"));
-        
+
         if (params != null) {
             String kw = params.get("kw");
             if (kw != null && !kw.isEmpty()) {
@@ -267,6 +277,7 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
     }
 
     @Override
+
     public List<Ticketdetail> getTicketOfUser(int userId, Date date) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -274,7 +285,7 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
         Root rootU = query.from(User.class);
         Root rootT = query.from(Ticketdetail.class);
         List<Predicate> predicates = new ArrayList<>();
-        
+
         predicates.add(builder.equal(rootU.get("id"), rootT.get("userId")));
         predicates.add(builder.equal(rootT.get("userId"), userId));
         predicates.add(builder.equal(rootT.get("active"), 1));
@@ -305,6 +316,19 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
 
         return session.get(Ticketdetail.class, id);
+    }
+
+    @Override
+    public long sumPointPlus(int userId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            Query q = session.createQuery("SELECT sum(pointplus) FROM Ticketdetail WHERE userId.id =:userId");
+            q.setParameter("userId", userId);
+            return Long.parseLong(q.getSingleResult().toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0l; 
     }
 
 }

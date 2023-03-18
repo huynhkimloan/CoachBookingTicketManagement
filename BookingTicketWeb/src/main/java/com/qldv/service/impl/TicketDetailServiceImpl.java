@@ -97,4 +97,9 @@ public class TicketDetailServiceImpl implements TicketDetailService{
     public Ticketdetail getTicketById(int id) {
         return this.ticketDetailRepository.getTicketById(id);
     }
+
+    @Override
+    public long sumPointPlus(int i) {
+        return this.ticketDetailRepository.sumPointPlus(i);
+    }
 }

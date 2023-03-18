@@ -47,7 +47,7 @@
                     <div>
                         <input type="hidden" name="tripId" value="${tripId}"/>
                         <input type="hidden" name="amount" value="${seatStats.amount}"/>
-                        <input type="hidden" name="price" value="${trip.routeId.price}"/>
+                        <input type="hidden" name="price" value="${price}"/>
                         <input type="hidden" name="quantity" value="${counter}"/>
                     </div>
 

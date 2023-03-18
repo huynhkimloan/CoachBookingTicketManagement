@@ -38,7 +38,7 @@ public class Utils {
     }
     
     public static Map<String, String> seatStats(Map<Integer, Seat> seat) {
-        Long a =0l;
+        Long a = 0l;
         int q = 0;
         
         if (seat != null)
