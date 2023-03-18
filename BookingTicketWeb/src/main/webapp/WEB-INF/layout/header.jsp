@@ -19,6 +19,12 @@
                     <c:url value="/" var="action" />
                     <a class="nav-link text-white" href="${action}" style= "font-weight: bold;">TRANG CHỦ</a>
                 </li>
+                <c:if test="${currentUser.userrole == 'Customer'}">
+                <li class="nav-item">
+                    <a class="nav-link text-info" href="<c:url value="/feedback" />" style="margin-left: 40px; font-weight: bold">
+                        PHẢN HỒI</a>
+                </li>
+                </c:if>
                 <c:if test="${currentUser.userrole == 'Driver'}">
                 <li class="nav-item">
                     <a class="nav-link text-info" href="<c:url value="/ad/driverdetails/list" />" style="margin-left: 40px; font-weight: bold">

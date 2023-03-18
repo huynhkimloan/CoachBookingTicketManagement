@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public interface TripRepository {
 
-    List<Trip> getDeparturedayTrips(Date kw, int id);
+    List<Trip> getRouteTrips(String kw, String kw1, Date fromDate, int page);
 
     List<Trip> findById(int routeId);
 
@@ -43,4 +43,10 @@ public interface TripRepository {
     Trip tripById(int tripId);
     
     List<Trip> tripComment();
+    
+    List<Trip> getListTripComment();
+    
+    long countTrip(Object obj);
+    
+    
 }

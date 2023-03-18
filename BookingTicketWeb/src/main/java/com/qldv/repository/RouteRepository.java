@@ -7,6 +7,7 @@ package com.qldv.repository;
 
 import com.qldv.pojo.Route;
 import com.qldv.pojo.Trip;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,8 @@ public interface RouteRepository {
 
     Route findById(int routeId);
 
+    
+    
     List<Route> getRoutes(String kw, String kw1, int page);
 
     List<Route> getRouteById(int id);

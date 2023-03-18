@@ -4,7 +4,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-<form action="">
+<form action="<c:url value="/trip"/>">
     <div id="demo" class="carousel slide" data-bs-ride="carousel" style="padding-top:10px;  ">
 
         <!-- Indicators/dots -->
@@ -47,8 +47,54 @@
             <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
             </button>
+<!--<form action="">-->
+    <div class="row searchRoute" >
+        <div style="width:100%; display:flex; ">
+            <div class="selectPoint" >
+                <h5>ĐIỂM ĐI</h5>
+                <div class="nav-item point" style="margin-left: 10px;">
+                    <input class="form-control" list="browsers" name="kw" id="startingpoint">
+                    <datalist id="browsers">
+                        <option value="Sài Gòn">
+                        <option value="Bình Định">
+                        <option value="Phú Yên">
+                        <option value="Bạc Liêu">
+                        <option value="Bến Tre">
+                        <option value="Hà Nội">
+                        <option value="Đà Nẵng">
+                        <option value="Cần Thơ">
+                    </datalist>
+                </div>
+            </div>
+            <div class="nav-item " style="border-color: #262626; margin-top: 40px;"><i class="fa-solid fa-arrow-right-arrow-left btnpoint"></i></div>
+            <div class="selectPoint">
+                <h5>ĐIỂM ĐẾN</h5>
+                <div class="nav-item point" style="margin-left: 10px;">
+                    <input class="form-control" list="browsers" name="kw1" id="destination">
+                    <datalist id="browsers">
+                        <option value="Sài Gòn">
+                        <option value="Bình Định">
+                        <option value="Phú Yên">
+                        <option value="Bạc Liêu">
+                        <option value="Bến Tre">
+                        <option value="Hà Nội">
+                        <option value="Đà Nẵng">
+                        <option value="Cần Thơ">
+                    </datalist>
+                </div> 
+            </div>
+            <div class="selectPoint">
+                <h5>CHỌN NGÀY ĐI</h5>
+                <div class="nav-item point" style="margin-left: 10px;">
+                    <input type="date" name="kw2" id="departureday1"  class="form-control" /> 
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Tìm" id="submitdepartureday" class="btn btn-dark"/>
 
-            <div class="row searchRoute" >
+    </div>
+<!--</form>-->
+<!--            <div class="row searchRoute" >
                 <div style="width:100%; display:flex; ">
                     <div class="selectPoint" >
                         <h5>ĐIỂM ĐI</h5>
@@ -87,7 +133,7 @@
             </div>
             <div class=" btnSearch" >
                 <input style=" border-radius: 5px;" id="search-search" type="submit" value="TÌM TUYẾN" />
-            </div>
+            </div>-->
         </div>
     </div>
 </form>

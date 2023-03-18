@@ -23,6 +23,8 @@
                             <p>Giờ khởi hành: <fmt:formatDate type = "time" value = "${i.tripId.departuretime}" /> </p>
                             <p>Ngày khởi hành: <fmt:formatDate pattern = "dd/MM/yyyy" value = "${i.tripId.departureday}" /> </p>
                             <p>Ghế: ${i.seatId.name}</p>
+                            <input type ="hidden" name="createddate" value="${i.createddate}"/>
+                            
                         </div>
                         <div style="margin: 0 auto">
                             <c:url value="/info-ticket/${i.id}" var="c" />

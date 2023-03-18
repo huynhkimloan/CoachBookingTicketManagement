@@ -100,6 +100,8 @@ public class User implements Serializable {
     @Size(max = 8)
     @Column(name = "userrole")
     private String userrole;
+    @Column(name = "pointplus")
+    private Integer pointplus;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Driver driver;
@@ -284,6 +286,20 @@ public class User implements Serializable {
      */
     public void setAvt(MultipartFile avt) {
         this.avt = avt;
+    }
+
+    /**
+     * @return the pointplus
+     */
+    public Integer getPointplus() {
+        return pointplus;
+    }
+
+    /**
+     * @param pointplus the pointplus to set
+     */
+    public void setPointplus(Integer pointplus) {
+        this.pointplus = pointplus;
     }
 
     

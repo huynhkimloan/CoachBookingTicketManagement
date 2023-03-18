@@ -37,6 +37,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/userdetail.jsp" />
     </definition>
+    <definition name="feedback" extends="baseLayout">
+        <put-attribute name="title" value="Phản hồi" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/feedback.jsp" />
+    </definition>
     <definition name="info-ticket" extends="baseLayout">
         <put-attribute name="title" value="Thông tin vé" />
         <put-attribute name="content"

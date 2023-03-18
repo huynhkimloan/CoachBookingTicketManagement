@@ -6,35 +6,24 @@
 package com.qldv.repository.impl;
 
 import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.qldv.pojo.Route;
 import com.qldv.pojo.Trip;
 import com.qldv.repository.RouteRepository;
-import com.qldv.service.impl.RouteServiceImpl;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import org.apache.commons.io.IOUtils;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -189,22 +178,24 @@ public class RouteRepositoryImpl implements RouteRepository {
 
         return session.get(Route.class, routeId);
     }
-
     @Override
     public List<Route> getRoutes(String kw, String kw1, int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Route> query = builder.createQuery(Route.class);
-        Root root = query.from(Route.class);
-        query = query.select(root);
-
+        
+        Root rootR = query.from(Route.class);
+        query = query.select(rootR);
+        
         if (kw != null && !kw.isEmpty() && kw1 != null && !kw1.isEmpty()) {
-            Predicate p = builder.like(root.get("startingpoint").as(String.class),
+        Predicate p = builder.like(rootR.get("startingpoint").as(String.class),
                     String.format("%%%s%%", kw));
-            Predicate p1 = builder.like(root.get("destination").as(String.class),
+        Predicate p1 = builder.like(rootR.get("destination").as(String.class),
                     String.format("%%%s%%", kw1));
-            query = query.where(p, p1);
+        query = query.where(p, p1);
+        
         }
+        
         org.hibernate.query.Query q = session.createQuery(query);
         //Phân trang
         int max = 6;
@@ -212,6 +203,8 @@ public class RouteRepositoryImpl implements RouteRepository {
         q.setFirstResult((page - 1) * max);
         return q.getResultList();
     }
+    
+    
 
     @Override
     public List<Route> getRouteById(int id) {
@@ -249,4 +242,8 @@ public class RouteRepositoryImpl implements RouteRepository {
         Query q = session.createQuery("Select Count(*) From Route");
         return Long.parseLong(q.getSingleResult().toString());
     }
+
+    
+
+    
 }

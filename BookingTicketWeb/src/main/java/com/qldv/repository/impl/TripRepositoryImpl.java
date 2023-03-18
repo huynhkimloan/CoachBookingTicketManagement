@@ -38,11 +38,8 @@ public class TripRepositoryImpl implements TripRepository {
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
-    
-
     @Override
-    public List<Trip> getDeparturedayTrips(Date kw, int id) {
-
+    public List<Trip> getRouteTrips(String kw, String kw1, Date fromDate, int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Trip> query = builder.createQuery(Trip.class);
@@ -51,15 +48,34 @@ public class TripRepositoryImpl implements TripRepository {
         List<Predicate> predicates = new ArrayList<>();
 
         predicates.add(builder.equal(rootT.get("routeId"), rootR.get("id")));
-        predicates.add(builder.equal(rootT.get("routeId"), id));
-        query = query.select(rootT);
 
-        if (kw != null) {
-            predicates.add(builder.equal(rootT.get("departureday"), kw));
+        predicates.add(builder.equal(rootT.get("active"), 1));
+
+        if (fromDate != null) {
+            predicates.add(builder.equal(rootT.get("departureday"), fromDate));
         }
+        if (kw != null && !kw.isEmpty() && kw1 != null && !kw1.isEmpty()) {
+            predicates.add(builder.like(rootR.get("startingpoint").as(String.class),
+                    String.format("%%%s%%", kw)));
+            predicates.add(builder.like(rootR.get("destination").as(String.class),
+                    String.format("%%%s%%", kw1)));
+//            Predicate p = builder.like(rootR.get("startingpoint").as(String.class),
+//                    String.format("%%%s%%", kw));
+//            Predicate p1 = builder.like(rootR.get("destination").as(String.class),
+//                    String.format("%%%s%%", kw1));
+//            query = query.where(p, p1);
+
+        }
+        query = query.select(rootT);
+        
         query.where(predicates.toArray(new Predicate[]{}));
         query.orderBy(builder.asc(rootT.get("departureday")));
         org.hibernate.query.Query q = session.createQuery(query);
+
+        //Phân trang
+        int max = 6;
+        q.setMaxResults(max);
+        q.setFirstResult((page - 1) * max);
         return q.getResultList();
     }
 
@@ -84,7 +100,7 @@ public class TripRepositoryImpl implements TripRepository {
         Root root = query.from(Trip.class);
         query = query.select(root);
         Query q = session.createQuery(query);
-        
+
         return q.getResultList();
     }
 
@@ -101,7 +117,8 @@ public class TripRepositoryImpl implements TripRepository {
         Predicate p = builder.equal(root.get("userIdEmployee"), rootU.get("id"));
         Predicate pp = builder.equal(root.get("routeId"), rootR.get("id"));
         Predicate ppp = builder.equal(root.get("passengercarId"), rootP.get("id"));
-        
+        query = query.where(builder.equal(root.get("active"), 1));
+
         if (params != null) {
             String kw = params.get("kw");
             if (kw != null && !kw.isEmpty()) {
@@ -231,14 +248,39 @@ public class TripRepositoryImpl implements TripRepository {
         Root rootT = query.from(Trip.class);
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
         long s = System.currentTimeMillis();
-        
+
         Date day = new Date(s);
         query = query.select(rootT);
-        Predicate p1 = builder.lessThanOrEqualTo(rootT.get("departureday"),day);
+        Predicate p1 = builder.lessThanOrEqualTo(rootT.get("departureday"), day);
         query = query.where(p1);
 
         Query q = session.createQuery(query);
         return q.getResultList();
+    }
+
+    @Override
+    public List<Trip> getListTripComment() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Trip> query = builder.createQuery(Trip.class);
+        Root root = query.from(Trip.class);
+        query = query.select(root);
+        query = query.where(builder.equal(root.get("active"), 0));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public long countTrip(Object obj) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            Query q = session.createQuery("SELECT count(*) FROM Object");
+            return Integer.parseInt(q.getSingleResult().toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
     }
 
 }

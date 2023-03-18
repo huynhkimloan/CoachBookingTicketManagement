@@ -36,8 +36,8 @@ public class TripServiceImpl implements TripService {
     private Cloudinary cloudinary;
 
     @Override
-    public List<Trip> getDeparturedayTrips(Date kw, int id) {
-        return this.tripRepository.getDeparturedayTrips(kw, id);
+    public List<Trip> getRouteTrips(String kw, String kw1, Date date, int page) {
+        return this.tripRepository.getRouteTrips(kw, kw1, date, page);
     }
 
     @Override
@@ -106,6 +106,16 @@ public class TripServiceImpl implements TripService {
     @Override
     public List<Trip> tripComment() {
         return this.tripRepository.tripComment();
+    }
+
+    @Override
+    public List<Trip> getListTripComment() {
+        return this.tripRepository.getListTripComment();
+    }
+
+    @Override
+    public long countTrip(Object obj) {
+        return this.tripRepository.countTrip(obj);
     }
 
 }

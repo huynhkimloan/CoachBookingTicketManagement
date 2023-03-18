@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -94,11 +95,6 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public List<Route> getRoutes(String kw, String kw1, int page) {
-        return this.routeRepository.getRoutes(kw, kw1, page);
-    }
-
-    @Override
     public List<Route> getRouteById(int id) {
         return this.routeRepository.getRouteById(id);
     }
@@ -112,5 +108,17 @@ public class RouteServiceImpl implements RouteService {
     public long countRoute() {
         return this.routeRepository.countRoute();
     }
+
+//    @Override
+//    public List<Route> getRoutes(String string, String string1, Date date, int i) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
+    @Override
+    public List<Route> getRoutes(String kw, String kw1, int page) {
+        return this.routeRepository.getRoutes(kw, kw1, page);
+    }
+
+   
 
 }

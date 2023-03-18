@@ -12,6 +12,8 @@ import com.qldv.service.UserService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
@@ -34,10 +36,10 @@ public class UserController {
 
     @Autowired
     private UserService userDetailService;
-    
-     @Autowired
+
+    @Autowired
     private TicketDetailService ticketDetailService;
-     
+
     @Autowired
     private MailSender mailSender;
 
@@ -53,16 +55,16 @@ public class UserController {
         return "register";
     }
 
-    public void sendMail(String from, String to, String subject, String content){
+    public void sendMail(String from, String to, String subject, String content) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(from);
         mailMessage.setTo(to);
         mailMessage.setSubject(subject);
         mailMessage.setText(content);
-        
+
         mailSender.send(mailMessage);
     }
-    
+
     @PostMapping("/register")
     public String registerProcess(Model model, @ModelAttribute(value = "user") @Valid User user, BindingResult result) {
         String errMsg = "";
@@ -84,37 +86,39 @@ public class UserController {
         return "register";
 
     }
-    
+
     @GetMapping("/info-ticket/{id}")
     public String cancelTicket(Model model, @PathVariable(value = "id") int ticketId) {
         model.addAttribute("cancel", this.ticketDetailService.getTicketById(ticketId));
         return "cancel-ticket";
     }
-    
+
     @PostMapping("/info-ticket-confirm")
-    public String cancelTicket(Model model, @ModelAttribute(value="cancel") @Valid Ticketdetail cancel, 
-           
-            BindingResult result, Authentication a) throws ParseException{
+    public String cancelTicket(Model model, @ModelAttribute(value = "cancel") @Valid Ticketdetail cancel,
+            BindingResult result, Authentication a, HttpServletRequest request, HttpServletResponse response) throws ParseException {
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        String createddate = request.getParameter("createddate");
         User u = this.userDetailService.getUsers(a.getName()).get(0);
-        String errMsg ="";
+        String errMsg = "";
 //         if(result.hasErrors())
 //            errMsg = "Vui lòng kiểm tra lại thông tin hủy vé!";
 //        else{
 //            Date d = (f.parse(params.getOrDefault("cd", null)));
-        
-            cancel.setUserId(u);
-            cancel.setCreateddate(new Date());
+
+        cancel.setUserId(u);
+        cancel.setCreateddate(f.parse(createddate));
+//        cancel.setCreateddate(new Date());
 //            String date = f.format(cancel.getCreateddate());
 //        try {
 //            cancel.setCreateddate(f.parse(date));
 //        } catch (ParseException ex) {
 //            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-            if(this.ticketDetailService.cancelTicket(cancel) ==  true)
-                return "redirect:/info-ticket";
-            else
-                errMsg = "Đã có lỗi xảy ra, không hủy vé được!!!"; 
+        if (this.ticketDetailService.cancelTicket(cancel) == true) {
+            return "redirect:/info-ticket";
+        } else {
+            errMsg = "Đã có lỗi xảy ra, không hủy vé được!!!";
+        }
 //            }
         model.addAttribute("errMsg", errMsg);
         model.addAttribute("d", cancel.getCreateddate());
