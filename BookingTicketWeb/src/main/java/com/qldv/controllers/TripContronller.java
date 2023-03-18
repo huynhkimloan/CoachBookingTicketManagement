@@ -7,15 +7,14 @@ package com.qldv.controllers;
 
 import com.qldv.pojo.Trip;
 import com.qldv.service.RouteService;
-import com.qldv.service.TicketDetailService;
 import com.qldv.service.TripService;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,23 +33,25 @@ public class TripContronller {
     @Autowired
     private TripService tripService;
     
-
-    @RequestMapping("/trip/{routeId}")
-    public String trip(Model model, @PathVariable("routeId") int routeId, @ModelAttribute(value = "trip") Trip trip, @RequestParam(required = false) Map<String, String> params) {
-       
+    @Autowired
+    private RouteService routeService;
+    
+    @RequestMapping("/trip")
+    public String trip(Model model, @RequestParam(required = false) Map<String, String> params) throws ParseException {
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-        
         Date fromDate = null;
-        String from = params.getOrDefault("kw", null);
-        if(from != null)
+        String kw = params.getOrDefault("kw", null);
+        String kw1 = params.getOrDefault("kw1", null);
+        String from = params.getOrDefault("kw2", null);
+        if (from != null)
             try {
-                fromDate = f.parse(from);
+            fromDate = f.parse(from);
         } catch (ParseException ex) {
             Logger.getLogger(TripContronller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        model.addAttribute("tripDeparturedays", this.tripService.getDeparturedayTrips(fromDate, routeId));
-        
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        model.addAttribute("trips", this.tripService.getRouteTrips(kw, kw1, fromDate, page));
+        model.addAttribute("counter", this.tripService.countTrip(this.tripService.getRouteTrips(kw, kw1, fromDate, page)));
         return "trip";
     }
     

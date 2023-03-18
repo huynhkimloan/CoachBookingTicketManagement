@@ -154,7 +154,7 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
                 ticket.setPassengercarId(this.passengerRepository.getById(s.getPasCarId()));
                 ticket.setActive(Boolean.TRUE);
                 ticket.setPointplus((int)(s.getPrice()*0.001));
-
+                
                 session.save(ticket);
             }
             
@@ -284,12 +284,14 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
         CriteriaQuery<Ticketdetail> query = builder.createQuery(Ticketdetail.class);
         Root rootU = query.from(User.class);
         Root rootT = query.from(Ticketdetail.class);
+        Root rootTrip = query.from(Trip.class);
         List<Predicate> predicates = new ArrayList<>();
 
         predicates.add(builder.equal(rootU.get("id"), rootT.get("userId")));
+        predicates.add(builder.equal(rootTrip.get("id"), rootT.get("tripId")));
         predicates.add(builder.equal(rootT.get("userId"), userId));
         predicates.add(builder.equal(rootT.get("active"), 1));
-        predicates.add(builder.greaterThanOrEqualTo(rootT.get("createddate"), date));
+        predicates.add(builder.greaterThanOrEqualTo(rootTrip.get("departureday"), date));
         query.where(predicates.toArray(new Predicate[]{}));
         query = query.select(rootT);
         Query q = session.createQuery(query);

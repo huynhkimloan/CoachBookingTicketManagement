@@ -54,45 +54,55 @@
     </button>
 </div>
 
-<form action="" style="margin-top: 70px;">
-    <div id="search-departureday">
-        <div style="width: 100%;display: flex; margin-top: 20px;">
-            <label style="width: 20%; font-size:20px; margin-left: 80px; margin-top: 45px;">Chọn ngày đi  </label>
-            <input type="date" name="kw" id="departureday1"  class="form-control" /> 
+<!--<form action="" style="margin-top: 70px;">
+            <div id="search-departureday">
+                <div style="width: 100%;display: flex; margin-top: 20px;">
+                    <label style="width: 20%; font-size:20px; margin-left: 80px; margin-top: 45px;">Chọn ngày đi  </label>
+                    <input type="date" name="kw" id="departureday1"  class="form-control" /> 
 
-        </div>  
-        <input type="submit" value="Tìm" id="submitdepartureday" class="btn btn-dark"/>
-    </div>  
-</form>
+                </div>  
+                <input type="submit" value="Tìm" id="submitdepartureday" class="btn btn-dark"/>
+            </div>  
+        </form>-->
 
 <div class="row trip-body" style="margin-top: 70px;">
     <div>
         <h1 id="nen">Danh sách các chuyến đi</h1>
     </div>
-    <c:if test="${tripDeparturedays.size() == 0}">
+    <c:if test="${trips.size() == 0}">
         <div class="alert alert-danger" style="margin-left: 27%; width: 50%; font-size: 20px; text-align: center">Hôm nay không có chuyến xe nào khởi hành !!!</div>  
     </c:if>
+    <c:if test="${trips.size() != 0}">
+        <div>
+            <ul class="pagination">
+                <c:forEach begin="1" end="${counter}" var="a">
+                    <li class="page-item"><a class="page-link" href="<c:url value="/trip" />?page=${a}">${a}</a></li>
+                </c:forEach>
+            </ul>
+        </div>
+    </c:if>
     <hr> 
-    <c:forEach var="tripDepartureday" items="${tripDeparturedays}">
+    <h1>${counter}</h1>
+    <c:forEach var="trip" items="${trips}">
         <div id="blocktrip">  
             <div class="card" style="width: 35%;">
-                <img style=" height: 300px;" class=" img-fluid card-header" id="trip-img" src="<c:url value="${tripDepartureday.image}"/>" alt="${tripDepartureday.coachname}" />  
+                <img style=" height: 300px;" class=" img-fluid card-header" id="trip-img" src="<c:url value="${trip.image}"/>" alt="${trip.coachname}" />  
             </div>
             <div id="trip-right">
                 <div style="display: flex">   
-                    <h1> <i class="fa-solid fa-bus" id="coachname"></i> ${tripDepartureday.routeId.startingpoint} - ${tripDepartureday.routeId.destination}</h1>
-                    <h9 style="margin-left: 170px; margin-top: 18px;"><i class="fa-solid fa-calendar-check"> </i> <fmt:formatDate pattern = "dd/MM/yyyy" value = "${tripDepartureday.departureday}" /></h9>
+                    <h1> <i class="fa-solid fa-bus" id="coachname"></i> ${trip.routeId.startingpoint} - ${trip.routeId.destination}</h1>
+                    <h9 style="margin-left: 170px; margin-top: 18px;"><i class="fa-solid fa-calendar-check"> </i> <fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.departureday}" /></h9>
                 </div>
                 <hr>                   
                 <div id="trip-p">
-                    <p id="p-1" ><i class="fa-solid fa-hourglass-start"></i> Thời gian đi: <fmt:formatDate type = "time" value = "${tripDepartureday.departuretime}" />  </p>  
-                    <p id="p-2" ><i class="fa-solid fa-hourglass-end"></i> Thời gian đến: <fmt:formatDate type = "time" value = "${tripDepartureday.arrivaltime}" /> </p>
+                    <p id="p-1" ><i class="fa-solid fa-hourglass-start"></i> Thời gian đi: <fmt:formatDate type = "time" value = "${trip.departuretime}" />  </p>  
+                    <p id="p-2" ><i class="fa-solid fa-hourglass-end"></i> Thời gian đến: <fmt:formatDate type = "time" value = "${trip.arrivaltime}" /> </p>
                 </div>  
 
                 <div id="trip-p">
-                    <p id="p-1" ><i class="fa-solid fa-chair"></i> Ghế trống: <input style=" border: none;background-color: white" id="result-${tripDepartureday.id}"
-                                                                                     onmouseover ="cRemain(${tripDepartureday.id})"/></p>
-                    <p id="p-2" ><i class="fa-solid fa-bus-simple"></i> Loại: ${tripDepartureday.passengercarId.categoryId.categoryname}</p>
+                    <p id="p-1" ><i class="fa-solid fa-chair"></i> Ghế trống: <input style=" border: none;background-color: white" id="result-${trip.id}"
+                                                                                     onmouseover ="cRemain(${trip.id})"/></p>
+                    <p id="p-2" ><i class="fa-solid fa-bus-simple"></i> Loại: ${trip.passengercarId.categoryId.categoryname}</p>
                 </div>
 
                 <div id="trip-a" >                        
@@ -100,9 +110,9 @@
                         <a href="<c:url value="/login"/>" id="priceInfo"  class="btn btn-dark action">Đặt</a>
                     </c:if>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
-                        <a href="<c:url value="/reservation/${tripDepartureday.id}"/>" id="priceInfo"  class="btn btn-dark action">Đặt</a>
+                        <a href="<c:url value="/reservation/${trip.id}"/>" id="priceInfo"  class="btn btn-dark action">Đặt</a>
                     </c:if>                    
-                    <a href="<c:url value="/comment/${tripDepartureday.id}"/>"  id="priceInfo" style="margin-left: 80px;" class="btn btn-dark action">Phản hồi</a>
+<!--                    <a href="<c:url value="/comment/${trip.id}"/>"  id="priceInfo" style="margin-left: 80px;" class="btn btn-dark action">Phản hồi</a>-->
                 </div>
             </div>
         </div>

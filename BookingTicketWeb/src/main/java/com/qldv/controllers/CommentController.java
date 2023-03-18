@@ -39,5 +39,12 @@ public class CommentController {
         return "comment";
     }
     
+    @RequestMapping("/feedback")
+    public String viewFeedbackPage(Model model, @RequestParam(required = false) Map<String, String> params) {
+       int page = Integer.parseInt(params.getOrDefault("page", "1"));
+       model.addAttribute("tripFeedback", this.tripService.getListTripComment());
+//       model.addAttribute("counter", this.tripService.countTrip());
+       return "feedback";
+    } 
     
 }

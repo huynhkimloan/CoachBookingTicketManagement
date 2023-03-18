@@ -21,7 +21,7 @@
                 </li>
                 <c:if test="${currentUser.userrole == 'Customer'}">
                 <li class="nav-item">
-                    <a class="nav-link text-info" href="<c:url value="/coment" />" style="margin-left: 40px; font-weight: bold">
+                    <a class="nav-link text-info" href="<c:url value="/feedback" />" style="margin-left: 40px; font-weight: bold">
                         PHẢN HỒI</a>
                 </li>
                 </c:if>
