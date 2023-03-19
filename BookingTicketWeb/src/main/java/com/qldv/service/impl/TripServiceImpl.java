@@ -119,8 +119,8 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public List<Trip> getDeparturedayTrips(int id) {
-        return this.tripRepository.getDeparturedayTrips(id);
+    public List<Trip> getDeparturedayTrips(int id, int page) {
+        return this.tripRepository.getDeparturedayTrips(id, page);
     }
 
 }

@@ -19,7 +19,7 @@ let textValidateDepartD = document.getElementById('invalid-feedback-day');
 let textValidateDepartT = document.getElementById('invalid-feedback-departT');
 let textValidateArrivalT = document.getElementById('invalid-feedback-arrival');
 
-let dateT = document.getElementById('departureday');
+let dateT = document.getElementById('departureday1');
 if (dateT) {
     const currentDate = new Date();
     let year = currentDate.getFullYear();

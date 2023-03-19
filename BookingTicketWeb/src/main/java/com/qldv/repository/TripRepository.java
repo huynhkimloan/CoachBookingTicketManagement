@@ -48,7 +48,7 @@ public interface TripRepository {
     
     long countTrip(String kw, String kw1, Date fromDate);
     
-    public List<Trip> getDeparturedayTrips(int id);
+    public List<Trip> getDeparturedayTrips(int id, int page);
     
     
 }

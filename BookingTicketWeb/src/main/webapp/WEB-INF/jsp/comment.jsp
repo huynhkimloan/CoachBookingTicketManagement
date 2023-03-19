@@ -17,32 +17,38 @@
 </div>
 
 
+<div style = "display: flex;">
+    <div id = "left" style = "margin: 5px; width:50%">
+        <img style=" height: 300px;" class=" img1 img-fluid card-header" src="<c:url value="${trip.image}"/>" alt="${trip.coachname}" />
+        <p style="margin:10px;">Hiện nay, xe khách Loan Hiền đã có mặt tại các thành phố lớn như Huế, Nha Trang, Đà Lạt, Cần Thơ, Đồng Tháp. Trong tương lai, xe buýt Loan Hiền đặt mục tiêu phủ rộng khắp các tỉnh thành trên cả nước, đáp ứng tối đa nhu cầu đi lại của người dân, giảm phương tiện cá nhân, góp phần thay đổi bộ mặt giao thông theo hướng hiện đại và tinh giản hơn</p>   
+    </div>
 
-<div class="row" style="margin-top: 30px; margin-left: 25%">
-    <div class="col-md-8 col-xs-6" style="padding:10px; margin: 10px;">
-        <div class="card">
-            <img style=" height: 300px;" class=" img1 img-fluid card-header" src="<c:url value="${trip.image}"/>" alt="${trip.coachname}" />                
-            <div class="card-body ">
-                <h2 style="font-family: 'Cambria', sans-serif;"> <i class="fa-solid fa-bus"></i> ${trip.routeId.startingpoint} - ${trip.routeId.destination} </h2>
-                <hr>                   
-                <h5><i class="fa-solid fa-calendar-check"></i> Ngày khởi hành: <fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.departureday}" /></h5>
-
-                <div style="display: flex; margin-top: 10px; ">
-                    <h5><i class="fa-solid fa-hourglass-start"></i> Thời gian đi: <fmt:formatDate type = "time" value = "${trip.departuretime}" /> </h5>  
-                    <h5 style="margin-left: 100px;"><i class="fa-solid fa-hourglass-end"></i> Thời gian đến: <fmt:formatDate type = "time" value = "${trip.arrivaltime}" /></h5>
-                </div>                    
+    <div id = "right" style = "margin: 5px;">
+        <p style="font-size: 55px;"><i class="fa-solid fa-bus" style="font-size: 55px;"></i>${trip.routeId.startingpoint} - ${trip.routeId.destination} </p>
+        
+        <h5 style="margin-top: 25px;"><i class="fa-solid fa-calendar-check"></i> Ngày khởi hành: <fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.departureday}" /></h5>
+        <div style="display: flex; margin-top: 35px; ">
+            <h5 ><i class="fa-solid fa-hourglass-start"></i> Thời gian đi: <fmt:formatDate type = "time" value = "${trip.departuretime}" /> </h5>  
+            <h5 style="margin-left: 160px;"><i class="fa-solid fa-hourglass-end"></i> Thời gian đến: <fmt:formatDate type = "time" value = "${trip.arrivaltime}" /></h5>
+        </div>  
+        <div class="rating-box" style="display: flex; margin-top: 40px;">
+            <p style="margin: 5px;">Đánh giá: </p>
+            <div class="stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
             </div>
         </div>
+        <input id="sendcomment" type="submit" style="width: 20%; margin-left: 40%; margin-top: 30px; " value="Đánh giá" />
+        
     </div>
 </div>
-
-
 
 <c:if test="${comments.size() == 0}">
     <p>Không có bình luận</p>
 </c:if>
-
-
 
 <hr>
 <br>
@@ -56,15 +62,15 @@
             </div>
             <div class="be-comment-content">
 
-                <span class="be-comment-name">
-                    <p>${comment.customerId.name}</p>
+                <span class="be-comment-name"style="margin-bottom: 0px;">
+                    <p style="font-size:18px; ">${comment.customerId.name}</p>
                 </span>
-                <span class="be-comment-time comment-date">
+                <span class="be-comment-time comment-date" style="font-size:12px; ">
                     <i class="fa-solid fa-clock"></i>
                     ${comment.createddate}
                 </span>
 
-                <p class="be-comment-text">
+                <p class="be-comment-text" style="font-size:15px; margin-bottom: 30px;">
                     ${comment.content}
                 </p>
             </div>
@@ -111,3 +117,21 @@
     }
 </script>
 <script src="<c:url value="/js/comment.js"/>"></script>
+
+<script>
+    // Select all elements with the "i" tag and store them in a NodeList called "stars"
+    const stars = document.querySelectorAll(".stars i");
+
+// Loop through the "stars" NodeList
+    stars.forEach((star, index1) => {
+        // Add an event listener that runs a function when the "click" event is triggered
+        star.addEventListener("click", () => {
+            // Loop through the "stars" NodeList Again
+            stars.forEach((star, index2) => {
+                // Add the "active" class to the clicked star and any stars with a lower index
+                // and remove the "active" class from any stars with a higher index
+                index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
+            });
+        });
+    });
+</script>

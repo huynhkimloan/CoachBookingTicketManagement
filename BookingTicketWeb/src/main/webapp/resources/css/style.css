@@ -257,11 +257,27 @@ input.invalid {
     margin: 0px 25px 15px 15px;
 }
 
+#submitdepartureday {
+    margin-left: 74%;
+    width:21%;
+   font-weight: bold;
+    height: 48px;
+    font-size: 20px;
+    top: 5px;
+    background: #1c1c1d;
+/*    background: #c19b77;*/
+    /*background:linear-gradient(to right, white, rgba(100, 233, 100, 0.815),rgba(96, 198, 238, 0.473), white);*/
+    border: none;
+     position:relative;
+     z-index: 99999;
+/*    color: #1f708a;*/
+} 
+
 .searchRoute {
     /*border-style: groove;*/
     padding: 10px;
     border-radius: 15px;
-    margin: 360px 25px 0px 15px;
+    margin: 350px 25px 0px 15px;
     width: 63%;
     margin-left: 20%;  
     background-color: white;
@@ -269,7 +285,7 @@ input.invalid {
     box-shadow: 6px 6px 20px 6px rgba(0, 0, 0, 0.2);
     position:relative;
     z-index: 1;
-    height: 120px;
+    height: 130px;
     opacity: 0.6;
     font-family: Roboto;
 /*    background: rgba(76, 175, 80, 0.1);
@@ -345,11 +361,11 @@ div.infomation > div {
     margin-right: 30px; 
     border-style: dotted;
 
-    color: orange;
+    color: #c19b77;
 }
 .h1 {
     margin:10px;
-    color: orange; 
+    color: #c19b77; 
     text-align: left;
 }
 .show-p > p {
@@ -393,7 +409,7 @@ div.infomation > div {
 }
 
 .selectPoint > h5{
-    font-size: 25px;
+    font-size: 20px;
     text-align: center;
     font-weight: bold;
     color: black; 
@@ -538,17 +554,7 @@ div.infomation > div {
        
 }
 
-#submitdepartureday {
-    margin-left: 72%;
-    width:20%;
-   font-weight: bold;
-    height: 55px;
-    font-size: 23px;
-    margin-top: 8px;
-    background:linear-gradient(to right, white, rgba(100, 233, 100, 0.815),rgba(96, 198, 238, 0.473), white);
-    border: none;
-/*    color: #1f708a;*/
-}
+
 #trip-img {
     height: 250px;
     transition: transform 50s ;
@@ -561,28 +567,30 @@ div.infomation > div {
 
 /*COMMENT*/
 .divcomment {
-    background: linear-gradient(#bed9ff, #bbffd1);
+    background: #c19b77;
+    color: white !important;
     width: 80%;
     margin-left: 10%;
 }
 #sendcomment {
-    background: linear-gradient(#bed9ff, #bbffd1);
+    background: #c19b77;
     /*background: linear-gradient(#ffffc9,  #ffe8ff);*/
     border: white;
     height: 50px;
     font-size: 22px;
-    color: black;
+    color: white;
     border-radius: 12px;
 }
 #comment {
     /*position:fixed;*/
-    animation: chaychu 20s infinite, doimauchu 3s infinite ;
+    /*animation: chaychu 20s infinite, doimauchu 3s infinite ;*/
     width: 100%;
     font-size: 55px;
     font-weight: bold;
     display: block;
     margin-top: 30px;
     margin-left:40px;
+    text-align: center;
 
 
 }
@@ -1550,4 +1558,35 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+}
+
+.rating-box {
+  position: relative;
+  /*background: #fff;*/
+  /*padding: 25px 50px 35px;*/
+  /*border-radius: 25px;*/
+  /*box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);*/
+}
+
+.rating-box p {
+  font-size: 22px;
+/*  color: #dadada;*/
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.rating-box .stars {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-left: 20px;
+}
+.stars i {
+  color: #e6e6e6;
+  font-size: 35px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.stars i.active {
+  color: #ff9c1a;
 }

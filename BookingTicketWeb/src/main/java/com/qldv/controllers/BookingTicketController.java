@@ -122,17 +122,4 @@ public class BookingTicketController {
         return "successpage";
     }
     
-    @RequestMapping("/reservation/{tripId}/confirm-seat/user-information/success-momo")
-    public String successPageMomo(HttpSession session, @PathVariable("tripId") int tripId, Model model) {
-        Map<Integer, Seat> seat = (Map<Integer, Seat>) session.getAttribute("seat");
-        if (seat != null) {
-            model.addAttribute("seat", seat.values());
-        } else {
-            model.addAttribute("seat", null);
-        }
-        model.addAttribute("counter", Utils.count((Map<Integer, Seat>) session.getAttribute("seat")));
-        model.addAttribute("seatStats", Utils.seatStats((Map<Integer, Seat>) session.getAttribute("seat")));
-        model.addAttribute("tripId", tripId);
-        return "paybymomo";
-    }
 }
