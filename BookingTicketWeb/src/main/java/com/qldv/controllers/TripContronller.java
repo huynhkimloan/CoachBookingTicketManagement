@@ -6,20 +6,17 @@
 package com.qldv.controllers;
 
 import com.qldv.pojo.Route;
-import com.qldv.pojo.Trip;
 import com.qldv.service.RouteService;
 import com.qldv.service.TripService;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,11 +54,14 @@ public class TripContronller {
     }
 
     @RequestMapping("/trip/{routeId}")
-    public String trip(Model model, @PathVariable("routeId") int routeId) {
+    public String trip(Model model, @PathVariable("routeId") int routeId, @RequestParam(required = false) Map<String, String> params) {
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
         Route route = this.routeService.findById(routeId);
-        model.addAttribute("trips", this.tripService.getDeparturedayTrips(routeId));
+        model.addAttribute("trips", this.tripService.getDeparturedayTrips(routeId, page));
         model.addAttribute("counter", this.tripService.countTrip(route.getStartingpoint(),route.getDestination(), null));
+        model.addAttribute("routeId", routeId );
         return "trip";
     }
 
+//     
 }

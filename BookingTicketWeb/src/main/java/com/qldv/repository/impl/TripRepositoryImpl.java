@@ -301,7 +301,7 @@ public class TripRepositoryImpl implements TripRepository {
     }
 
     @Override
-    public List<Trip> getDeparturedayTrips(int id) {
+    public List<Trip> getDeparturedayTrips(int id, int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Trip> query = builder.createQuery(Trip.class);
@@ -315,6 +315,9 @@ public class TripRepositoryImpl implements TripRepository {
         query.orderBy(builder.asc(rootT.get("departureday")));
         query = query.select(rootT);
         org.hibernate.query.Query q = session.createQuery(query);
+        int max = 6;
+        q.setMaxResults(max);
+        q.setFirstResult((page - 1) * max);
         return q.getResultList();
     }
 

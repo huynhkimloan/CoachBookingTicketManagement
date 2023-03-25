@@ -77,7 +77,7 @@
         <div>
             <ul class="pagination">
                 <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="a">
-                    <li class="page-item"><a class="page-link" href="<c:url value="/trip" />?page=${a}">${a}</a></li>
+                    <li class="page-item"><a class="page-link" href="<c:url value="/trip/${routeId}" />?page=${a}">${a}</a></li>
                 </c:forEach>
             </ul>
         </div>
