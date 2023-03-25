@@ -9,16 +9,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-<div id="demo" class="carousel slide" data-bs-ride="carousel" style="padding-top:10px;">
+<!--<div id="demo" class="carousel slide" data-bs-ride="carousel" style="padding-top:10px;">
 
-    <!-- Indicators/dots -->
+     Indicators/dots 
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
         <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
         <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
     </div>
 
-    <!-- The slideshow/carousel -->
+     The slideshow/carousel 
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="<c:url value="/img/xekhach1.jpg"/>" alt="Los Angeles" class="d-block w-100 " style="height: 400px;">
@@ -45,14 +45,14 @@
         </div>
     </div>
 
-    <!-- Left and right controls/icons -->
+     Left and right controls/icons 
     <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
         <span class="carousel-control-next-icon"></span>
     </button>
-</div>
+</div>-->
 
 <!--<form action="" style="margin-top: 70px;">
             <div id="search-departureday">
@@ -65,12 +65,13 @@
             </div>  
         </form>-->
 
-<div class="row trip-body" style="margin-top: 70px;">
+<div class="row trip-body" >
     <div>
-        <h1 id="nen">Danh sách các chuyến đi</h1>
+        <h1 id="nen">Thông tin chuyến đi</h1>
+        <p class="text-center">${date}</p>
     </div>
     <c:if test="${trips.size() == 0}">
-        <div class="alert alert-danger" style="margin-left: 27%; width: 50%; font-size: 20px; text-align: center">Hôm nay không có chuyến xe nào khởi hành !!!</div>  
+        <div class="alert alert-danger" style="margin-left: 27%; width: 50%; font-size: 15px; text-align: center">Hôm nay không có chuyến xe nào khởi hành !!!</div>  
     </c:if>
     <c:if test="${trips.size() != 0}">
         <div>
@@ -84,13 +85,13 @@
     <hr> 
     <c:forEach var="trip" items="${trips}">
         <div id="blocktrip">  
-            <div class="card" style="width: 35%;">
-                <img style=" height: 300px;" class=" img-fluid card-header" id="trip-img" src="<c:url value="${trip.image}"/>" alt="${trip.coachname}" />  
+            <div class="card" style="width: 45%;">
+                <img style=" height: 200px;" id="trip-img" src="<c:url value="${trip.image}"/>" alt="${trip.coachname}" />  
             </div>
             <div id="trip-right">
                 <div style="display: flex">   
-                    <h1> <i class="fa-solid fa-bus" id="coachname"></i> ${trip.routeId.startingpoint} - ${trip.routeId.destination}</h1>
-                    <h9 style="margin-left: 170px; margin-top: 18px;"><i class="fa-solid fa-calendar-check"> </i> <fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.departureday}" /></h9>
+                    <h1 style="font-weight: bold">${trip.routeId.startingpoint} - ${trip.routeId.destination}</h1>
+                    <h9 style="margin-left: 105px; margin-top: 10px;"><i class="fa-solid fa-calendar-check"> </i> <fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.departureday}" /></h9>
                 </div>
                 <hr>                   
                 <div id="trip-p">

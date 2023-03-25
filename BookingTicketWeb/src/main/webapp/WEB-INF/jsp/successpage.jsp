@@ -17,7 +17,7 @@
                     <span class="step" style="background-color: green"></span> 
                     <span class="step" style="background-color: green"></span> 
                     <span class="step" style="background-color: green"></span>
-                    <span class="step" style="background-color: black"></span> 
+                    <span class="step" style="background-color: green"></span> 
                 </div>
                 <div class="thanks-message text-center" id="text-message"> <img src="https://i.imgur.com/O18mJ1K.png" width="100" class="mb-4">
                     <h3>Bạn đã thanh toán thành công!</h3> 
