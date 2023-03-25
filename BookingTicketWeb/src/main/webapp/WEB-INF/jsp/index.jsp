@@ -3,7 +3,8 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
+<img src="https://res.cloudinary.com/ddqevaeix/image/upload/v1679218985/routes/Beige_Parchment_Background_Camping_Photo_Collage_yeklws.png" 
+     alt="Tuyến 1" style="height: 550px; width: 100%">
 <form action="<c:url value="/trip"/>">
     <div id="demo1" class="carousel slide" data-bs-ride="carousel" style="padding-top:10px; height: 500px;  ">
 
@@ -24,21 +25,8 @@
                             </div>-->
             </div>
 
-            <div class="carousel-item">
-                <img src="https://res.cloudinary.com/dvsqhstsi/image/upload/v1676619201/1_p51utj.jpg" alt="Tuyến 2" class="d-block w-100 " style="height: 400px;">
-                <!--            <div class="carousel-caption">
-                                <h1 style="padding-top: 100px; " >CÁC TUYẾN ĐƯỜNG PHỔ BIẾN</h1>
-                                <p>We will give you a great experience!!!</p>
-                            </div>-->
-            </div>
+    <!--    <div id="demo" class="carousel slide" data-bs-ride="carousel" style="padding-top:10px; position: relative ">-->
 
-            <div class="carousel-item">
-                <img src="https://res.cloudinary.com/dvsqhstsi/image/upload/v1676619232/2_tcygoc.jpg" alt="Tuyến 3" class="d-block w-100 " style="height: 400px;">
-                <!--            <div class="carousel-caption">
-                                <h1 style="padding-top:100px; ">CÁC TUYẾN ĐƯỜNG PHỔ BIẾN</h1>
-                                <p>We will give you a great experience!!!</p>
-                            </div>-->
-            </div>
 
             <!--     Left and right controls/icons -->
             <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
@@ -112,31 +100,29 @@
 </c:if>
 
 
+    <div class="row" style="margin-top: 90px">
 
-<div class="row">
+        <c:forEach var="route" items="${routes}"> 
 
-    <c:forEach var="route" items="${routes}"> 
+            <div class="col-md-4 col-xs-12" style="padding:10px;">
+                <div class="card">
+                    <img style=" height: 250px;" class=" img1 img-fluid card-header" src="<c:url value="${route.image}"/>" alt="${route.routename}" />                
 
-        <div class="col-md-4 col-xs-12" style="padding:10px;">
-            <div class="card">
-                <img style=" height: 250px;" class=" img1 img-fluid card-header" src="<c:url value="${route.image}"/>" alt="${route.routename}" />                
+                    <div class="card-body ">
+                        <h3 style="font-family: 'Cambria', sans-serif;"><i class="fa-solid fa-map-location-dot"></i> ${route.startingpoint} - ${route.destination}</h3>
+                        <hr>
+                        <diV style="display: flex;" class="show-p">
 
-                <div class="card-body ">
-                    <h3 style="font-family: 'Cambria', sans-serif;"><i class="fa-solid fa-map-location-dot"></i> ${route.startingpoint} - ${route.destination}</h3>
-                    <hr>
-                    <diV style="display: flex;" class="show-p">
-
-                        <g style="font-family: 'Cambria', sans-serif; font-weight: bold"><i class="fa-solid fa-location-dot" ></i> ${route.stretch} km </g>
-                        <p style="font-family: 'Cambria', sans-serif; font-weight: bold"><i class="fa-solid fa-clock"></i> ${route.time} h </p>
-                        <p class="product-carousel-price" style="font-family: 'Cambria', sans-serif; font-weight: bold">
-                            <i class="fa-solid fa-money-bill-wave"></i> <fmt:formatNumber 
-                                value="${route.price}" maxFractionDigits="3" type = "number" /> VNĐ</p> 
-                    </diV>
-                    <a href="<c:url value="/trip/${route.id}"/>"  id="priceInfo" class="btn btn-dark action" style="width: 100%; font-size: 20px;">Xem chi tiết</a>
+                            <g style="font-family: 'Cambria', sans-serif; font-weight: bold"><i class="fa-solid fa-location-dot" ></i> ${route.stretch} km </g>
+                            <p style="font-family: 'Cambria', sans-serif; font-weight: bold"><i class="fa-solid fa-clock"></i> ${route.time} h </p>
+                            <p class="product-carousel-price" style="font-family: 'Cambria', sans-serif; font-weight: bold">
+                                <i class="fa-solid fa-money-bill-wave"></i> <fmt:formatNumber 
+                                    value="${route.price}" maxFractionDigits="3" type = "number" /> VNĐ</p> 
+                        </diV>
+                        <a href="<c:url value="/trip/${route.id}"/>"  id="priceInfo" class="btn btn-dark action" style="width: 100%; font-size: 20px;">Xem chi tiết</a>
+                    </div>
                 </div>
             </div>
-        </div>
-
     </c:forEach>
 </div>
 
@@ -157,7 +143,6 @@
         <h1 class="h1"><i class="fa-solid fa-bus"></i> 1600</h1>
         <H4 style="margin:10px; color: #c19b77;">Hơn 1,600 chuyến mỗi ngày</H4>
         <P style="margin:10px; ">Phục vụ hơn 1600 chuyến xe đường dài và liên tỉnh mỗi ngày</P>
-    </div>
-</div>
 
 <script src="<c:url value="/js/trip.js"/>"></script>
+

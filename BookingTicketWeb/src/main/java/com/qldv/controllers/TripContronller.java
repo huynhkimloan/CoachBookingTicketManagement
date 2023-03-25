@@ -49,7 +49,7 @@ public class TripContronller {
         }
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         model.addAttribute("trips", this.tripService.getRouteTrips(kw, kw1, fromDate, page));
-        model.addAttribute("counter", this.tripService.countTrip(kw, kw1, fromDate));
+        model.addAttribute("date", from);
         return "trip";
     }
 

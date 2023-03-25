@@ -31,8 +31,9 @@
     </head>
     <body>
         <i class="fas fa-arrow-alt-circle-up" onclick="topFunction()" id="myBtn"></i>
-            <tiles:insertAttribute name="header" />
-            <div class="container">
+        <tiles:insertAttribute name="header" />
+        <tiles:insertAttribute name="imagePage" />
+        <div class="container">
             <div class="container-fluid">
                 <div class="row flex-nowrap">
                     <tiles:insertAttribute name="menu" />
@@ -45,7 +46,7 @@
         </div>
         <tiles:insertAttribute name="footer" />
 
-        
+
         <script src="<c:url value="/js/stats.js"/>"></script>
         <script src="<c:url value="/js/comment.js"/>"></script>
 
