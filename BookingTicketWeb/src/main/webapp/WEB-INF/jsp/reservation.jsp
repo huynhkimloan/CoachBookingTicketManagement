@@ -15,7 +15,8 @@
                 <h1 id="register" class="text-success" style="font-weight: 700;">ĐẶT VÉ</h1>
                 <div class="all-steps mt-0" id="all-steps">
                     <span class="step" style="background-color: black"></span> 
-                    <span class="step"></span> 
+                    <a type="button" id="nextBtn" 
+                                          href="<c:url value="/reservation/${tripId}/confirm-seat"/>"> <span class="step"></span> </a>
                     <span class="step"></span> 
                     <span class="step"></span> 
                 </div>

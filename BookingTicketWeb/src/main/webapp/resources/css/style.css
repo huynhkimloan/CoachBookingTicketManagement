@@ -462,16 +462,34 @@ div.infomation > div {
 /*TRIP*/
 #nen {
     margin: 20px 0 20px 10px ;
+    padding: 20px 12px 12px 12px;
+    border-radius: 10px 10px 0 0;
+    width: 30%;
+    border: 1px solid black;
     text-align: center;
     font-size: 30px;
     font-weight: bold;
+    animation: doimauh1 2s infinite;    
+    box-shadow: 4px 4px 4px black; 
 }  
+@keyframes doimauh1 {
+    from {
+        background-image: linear-gradient(to right, #8cd9b2, white);
+    }
+    to {
+        background-image: linear-gradient(to right,white, #c7ff82) ;
+    }
 
+}
 
 #blocktrip {
-    display: flex;  
-    margin: 0 auto;
-    width: 70%;
+    display: flex; 
+    border: 3px ridge; 
+    margin: 10px;
+    /*background: #f2ffcc;*/
+    margin-bottom: 20px;
+    margin-left: 15px;
+    width: 98%;
 /*    box-shadow: 3px 3px 3px #198754;*/
 }
 #blocktrip:hover {     
@@ -483,7 +501,7 @@ div.infomation > div {
     width: 60%; 
     margin-left: 20px; 
     padding: 10px; 
-    /*border-left: 1px solid gray;*/
+    border-left: 1px solid gray;
 }
 
 #trip-a {
@@ -545,6 +563,7 @@ div.infomation > div {
 #trip-img:hover {
     transform: rotate(180deg);
 
+}
 
 /*COMMENT*/
 .divcomment {
@@ -1280,10 +1299,11 @@ flex-flow: row nowrap;
 
 .RBtn{
     background-color: #c19b77; 
-    padding: 10px 20px; 
+    padding: 7px 5px 10px 5px; 
     float: right;
     margin-top: 10px;
     font-weight: bold;
+    text-align: center;
 }
     
 /*ABOUT US*/

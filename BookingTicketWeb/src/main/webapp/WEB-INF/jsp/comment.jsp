@@ -46,9 +46,6 @@
     </div>
 </div>
 
-<c:if test="${comments.size() == 0}">
-    <p>Không có bình luận</p>
-</c:if>
 
 <hr>
 <br>

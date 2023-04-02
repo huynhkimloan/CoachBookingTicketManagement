@@ -3,8 +3,8 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<img src="https://res.cloudinary.com/ddqevaeix/image/upload/v1679218985/routes/Beige_Parchment_Background_Camping_Photo_Collage_yeklws.png" 
-     alt="Tuyến 1" style="height: 550px; width: 100%">
+<!--<img src="https://res.cloudinary.com/ddqevaeix/image/upload/v1679218985/routes/Beige_Parchment_Background_Camping_Photo_Collage_yeklws.png" 
+     alt="Tuyến 1" style="height: 550px; width: 100%">-->
 <form action="<c:url value="/trip"/>">
     <div id="demo1" class="carousel slide" data-bs-ride="carousel" style="padding-top:10px; height: 500px;  ">
 
@@ -143,6 +143,7 @@
         <h1 class="h1"><i class="fa-solid fa-bus"></i> 1600</h1>
         <H4 style="margin:10px; color: #c19b77;">Hơn 1,600 chuyến mỗi ngày</H4>
         <P style="margin:10px; ">Phục vụ hơn 1600 chuyến xe đường dài và liên tỉnh mỗi ngày</P>
-
+    </div>
+</div>
 <script src="<c:url value="/js/trip.js"/>"></script>
 
