@@ -594,7 +594,26 @@ div.infomation > div {
 
 
 }
+@keyframes chaychu {
+    0% {
+        margin-left: 0;
+    }
+    50%{
+        margin-left: 30%;
+    }
+    100% {
+        margin-left: 1%;
+    }
+}
+@keyframes doimauchu {
+    from {
 
+        text-shadow: 3px 2px rgb(65, 238, 238) ;
+    }
+    to {
+        text-shadow: 3px 2px  rgb(39, 243, 39);
+    }
+}
 body{
     margin-top:20px;
 
@@ -1538,6 +1557,8 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
 }
 
 .rating-box {

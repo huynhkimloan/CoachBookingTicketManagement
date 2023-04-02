@@ -7,6 +7,7 @@ package com.qldv.repository.impl;
 
 import com.qldv.pojo.Driver;
 import com.qldv.pojo.Driverdetail;
+import com.qldv.pojo.Rating;
 import com.qldv.pojo.Trip;
 import com.qldv.pojo.User;
 import java.util.List;
@@ -21,6 +22,8 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.qldv.repository.DriverDetailRepository;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.persistence.criteria.Predicate;
 
 /**
@@ -45,7 +48,7 @@ public class DriverDetaiRepositoryImpl implements DriverDetailRepository {
         query = query.select(root);
         Predicate p = builder.equal(root.get("userIdDriver"), rootU.get("id"));
         Predicate pp = builder.equal(root.get("tripId"), rootT.get("id"));
-        
+
         if (params != null) {
             String kw = params.get("kw");
             if (kw != null && !kw.isEmpty()) {
@@ -134,6 +137,61 @@ public class DriverDetaiRepositoryImpl implements DriverDetailRepository {
             ex.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public Rating addRaing(int stars, Driverdetail driverDetail, User user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Rating r = new Rating();
+        r.setStars(stars);
+        r.setCreateddate(new Date());
+        r.setDriverdetailId(driverDetail);
+        r.setUser(user);
+        session.save(r);
+        return r;
+    }
+
+    @Override
+    public Double avgStar(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+            Root rootR = query.from(Rating.class);
+            Root rootD = query.from(Driverdetail.class);
+
+            List<Predicate> predicates = new ArrayList<>();
+            predicates.add(builder.equal(rootR.get("driverdetailId"), rootD.get("id")));
+            predicates.add(builder.equal(rootD.get("tripId"), id));
+            predicates.add(builder.equal(rootD.get("driverrole"), "MainDriver"));
+            query.multiselect(builder.avg(rootR.get("stars")));
+            query.where(predicates.toArray(new Predicate[]{}));
+            Query q = session.createQuery(query);
+            return Double.parseDouble(q.getSingleResult().toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return 0.0;
+        }
+
+    }
+
+    @Override
+    public int driverId(int i) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+
+        Root rootD = query.from(Driverdetail.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        predicates.add(builder.equal(rootD.get("tripId"), i));
+        predicates.add(builder.equal(rootD.get("driverrole"), "MainDriver"));
+        query.multiselect(rootD.get("id"));
+        query.where(predicates.toArray(new Predicate[]{}));
+        Query q = session.createQuery(query);
+
+        return Integer.parseInt(q.getSingleResult().toString());
     }
 
 }
