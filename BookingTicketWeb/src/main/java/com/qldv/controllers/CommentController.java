@@ -39,6 +39,9 @@ public class CommentController {
     @Autowired
     private DriverDetailService driverDetailService;
     
+    @Autowired
+    private UserService userService;
+    
     @RequestMapping("/comment/{tripId}")
     public String comment(Model model, @PathVariable("tripId") int tripId, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));

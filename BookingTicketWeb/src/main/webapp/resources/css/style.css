@@ -12,7 +12,11 @@ and open the template in the editor.
     font-family: 'Raleway', sans-serif;
     font-size: 13.5px;
 }
-
+#item_index h5{
+    font-weight: bold;
+    color: #c19b77;
+    font-size: 16px;
+}
 /*REGISTER*/
 div.register {
     width: 50%; 
@@ -1570,3 +1574,4 @@ input:checked + .slider:before {
 .stars i.active {
   color: #ff9c1a;
 }
+

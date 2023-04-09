@@ -31,6 +31,7 @@
             <h5 ><i class="fa-solid fa-hourglass-start"></i> Thời gian đi: <fmt:formatDate type = "time" value = "${trip.departuretime}" /> </h5>  
             <h5 style="margin-left: 160px;"><i class="fa-solid fa-hourglass-end"></i> Thời gian đến: <fmt:formatDate type = "time" value = "${trip.arrivaltime}" /></h5>
         </div>  
+
         <form  onsubmit="addRating(event, ${driverId}, ${tripId})" id="star-rating">
                 <div id="error-message" class="text-center alert-danger"></div>
                 <h5 style="margin-top: 25px;">${driver.userIdDriver.user.name}: ${Math.ceil(rating * 10) / 10}  
@@ -135,4 +136,5 @@
             });
         });
     });
+
 </script>

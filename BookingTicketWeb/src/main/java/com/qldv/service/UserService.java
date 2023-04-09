@@ -38,5 +38,7 @@ public interface UserService extends UserDetailsService {
 
     boolean editUser(User u);
     
+    User getName (int driverId);
+    
     int totalItem(String kw);
 }

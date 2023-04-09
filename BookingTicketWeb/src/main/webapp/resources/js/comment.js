@@ -1,30 +1,4 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* global trip, fetch */
-//function loadComments() {
-//     fetch("/BookingTicketWeb/comment").then(function (res) {
-//        return res.json();
-//    }).then(function (data) {
-//        let area = document.getElementById("commentArea");
-//        let h = '';
-//        for (let d of data)
-//            h += `
-//                <div class="col-md-4 col-xs-12" style="padding:10px;">
-//                     <div class="card-body ">
-//                         <p>Nội dung: ${d.content}</li>
-//                         <p class="comment-date">${moment(d.createddate).fromNow()} </p>
-//                         <hr>                   
-//                     </div>
-//
-//                 </div>
-//            `;
-//        area.innerHTML = h;
-//    });
-//}
+/* global fetch, moment */
 
 function addComment(event, tripId) {
     event.preventDefault();
@@ -80,20 +54,21 @@ function addComment(event, tripId) {
 
 let mybutton = document.getElementById("myBtn");
 
-window.onscroll = function() {scrollFunction();};
+window.onscroll = function () {
+    scrollFunction();
+};
 
 function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
 }
 
 function topFunction() {
-  document.documentElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }
-
 
 function addRating(event, driverId, tripId) {
     event.preventDefault();
@@ -127,3 +102,39 @@ function addRating(event, driverId, tripId) {
     });
 }
 
+//const ratingForm = document.getElementById('rating-form');
+//
+//ratingForm.addEventListener('submit', function(event) {
+//    event.preventDefault();
+//
+//    let ratingValue = 0;
+//    const stars = document.querySelectorAll(".stars i");
+//    stars.forEach((star, i) => {
+//        if (star.classList.contains('active')) {
+//            ratingValue = i + 1;
+//        }
+//    });
+//
+//    const driverId = this.elements.driverId.value;
+//    const tripId = this.elements.tripId.value;
+//
+//    fetch("/BookingTicketWeb/rating", {
+//        method: 'POST',
+//        body: JSON.stringify({
+//            "stars": ratingValue,
+//            "driver": driverId
+//
+//        }),
+//        headers: {
+//            "Content-Type": "application/json"
+//        }
+//    }).then((res) => {
+//        return res.json();
+//    }).then(() => {
+//        document.location.href = `/BookingTicketWeb/comment/${tripId}`;
+//    }).catch((error) => {
+//        const errEle = document.getElementById('error-message');
+//        errEle.textContent = "Có lỗi xảy ra, vui lòng thử lại lần nữa!!";
+//        console.error(error);
+//    });
+//});

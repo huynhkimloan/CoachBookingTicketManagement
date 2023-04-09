@@ -74,8 +74,39 @@
 <c:if test="${routes.size() == 0}">
     <div class="alert alert-danger" style="margin-left: 27%; margin-top: 70px; width: 50%; font-size: 20px; text-align: center">Không có tuyến bạn cần tìm !!!</div>
 </c:if>
+
+
+<h1 style="margin-top: 30px">CÁC TUYẾN PHỔ BIẾN</h1>
+
+<div class="row" style="margin-top: 20px">
+
+    <c:forEach var="route" items="${routes}"> 
+
+        <div class="col-md-4 col-xs-12" style="padding:10px;">
+            <div class="card">
+                <img style=" height: 250px;" class=" img1 img-fluid card-header" src="<c:url value="${route.image}"/>" alt="${route.routename}" />                
+                <div class="card-body ">
+                    <h3 style="font-family: 'Cambria', sans-serif;"><i class="fa-solid fa-map-location-dot"></i> ${route.startingpoint} - ${route.destination}</h3>
+                    <hr>
+                    <diV style="display: flex;" class="show-p">
+
+                        <g style="font-family: 'Cambria', sans-serif; font-weight: bold"><i class="fa-solid fa-location-dot" ></i> ${route.stretch} km </g>
+                        <p style="font-family: 'Cambria', sans-serif; font-weight: bold"><i class="fa-solid fa-clock"></i> ${route.time} h </p>
+                        <p class="product-carousel-price" style="font-family: 'Cambria', sans-serif; font-weight: bold">
+                            <i class="fa-solid fa-money-bill-wave"></i> <fmt:formatNumber 
+                                value="${route.price}" maxFractionDigits="3" type = "number" /> VNĐ</p> 
+                        
+                    </diV>
+                    <a href="<c:url value="/trip/${route.id}"/>"  id="priceInfo" class="btn btn-dark action" style="width: 100%; font-size: 20px;">Xem chi tiết</a>
+
+                </div>
+            </div>
+        </div>
+    </c:forEach>
+    
+</div>
 <c:if test="${routes.size() != 0}">
-    <div>
+    <div Style = "margin-left: 93%;">
         <ul class="pagination"  style = "margin-top:10px;">
             <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="a">
                 <li class="page-item"><a class="page-link" href="<c:url value="/" />?page=${a}">${a}</a></li>
@@ -83,34 +114,47 @@
         </ul>
     </div>
 </c:if>
+<hr style="margin-top: 30px;">
+<div style="display: flex; margin-top: 20px;" id="item_index">
+    <div style="width: 24%; margin: 1%;">
+        <div>
+            <img src="https://res.cloudinary.com/dvsqhstsi/image/upload/v1681014879/1_euxnab.png" style="height:100px; width: 100px; margin-left: 85px;">
+        </div>
+        <h5>DỊCH VỤ ĐƯA ĐÓN CHUYÊN NGHIỆP</h5>
+        <p >
+            Trải qua hơn 20 năm vận chuyển đưa đón hành khách Hiền Loan đã từng bước khẳng định và giữ vững vị thế - uy tín chất lượng dịch vụ hàng đầu tại Hồ Chí Minh, làm hài lòng hàng trăm triệu lượt khách hàng trong nước cũng như khách quốc tế đến Việt Nam
+        </p>
+    </div>
+   <div style="width: 24%; margin: 1%;">
+        <div >
+            <img src="https://res.cloudinary.com/dvsqhstsi/image/upload/v1680932548/2_uagro7.png" style="height:100px; width: 100px;margin-left: 85px;" >
+        </div>
+        <h5>CÁC DÒNG XE CHẤT LƯỢNG CAO</h5>
+        <p >
+            Với định hướng phát triển và mục tiêu nâng cao chất lượng dịch vụ Hiền Loan vẫn luôn không ngừng đầu tư các dòng xe mới, hiện đại để đáp ứng nhu cầu sử dụng dịch vụ trong nước và Quốc tế
+        </p>
 
+    </div>
+    <div style="width: 24%; margin: 1%;">
+        <div style="width: 50%">
+            <img src="https://res.cloudinary.com/dvsqhstsi/image/upload/v1681014898/3_wcmnsi.png" style="height:100px; width: 100px;margin-left: 85px;" >
+        </div>
 
-    <div class="row" style="margin-top: 90px">
-
-        <c:forEach var="route" items="${routes}"> 
-
-            <div class="col-md-4 col-xs-12" style="padding:10px;">
-                <div class="card">
-                    <img style=" height: 250px;" class=" img1 img-fluid card-header" src="<c:url value="${route.image}"/>" alt="${route.routename}" />                
-
-                    <div class="card-body ">
-                        <h3 style="font-family: 'Cambria', sans-serif;"><i class="fa-solid fa-map-location-dot"></i> ${route.startingpoint} - ${route.destination}</h3>
-                        <hr>
-                        <diV style="display: flex;" class="show-p">
-
-                            <g style="font-family: 'Cambria', sans-serif; font-weight: bold"><i class="fa-solid fa-location-dot" ></i> ${route.stretch} km </g>
-                            <p style="font-family: 'Cambria', sans-serif; font-weight: bold"><i class="fa-solid fa-clock"></i> ${route.time} h </p>
-                            <p class="product-carousel-price" style="font-family: 'Cambria', sans-serif; font-weight: bold">
-                                <i class="fa-solid fa-money-bill-wave"></i> <fmt:formatNumber 
-                                    value="${route.price}" maxFractionDigits="3" type = "number" /> VNĐ</p> 
-                        </diV>
-                        <a href="<c:url value="/trip/${route.id}"/>"  id="priceInfo" class="btn text-white action" style="width: 100%; font-size: 20px; font-weight: bold">Xem chi tiết</a>
-                    </div>
-                </div>
-            </div>
-    </c:forEach>
+        <h5>ĐỘI NGŨ TÀI XẾ GIÀU KINH NGHIỆM</h5>
+        <p>
+            Không chỉ mang đến sự an toàn, đội ngũ tài xế tâm huyết, nhiệt tình đã được đào tạo nghiệp vụ bài bản sẽ mang đến cho bạn những trải nghiệm mới trên mỗi hành trình khám phá của mình
+        </p>
+    </div>
+    <div style="width: 24%; margin: 1%;">
+        <div style="width: 50%">
+            <img src="https://res.cloudinary.com/dvsqhstsi/image/upload/v1680932011/4_saqyn4.png" style="height:100px; width: 100px;margin-left: 85px;" >
+        </div>
+        <h5>GIÁ TỐT NHẤT DÀNH CHO BẠN</h5>
+        <p>
+            Với phương châm: "Một hành trình - Vạn niềm vui", Hiền Loan đã từng bước khẳng định vị thế không chỉ chất lượng mà còn hài lòng quý khách với mức giá cạnh tranh nhất trên thị trường hiện nay
+        </p>
+    </div>
 </div>
-
 <hr style="margin-top: 30px;">
 <h1 style="margin-top: 30px; color: #c19b77; font-size: 50px; font-family: SFProText;">CHẤT LƯỢNG LÀ DANH DỰ </h1>
 <div style="margin-top: 30px; display: flex; " class="infomation">

@@ -9,37 +9,61 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-<div class="containerbb container-fluid">
-    <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-md-6">
-            <h3 class="text-center text-info mb-4" style="font-family: ui-rounded;">Thông tin mua vé - Xem trước</h3>
-            <div class="chooseSeatInfo">
-                <div>
-                    <h5 class="alert alert-secondary">Thông tin chuyến xe</h5> 
-                    <div class="row">
-                        <div class="col-sm-7 form-check" style="padding-left: 15px">
-                            <p class="formatP"><i class="fa-solid fa-car-tunnel"></i> Chuyến xe: ${trip.coachname} </p>
-                            <p class="formatP"> <i class="fa-solid fa-calendar-days"></i> Ngày khởi hành: <fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.departureday}" /></p>
-                            <p class="formatP"><i class="fa-solid fa-clock"></i> Giờ xuất phát: <fmt:formatDate type = "time" value = "${trip.departuretime}" /></p>
-                        </div>
-                        <div class="col-sm-5 form-check">
-                            <p class="formatP"><i class="fa-solid fa-check-to-slot"></i> Số lượng vé: <span id="count">${counter}</span> </p> 
-                            <p class="formatP"><i class="fa-solid fa-check-to-slot"></i> Giá vé: <span id="price">${trip.routeId.price}</span> </p>
-                        </div>
-                    </div>
-                </div> 
-                <div>
-                    <h6 style="text-align: right;"> <i class="fa-solid fa-hand-holding-dollar"></i>
-                        Tổng tiền: <span id="amount" class="text-success" style="font-weight: bold"><fmt:formatNumber value="${seatStats.amount}" maxFractionDigits="3" type = "number" /></span> VNĐ   </h6> 
-                  
-                        Điểm tích lũy: <span class="text-success" style="font-weight: bold" id="point">${Math.ceil(seatStats.amount*0.001)}</span> điểm
-                       
-                </div>
-                </div>
-                        <a onclick="pay(${tripId}, 'Paypal')" class="btn btn-info" type="button"><p>Thanh toán</p></a>
-            </div>
+
+
+
+<div style="font-family: ui-rounded; text-align: center; margin-top: 20px; background: #c19b77; color: white;font-size: 25px; font-weight: bold; padding: 0.5%;">THÔNG TIN MUA VÉ - XEM TRƯỚC</div>
+
+<div style="margin: 1% 25%; border: 1px solid #a4a4a4 ">
+    <div style="font-family: ui-rounded; padding: 0.5%; font-size: 20px; font-weight: bold; background: #f3f3f3; padding-left: 20px;">Thông tin chuyến xe</div>
+    <div style="padding-left: 15px;">
+        <div Style ="display: flex">
+            <p style ="margin-left: 35px; width: 80%"> Chuyến xe:</p>
+            <p style="text-align: left;">${trip.coachname} </p>
         </div>
-    </div>  
+        <div Style ="display: flex">
+            <p style ="margin-left: 35px; width: 80%"> Ngày khởi hành:</p>
+            <p style="text-align: left;"><fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.departureday}" /></p>
+        </div>
+        <div Style ="display: flex">
+            <p style ="margin-left: 35px; width: 80%"> Giờ xuất phát:</P>
+            <p style="text-align: left;"><fmt:formatDate type = "time" value = "${trip.departuretime}" /></p>
+        </div>
+    </div>
+
+</div> 
+
+<div style="margin: 0% 25%; border: 1px solid #a4a4a4; ">
+    <div style="font-family: ui-rounded; padding: 0.5%; font-size: 20px; font-weight: bold; background: #f3f3f3; padding-left: 20px;">Thông tin thanh toán</div>
+
+    <div style="padding-left: 15px; margin: 1%;">
+        <div Style ="display: flex; ">
+            <p style ="margin-left: 35px; width: 80%" >Số lượng vé: <span id="count"></span> </p> 
+            <p style="text-align: left;">${counter}</p>
+        </div>
+        <div Style ="display: flex">
+            <p style ="margin-left: 35px; width: 80%">Giá vé: <span id="price"></span> </p>
+            <p style="text-align: left;"><fmt:formatNumber value="${trip.routeId.price}" maxFractionDigits="3" type = "number" /> VNĐ </p>
+        </div>
+        <div Style ="display: flex">
+            <p style ="margin-left: 35px; width: 80%">Điểm tích lũy: <span id="price"></span> </p><!-- comment -->
+            <p style="text-align: left;"> ${Math.ceil(seatStats.amount*0.001)} điểm</p>
+        </div>
+        <div Style ="display: flex">
+            <p style ="margin-left: 35px; width: 80%; font-weight: bold">Tổng tiền: <span id="price"></span> </p><!-- comment -->
+            <p style="text-align: left; font-weight: bold; font-size: 17px"><fmt:formatNumber value="${seatStats.amount}" maxFractionDigits="3" type = "number" /> VNĐ </p>
+        </div>
+
+    </div>
 </div>
+
+
+
+<a onclick="pay(${tripId}, 'Paypal')" class="btn btn-info" type="button">
+    <div style="font-size: 20px;margin-top: 15px; font-weight: bold; margin-left: 67%; width: 7%;padding: 0.5%; background: #c19b77; color: white">Thanh toán</div>
+</a>
+
+
+
 <script src="<c:url value="/js/reservation.js"/>"></script>
 

@@ -134,4 +134,9 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getPassById(id);
     }
 
+    @Override
+    public User getName(int driverId) {
+        return this.userRepository.getName(driverId);
+    }
+
 }

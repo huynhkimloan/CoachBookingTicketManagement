@@ -49,6 +49,7 @@ public class TripContronller {
         } catch (ParseException ex) {
             Logger.getLogger(TripContronller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        int price = Integer.parseInt(params.getOrDefault("priceT","0"));
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         model.addAttribute("trips", this.tripService.getRouteTrips(kw, kw1, fromDate, page));
         Route route = this.routeService.findById(this.tripService.getRouteIdByKeyword(kw, kw1, fromDate));
