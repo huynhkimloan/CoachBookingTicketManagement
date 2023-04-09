@@ -60,7 +60,7 @@
 
 
 <a onclick="pay(${tripId}, 'Paypal')" class="btn btn-info" type="button">
-    <div style="font-size: 20px;margin-top: 15px; font-weight: bold; margin-left: 67%; width: 7%;padding: 0.5%; background: #c19b77; color: white">Thanh toán</div>
+    <div style="font-size: 20px;margin-top: 15px; font-weight: bold; margin-left: 67%; width: 7%;padding: 0.5%; background: #c19b77; color: white; cursor: pointer">Thanh toán</div>
 </a>
 
 

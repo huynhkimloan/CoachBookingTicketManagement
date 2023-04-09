@@ -34,7 +34,7 @@
     <thead class="admin-table text-center">
         <tr>
             <th style="width: 5px">Mã vé</th>
-            <th style="width: 100px">Người mua</th>
+            <th style="width: 150px">Người mua</th>
             <th style="width: 5px">SĐT</th>
             <th style="width: 30px">Vị trí ngồi</th>
             <th style="width: 80px">Phương thức trả</th>

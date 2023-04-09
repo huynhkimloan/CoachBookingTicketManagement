@@ -55,19 +55,21 @@
                         <h5 class="alert alert-secondary">Phương thức thanh toán</h5> 
                         <div class="row" style="margin-right: 7px">
                             <div class="col-sm-6 form-check" style="width: 50%">
+                                <a>
                                 <div class="col">
                                     <span class="btn border border-warning">
-                                        <img class="img-fluid icon" src="<c:url value="/img/paypal.jpg"/>" alt="Paypal" />
-                                        <input type="submit" value="Ví paypal"/>
+                                        <img class="img-fluid icon" style="height: 75px" src="<c:url value="/img/paypal.jpg"/>" alt="Paypal" />
+                                        <input type="submit" style="border-bottom: none; margin: 0" value="Ví paypal"/>
                                     </span>
-                                </div>                         
+                                </div>   
+                                </a>
                             </div>
                             <c:if test="${user.userrole=='Employee'||user.userrole=='Admin'}">  
                                 <div class="col-sm-6 form-check" style="width: 50%"> 
                                     <a onclick="pay(${tripId}, 'Tiền mặt')">
                                         <div class="col" >
                                             <span class="btn border border-warning" >
-                                                <img class="img-fluid icon" src="<c:url value="/img/tienmat.jpg"/>" alt="Tiền mặt" />
+                                                <img class="img-fluid icon" style="height: 88px" src="<c:url value="/img/tienmat.jpg"/>" alt="Tiền mặt" />
                                                 <p style="margin-bottom: 0">Trực tiếp tại quầy</p>
                                             </span>
                                         </div> 

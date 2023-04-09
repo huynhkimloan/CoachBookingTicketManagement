@@ -76,7 +76,7 @@
 </c:if>
 
 
-<h1 style="margin-top: 30px">CÁC TUYẾN PHỔ BIẾN</h1>
+<h1 style="margin-top: 30px; font-weight: bold; font-size: 3rem">CÁC TUYẾN PHỔ BIẾN</h1>
 
 <div class="row" style="margin-top: 20px">
 
@@ -97,7 +97,7 @@
                                 value="${route.price}" maxFractionDigits="3" type = "number" /> VNĐ</p> 
                         
                     </diV>
-                    <a href="<c:url value="/trip/${route.id}"/>"  id="priceInfo" class="btn btn-dark action" style="width: 100%; font-size: 20px;">Xem chi tiết</a>
+                    <a href="<c:url value="/trip/${route.id}"/>"  id="priceInfo" class="btn text-white action" style="width: 100%; font-size: 20px; font-weight: bold">Xem chi tiết</a>
 
                 </div>
             </div>

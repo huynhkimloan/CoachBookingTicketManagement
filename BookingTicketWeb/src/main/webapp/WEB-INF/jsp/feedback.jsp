@@ -28,7 +28,7 @@
     
     <form action="<c:url value="/feedbackByKeyword"/>">
             <!--<form action="">-->
-            <div class="row searchRoute" style="margin: 25px auto" >
+            <div class="row searchRoute" style="margin: 40px auto" >
                 <div style="width:100%; display:flex; ">
                     <div class="selectPoint" style="border: 1px solid #A4A4A4" >
                         <h5 style="margin-top: 10px;  color: #a4a4a4">ĐIỂM ĐI</h5>

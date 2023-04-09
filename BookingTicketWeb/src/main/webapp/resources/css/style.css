@@ -38,11 +38,10 @@ div.register > h1{
 .navbar{
     /*background-image: linear-gradient(to bottom left, #E3FDF5, #FFE6FA);*/
     background-color: #1c1c1d;
-    border-bottom:  2px solid pink;
 
 }
 .navbar-brand, .nav-link{
-    color: black;
+    color: white;
 }
 .callNumber{
     animation: doimau 0.8s ease-in infinite;
@@ -50,7 +49,7 @@ div.register > h1{
 
 /*NAV*/
 .menu{
-    background-image: linear-gradient(to bottom right, #E3FDF5, #FFE6FA);
+    background-color: #1c1c1d;
     
 }
 
