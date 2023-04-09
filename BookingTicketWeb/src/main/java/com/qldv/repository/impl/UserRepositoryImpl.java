@@ -7,10 +7,14 @@ package com.qldv.repository.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.qldv.pojo.Driver;
+import com.qldv.pojo.Driverdetail;
+import com.qldv.pojo.Trip;
 import com.qldv.pojo.User;
 import com.qldv.repository.UserRepository;
 import com.qldv.service.impl.UserServiceImpl;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -190,6 +194,23 @@ public class UserRepositoryImpl implements UserRepository {
 
         Query q = session.createQuery(query);
         return q.getSingleResult().toString();
+    }
+
+    @Override
+    public User getName(int driverId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root rootU = query.from(User.class);
+        Root rootD = query.from(Driver.class);
+        
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.equal(rootU.get("id"), rootD.get("userIdDriver")));
+        predicates.add(builder.equal(rootD.get("userIdDriver"), driverId));   
+        query.where(predicates.toArray(new Predicate[]{}));
+        query = query.select(rootU);
+        org.hibernate.query.Query q = session.createQuery(query);        
+        return (User) q.getSingleResult();
     }
 
 }

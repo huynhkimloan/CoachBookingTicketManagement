@@ -35,4 +35,6 @@ public interface UserRepository {
     boolean editUser(User u);
 
     int totalItem(String kw);
+    
+    User getName (int driverId);
 }

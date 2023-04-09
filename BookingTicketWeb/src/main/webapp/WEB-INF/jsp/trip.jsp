@@ -83,6 +83,7 @@
         </div>
     </c:if>
     <hr> 
+    <h1>${price}</h1>
     <c:forEach var="trip" items="${trips}">
         <div id="blocktrip">  
             <div class="card" style="width: 45%;">
