@@ -94,32 +94,36 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
+
 function addRating(event, driverId, tripId) {
     event.preventDefault();
-    console.log('trigger on submit', event, driverId);
-//    const ratingForm = document.querySelector('#star-rating');
+    console.log('trigger on submit', event, driverId, tripId);
+    let ratingValue = 0;
     const stars = document.querySelectorAll(".stars i");
-   
+    stars.forEach((star, i) => {
+        
+        if (star.classList.contains('active')) {
+            ratingValue = i + 1;
+        }
+    });
+    fetch("/BookingTicketWeb/rating", {
+        method: 'POST',
+        body: JSON.stringify({
+            "stars": ratingValue,
+            "driver": driverId
 
-//        const stars = new FormData(ratingForm);
-
-        fetch("/BookingTicketWeb/rating", {
-            method: 'POST',
-            body: JSON.stringify({
-                "stars": stars.length,
-                "driver": driverId
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then((res) => {
-            return res.json();
-        }).then(() =>{
-            document.location.href = `/BookingTicketWeb/comment/${tripId}`;
-        }).catch((error) => {
-            const errEle = document.getElementById('error-message');
-            errEle.textContent = "Có lỗi xảy ra, vui lòng thử lại lần nữa!!";
-            console.error(error);
-        });
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then((res) => {
+        return res.json();
+    }).then(() => {
+        document.location.href = `/BookingTicketWeb/comment/${tripId}`;
+    }).catch((error) => {
+        const errEle = document.getElementById('error-message');
+        errEle.textContent = "Có lỗi xảy ra, vui lòng thử lại lần nữa!!";
+        console.error(error);
+    });
 }
 

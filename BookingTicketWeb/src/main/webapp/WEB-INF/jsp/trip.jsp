@@ -8,115 +8,67 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
-<!--<div id="demo" class="carousel slide" data-bs-ride="carousel" style="padding-top:10px;">
-
-     Indicators/dots 
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-    </div>
-
-     The slideshow/carousel 
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="<c:url value="/img/xekhach1.jpg"/>" alt="Los Angeles" class="d-block w-100 " style="height: 400px;">
-            <div class="carousel-caption">
-                <h1 style="padding-top: 100px; ">CHUYẾN XE ĐỒNG HÀNH CÙNG CÁC BẠN</h1>
-                <p>We will give you a great experience!!!</p>
-            </div>
-        </div>
-
-        <div class="carousel-item">
-            <img src="<c:url value="/img/xekhach2.jpg"/>" alt="Los Angeles" class="d-block w-100 " style="height: 400px;">
-            <div class="carousel-caption">
-                <h1 style="padding-top: 100px; " >CHUYẾN XE ĐỒNG HÀNH CÙNG CÁC BẠN</h1>
-                <p>We will give you a great experience!!!</p>
-            </div>
-        </div>
-
-        <div class="carousel-item">
-            <img src="<c:url value="/img/xekhach3.jpg"/>" alt="Los Angeles" class="d-block w-100 " style="height: 400px;">
-            <div class="carousel-caption">
-                <h1 style="padding-top:100px; ">CHUYẾN XE ĐỒNG HÀNH CÙNG CÁC BẠN</h1>
-                <p>We will give you a great experience!!!</p>
-            </div>
-        </div>
-    </div>
-
-     Left and right controls/icons 
-    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
-</div>-->
-
-<!--<form action="" style="margin-top: 70px;">
-            <div id="search-departureday">
-                <div style="width: 100%;display: flex; margin-top: 20px;">
-                    <label style="width: 20%; font-size:20px; margin-left: 80px; margin-top: 45px;">Chọn ngày đi  </label>
-                    <input type="date" name="kw" id="departureday1"  class="form-control" /> 
-
-                </div>  
-                <input type="submit" value="Tìm" id="submitdepartureday" class="btn btn-dark"/>
-            </div>  
-        </form>-->
-
 <div class="row trip-body" >
     <div>
-        <h1 id="nen">Thông tin chuyến đi</h1>
-        <p class="text-center">${date}</p>
+        <h1 id="nen">THÔNG TIN CHUYẾN ĐI</h1>
+        <c:if test="${date != null}">
+            <h5 class="text-center" style="font-weight: bold; color: #a4a4a4">
+                Ngày: <fmt:formatDate pattern = "dd/MM/yyyy" value = "${date}" />
+            </h5>
+        </c:if>
     </div>
-    <c:if test="${trips.size() == 0}">
-        <div class="alert alert-danger" style="margin-left: 27%; width: 50%; font-size: 15px; text-align: center">Hôm nay không có chuyến xe nào khởi hành !!!</div>  
-    </c:if>
-    <c:if test="${trips.size() != 0}">
-        <div>
-            <ul class="pagination">
-                <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="a">
-                    <li class="page-item"><a class="page-link" href="<c:url value="/trip/${routeId}" />?page=${a}">${a}</a></li>
-                </c:forEach>
-            </ul>
-        </div>
-    </c:if>
-    <hr> 
     <c:forEach var="trip" items="${trips}">
         <div id="blocktrip">  
-            <div class="card" style="width: 45%;">
-                <img style=" height: 200px;" id="trip-img" src="<c:url value="${trip.image}"/>" alt="${trip.coachname}" />  
+            <div class="card" style="width: 30%;">
+                <img id="trip-img" src="<c:url value="${trip.image}"/>" alt="${trip.coachname}" />  
             </div>
             <div id="trip-right">
                 <div style="display: flex">   
-                    <h1 style="font-weight: bold">${trip.routeId.startingpoint} - ${trip.routeId.destination}</h1>
-                    <h9 style="margin-left: 105px; margin-top: 10px;"><i class="fa-solid fa-calendar-check"> </i> <fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.departureday}" /></h9>
+                    <h1 style="font-weight: bold; color: #c19b77; margin-bottom: 0">${trip.routeId.startingpoint} - ${trip.routeId.destination}</h1>
+                    <h9 style="margin-left: 70px; margin-top: 10px; font-size: 17px; color: #a4a4a4; font-weight: bold"><i class="fa-solid fa-calendar-check"> </i> 
+                        <fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.departureday}" /></h9>
                 </div>
                 <hr>                   
                 <div id="trip-p">
-                    <p id="p-1" ><i class="fa-solid fa-hourglass-start"></i> Thời gian đi: <fmt:formatDate type = "time" value = "${trip.departuretime}" />  </p>  
-                    <p id="p-2" ><i class="fa-solid fa-hourglass-end"></i> Thời gian đến: <fmt:formatDate type = "time" value = "${trip.arrivaltime}" /> </p>
-                </div>  
-
+                    <p id="p-1" ><b><i class="fa-solid fa-hourglass-start"></i> Thời gian đi:</b> <fmt:formatDate type = "time" value = "${trip.departuretime}" />  </p>  
+                    <p id="p-2" ><b><i class="fa-solid fa-hourglass-end"></i> Thời gian đến:</b> <fmt:formatDate type = "time" value = "${trip.arrivaltime}" /> </p>
+                </div> 
                 <div id="trip-p">
-                    <p id="p-1" ><i class="fa-solid fa-chair"></i> Ghế trống: <input style=" border: none;background-color: white" id="result-${trip.id}"
+                    <p id="p-1" ><b><i class="fa-solid fa-chair"></i> Ghế trống: </b>
+                        <input style=" border: none;background-color: white; margin-bottom: 0" id="result-${trip.id}"
                                                                                      onmouseover ="cRemain(${trip.id})"/></p>
-                    <p id="p-2" ><i class="fa-solid fa-bus-simple"></i> Loại: ${trip.passengercarId.categoryId.categoryname}</p>
+                    <p id="p-2" ><b><i class="fa-solid fa-bus-simple"></i> Loại: </b>${trip.passengercarId.categoryId.categoryname}</p>
                 </div>
+                <p class="text-center pri" style="margin-bottom: 5px;"><b style="font-size: 14px">Giá vé:</b> 
+                        <strong style=" color: orange; font-weight: bold; font-size: 16px"><fmt:formatNumber value="${price}" maxFractionDigits="3" type = "number" /> VNĐ</strong></p>
 
                 <div id="trip-a" >                        
                     <c:if test="${pageContext.request.userPrincipal.name == null}">
-                        <a href="<c:url value="/login"/>" id="priceInfo"  class="btn btn-dark action">Đặt</a>
+                        <a href="<c:url value="/login"/>" id="priceInfo" style="margin-left: 145px"
+                           class="btn text-white action">Đặt vé</a>
                     </c:if>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
-                        <a href="<c:url value="/reservation/${trip.id}"/>" id="priceInfo"  class="btn btn-dark action">Đặt</a>
-                    </c:if>                    
-<!--                    <a href="<c:url value="/comment/${trip.id}"/>"  id="priceInfo" style="margin-left: 80px;" class="btn btn-dark action">Phản hồi</a>-->
+                        <a href="<c:url value="/reservation/${trip.id}"/>" id="priceInfo" style="margin-left: 145px"
+                           class="btn text-white action">Đặt vé</a>
+                    </c:if>        
                 </div>
             </div>
         </div>
     </c:forEach>
+    
+     <c:if test="${trips.size() == 0}">
+        <div class="alert alert-danger" style="margin-left: 27%; width: 50%; font-size: 15px; text-align: center">Hôm nay không có chuyến xe nào khởi hành !!!</div>  
+    </c:if>
+    <c:if test="${trips.size() != 0}">
+        <div>
+            <ul class="pagination" style="float: right">
+                <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="a">
+                    <li class="page-item">
+                        <a class="page-link" href="<c:url value="/trip/${routeId}" />?page=${a}">${a}</a></li>
+                </c:forEach>
+            </ul>
+        </div>
+    </c:if>
 </div>
 
 <script src="<c:url value="/js/trip.js"/>"></script>

@@ -21,24 +21,24 @@
                 </li>
                 <c:if test="${currentUser.userrole == 'Customer'}">
                     <li class="nav-item">
-                        <a class="nav-link text-info" href="<c:url value="/feedback" />" style="margin-left: 40px; font-weight: bold">
+                        <a class="nav-link" href="<c:url value="/feedback" />" style="margin-left: 40px; font-weight: bold; color: #c19b77">
                             PHẢN HỒI</a>
                     </li>
                 </c:if>
                 <c:if test="${currentUser.userrole == 'Driver'}">
                     <li class="nav-item">
-                        <a class="nav-link text-info" href="<c:url value="/ad/driverdetails/list" />" style="margin-left: 40px; font-weight: bold">
+                        <a class="nav-link text-info" href="<c:url value="/ad/driverdetails/list" />" style="margin-left: 40px; font-weight: bold; color: #c19b77">
                             PHÂN CÔNG</a>
                     </li>
                 </c:if>
                 <c:if test="${currentUser.userrole == 'Admin'}">
                     <li class="nav-item">
-                        <a class="nav-link text-info" href="<c:url value="/admin" />" style="margin-left: 40px; font-weight: bold;">QUẢN TRỊ</a>
+                        <a class="nav-link text-info" href="<c:url value="/admin" />" style="margin-left: 40px; font-weight: bold; color: #c19b77">QUẢN TRỊ</a>
                     </li>
                 </c:if>
                 <c:if test="${currentUser.userrole == 'Employee'}">
                     <li class="nav-item">
-                        <a class="nav-link text-info" href="<c:url value="/tickets/list" />" style="margin-left: 40px; font-weight: bold;">QUẢN LÝ VÉ</a>
+                        <a class="nav-link text-info" href="<c:url value="/tickets/list" />" style="margin-left: 40px; font-weight: bold; color: #c19b77">QUẢN LÝ VÉ</a>
                     </li>
                 </c:if>
 

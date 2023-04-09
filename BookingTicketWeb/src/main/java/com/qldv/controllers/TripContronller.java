@@ -6,8 +6,10 @@
 package com.qldv.controllers;
 
 import com.qldv.pojo.Route;
+import com.qldv.pojo.Trip;
 import com.qldv.service.RouteService;
 import com.qldv.service.TripService;
+import com.qldv.utils.Utils;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -49,17 +51,22 @@ public class TripContronller {
         }
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         model.addAttribute("trips", this.tripService.getRouteTrips(kw, kw1, fromDate, page));
-        model.addAttribute("date", from);
+        Route route = this.routeService.findById(this.tripService.getRouteIdByKeyword(kw, kw1, fromDate));
+        long price = (long)Utils.sumMoney(new Date(), route);
+        model.addAttribute("date", fromDate);
+        model.addAttribute("price", price);
         return "trip";
     }
 
     @RequestMapping("/trip/{routeId}")
-    public String trip(Model model, @PathVariable("routeId") int routeId, @RequestParam(required = false) Map<String, String> params) {
+    public String trip1(Model model, @PathVariable("routeId") int routeId, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         Route route = this.routeService.findById(routeId);
+        long price = (long)Utils.sumMoney(new Date(), route);
         model.addAttribute("trips", this.tripService.getDeparturedayTrips(routeId, page));
         model.addAttribute("counter", this.tripService.countTrip(route.getStartingpoint(),route.getDestination(), null));
         model.addAttribute("routeId", routeId );
+        model.addAttribute("price", price);
         return "trip";
     }
 

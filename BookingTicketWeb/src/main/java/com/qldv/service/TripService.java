@@ -49,4 +49,6 @@ public interface TripService {
     long countTrip(String kw, String kw1, Date fromDate);
     
     public List<Trip> getDeparturedayTrips(int id, int page);
+    
+    public int getRouteIdByKeyword(String kw, String kw1, Date fromDate);
 }

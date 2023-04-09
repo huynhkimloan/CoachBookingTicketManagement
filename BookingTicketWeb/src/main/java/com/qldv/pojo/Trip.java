@@ -98,6 +98,7 @@ public class Trip implements Serializable {
     
     @Transient
     private MultipartFile file;
+    
 
     public Trip() {
     }

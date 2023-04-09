@@ -8,7 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Section Blog start -->
-<h1 class="text-center">TIN TỨC</h1>
+<h1 class="text-center" style="font-size: 3rem; font-weight: bold">TIN TỨC</h1>
 <div style="display: flex">
     <div style="width: 100%; display: flex; flex-wrap: wrap" >
         <div class="col-news">
@@ -194,9 +194,9 @@ Hiểu được nhu cầu nghỉ ngơi, thư giãn của hành khách trên các
         <aside class="single-sidebar-widget search-widget">
             <form action="">
                 <div class="form-group">
-                    <input required="" type="text" name="title" id="" placeholder="Nhập từ khóa...">
+                    <input required="" style="margin-bottom: 0" type="text" name="title" id="" placeholder="Nhập từ khóa...">
                     <div class="input-group-append">
-                        <button class="input-btn">
+                        <button>
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
