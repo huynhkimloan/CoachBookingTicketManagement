@@ -6,6 +6,7 @@
 package com.qldv.controllers;
 
 import com.qldv.pojo.Seat;
+import com.qldv.pojo.Ticketdetail;
 import com.qldv.pojo.User;
 import com.qldv.service.TicketDetailService;
 import com.qldv.service.UserService;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,6 +39,9 @@ public class ApiBookingController {
 
     @Autowired
     private UserService userDetailService;
+    
+    @Autowired
+    private UserService userService;
 
      @PostMapping("/api/reservation")
     public int addTicketDetail(@RequestBody Seat params, HttpSession session) {
@@ -86,18 +91,44 @@ public class ApiBookingController {
         return HttpStatus.BAD_REQUEST;
     }
     
-//    @PostMapping(value = "/api/pay")
-//    public HttpStatus payMomo(HttpSession session, @RequestBody Map<String, String> params,
-//            HttpServletRequest request, Authentication au) {
-//        User u = this.userDetailService.getUsers(au.getName()).get(0);
-//
-//        String method = params.get("method");
-//
-//        if (this.ticketDetailService.addReceipt((Map<Integer, Seat>) session.getAttribute("seat"), u.getId(), method) == true) {
-//            session.removeAttribute("seat");
-//            return HttpStatus.OK;
-//        }
-//
-//        return HttpStatus.BAD_REQUEST;
-//    }
+    @PostMapping(path = "/api/add-user-booking", produces = {
+        MediaType.APPLICATION_JSON_VALUE
+    })
+    public ResponseEntity<User> addUser(@RequestBody Map<String, String> params) {
+        try {
+            String name = params.get("name");
+            String phone = params.get("phone");
+            String email = params.get("email");
+
+            User newUser = new User();
+            newUser.setName(name);
+            newUser.setPhone(phone);
+            newUser.setEmail(email);
+            newUser.setUsername(phone);
+            newUser.setPassword("123");
+
+            User u = this.userService.addC(newUser);
+            return new ResponseEntity<>(u, HttpStatus.CREATED);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    
+    @PostMapping(value = "/api/add-ticket-customer")
+     public HttpStatus addTicket(HttpSession session, @RequestBody Map<String, String> params) {
+        
+            int userId = Integer.parseInt(params.get("userId"));
+            String method = params.get("method");
+
+            if (this.ticketDetailService.addReceipt((Map<Integer, Seat>) session.getAttribute("seat"), userId, method) == true) {
+            
+            session.removeAttribute("seat");
+            return HttpStatus.OK;
+        }
+
+        return HttpStatus.BAD_REQUEST;
+    }
+    
 }

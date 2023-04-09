@@ -31,6 +31,8 @@ public interface UserService extends UserDetailsService {
             String email, String phone, String avtUrl);
 
     User addU(User user);
+    
+    User addC(User user);
 
     User addUE(User user);
 

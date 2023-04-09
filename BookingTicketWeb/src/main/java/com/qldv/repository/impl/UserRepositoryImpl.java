@@ -213,4 +213,18 @@ public class UserRepositoryImpl implements UserRepository {
         return (User) q.getSingleResult();
     }
 
+    @Override
+    public User addC(User user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(user);
+
+            return user;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+
 }

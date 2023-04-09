@@ -72,8 +72,9 @@ public class BookingTicketController {
     }
 
     @RequestMapping("/reservation/{tripId}/confirm-seat")
-    public String confirmPage(HttpSession session, @PathVariable("tripId") int tripId, Model model) {
-
+    public String confirmPage(HttpSession session, @PathVariable("tripId") int tripId, Model model,
+            HttpServletRequest request, Authentication au) {
+        User u = this.userDetailService.getUsers(au.getName()).get(0);
         Map<Integer, Seat> seat = (Map<Integer, Seat>) session.getAttribute("seat");
         if (seat != null) {
             model.addAttribute("seat", seat.values());
@@ -83,6 +84,7 @@ public class BookingTicketController {
         model.addAttribute("tripId", tripId);
         model.addAttribute("counter", Utils.count((Map<Integer, Seat>) session.getAttribute("seat")));
         model.addAttribute("seatStats", Utils.seatStats((Map<Integer, Seat>) session.getAttribute("seat")));
+        model.addAttribute("user", u);
         return "confirmseat";
     }
 
@@ -106,6 +108,28 @@ public class BookingTicketController {
         model.addAttribute("trip", t);
         model.addAttribute("price", price);
         return "bill";
+    }
+    
+    @RequestMapping("/reservation/{tripId}/confirm-seat/user-information-byEmployee")
+    public String billPageE(HttpSession session, @PathVariable("tripId") int tripId, Model model,
+            HttpServletRequest request, Authentication au) {
+        User u = this.userDetailService.getUsers(au.getName()).get(0);
+        Trip t = tripService.tripById(tripId);
+        Route r = t.getRouteId();
+        long price = (long)Utils.sumMoney(new Date(), r);
+        Map<Integer, Seat> seat = (Map<Integer, Seat>) session.getAttribute("seat");
+        if (seat != null) {
+            model.addAttribute("seat", seat.values());
+        } else {
+            model.addAttribute("seat", null);
+        }
+        model.addAttribute("counter", Utils.count((Map<Integer, Seat>) session.getAttribute("seat")));
+        model.addAttribute("seatStats", Utils.seatStats((Map<Integer, Seat>) session.getAttribute("seat")));
+        model.addAttribute("tripId", tripId);
+        model.addAttribute("user", u);
+        model.addAttribute("trip", t);
+        model.addAttribute("price", price);
+        return "billemployee";
     }
     
     @RequestMapping("/reservation/{tripId}/confirm-seat/user-information/success")

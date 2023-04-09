@@ -59,7 +59,7 @@
                         <!--<div style="float: right"><button class="btn btn-warning" onclick="pay()">Thanh toán</button></div>-->
 
                     </div>
-                <c:if test="${counter==0}">
+                    <c:if test="${counter==0}">
                         <p class="text-danger formatP"><i>Vui lòng quay lại đặt ghế mới!</i></p>
                     </c:if>
                 </c:if>
@@ -67,8 +67,14 @@
                     <div style="float:right;"> 
                         <a type="button" id="prevBtn" class="button btn btn-secondary" href="<c:url value="/reservation/${tripId}"/>">Quay lại</a> 
                         <c:if test="${counter!=0}">
+                            <c:if test="${user.userrole!='Customer'}">
+                                <a type="button" id="nextBtn" class="button btn btn-success"
+                                   href="<c:url value="/reservation/${tripId}/confirm-seat/user-information-byEmployee"/>"> Tiếp tục</a> 
+                            </c:if>
+                            <c:if test="${user.userrole=='Customer'}">
                             <a type="button" id="nextBtn" class="button btn btn-success"
                                href="<c:url value="/reservation/${tripId}/confirm-seat/user-information"/>"> Tiếp tục</a> 
+                            </c:if>
                         </c:if>
                     </div>
                 </div>

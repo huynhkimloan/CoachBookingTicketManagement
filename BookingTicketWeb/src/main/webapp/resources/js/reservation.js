@@ -5,69 +5,6 @@
  */
 /* global fetch */
 
-//var currentTab = 0;
-//document.addEventListener("DOMContentLoaded", function (event) {
-//    showTab(currentTab);
-//
-//});
-//
-//function showTab(n) {
-//    var x = document.getElementsByClassName("tab");
-//    x[n].style.display = "block";
-//    if (n === 0) {
-//        document.getElementById("prevBtn").style.display = "none";
-//    } else {
-//        document.getElementById("prevBtn").style.display = "inline";
-//    }
-//    if (n === (x.length - 1)) {
-//        document.getElementById("nextBtn").innerHTML = "Thanh toán";
-//    } else {
-//        document.getElementById("nextBtn").innerHTML = "Tiếp tục";
-//    }
-//    fixStepIndicator(n);
-//}
-//
-//function nextPrev(n) {
-//    var x = document.getElementsByClassName("tab");
-//    if (n === 1 && !validateForm())
-//        return false;
-//    x[currentTab].style.display = "none";
-//    currentTab = currentTab + n;
-//    if (currentTab >= x.length) {
-//        // document.getElementById("regForm").submit();
-//        // return false;
-//        //alert("sdf");
-//        document.getElementById("nextprevious").style.display = "none";
-//        document.getElementById("all-steps").style.display = "none";
-//        document.getElementById("register").style.display = "none";
-//        document.getElementById("text-message").style.display = "block";
-//    }
-//    showTab(currentTab);
-//}
-//
-//function validateForm() {
-//    var x, y, i, valid = true;
-//    x = document.getElementsByClassName("tab");
-//    y = x[currentTab].getElementsByTagName("input");
-//    for (i = 0; i < y.length; i++) {
-//        if (y[i].value === "") {
-//            y[i].className += " invalid";
-//            valid = false;
-//        }
-//    }
-//    if (valid) {
-//        document.getElementsByClassName("step")[currentTab].className += " finish";
-//    }
-//    return valid;
-//}
-//
-//function fixStepIndicator(n) {
-//    var i, x = document.getElementsByClassName("step");
-//    for (i = 0; i < x.length; i++) {
-//        x[i].className = x[i].className.replace(" active", "");
-//    }
-//    x[n].className += " active";
-//}
 
 function addToPay(id, name, price, pasCarId, tripId) {
     event.preventDefault();
@@ -122,12 +59,12 @@ function pay(tripId, method) {
     if (option === true) {
         fetch("/BookingTicketWeb/api/pay", {
             method: 'post',
-        body: JSON.stringify({
-            "method": method
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
+            body: JSON.stringify({
+                "method": method
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
         }).then(function (res) {
             return res.json();
         }).then(function (code) {
@@ -136,3 +73,66 @@ function pay(tripId, method) {
         });
     }
 }
+
+function pay(tripId, method) {
+    var option = confirm('Bạn có chắc chắn muốn thanh toán không?');
+    if (option === true) {
+        fetch("/BookingTicketWeb/api/pay", {
+            method: 'post',
+            body: JSON.stringify({
+                "method": method
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (res) {
+            return res.json();
+        }).then(function (code) {
+            console.log(code);
+            document.location.href = `/BookingTicketWeb/reservation/${tripId}/confirm-seat/user-information/success`;
+        });
+    }
+}
+
+function addTicket(tripId, method) {
+    event.preventDefault();
+    var option = confirm('Bạn có chắc chắn muốn thanh toán không?');
+    if (option === true) {
+
+        return fetch("/BookingTicketWeb/api/add-user-booking", {
+            method: 'post',
+            body: JSON.stringify({
+                "name": document.getElementById("nameUser").value,
+                "phone": document.getElementById("phoneNumber").value,
+                "email": document.getElementById("emailUser").value
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then((res) => {
+            return res.json();
+        }).then((data) => {
+            if (data && data.id > 0) {
+                userId = data.id;
+                return fetch("/BookingTicketWeb/api/add-ticket-customer", {
+                    method: 'post',
+                    body: JSON.stringify({
+                        "userId": userId,
+                        "method": method
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+            } else {
+                throw Error("Có lỗi xảy ra, vui lòng quay lại sau!!");
+            }
+        }).then(function (res) {
+            return res.json();
+        }).then(function (code) {
+            console.log(code);
+            document.location.href = `/BookingTicketWeb/reservation/${tripId}/confirm-seat/user-information/success`;
+        });
+    }
+}
+

@@ -71,10 +71,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/bill.jsp" />
     </definition>
-    <definition name="paybypaypal" extends="baseLayout">
-        <put-attribute name="title" value="Thanh toán momo" />
+    <definition name="billemployee" extends="baseLayout">
+        <put-attribute name="title" value="Thanh toán" />
         <put-attribute name="content"
-                       value="/WEB-INF/jsp/paybypaypal.jsp" />
+                       value="/WEB-INF/jsp/bill-employee.jsp" />
     </definition>
     <definition name="confirmseat" extends="baseLayout">
         <put-attribute name="title" value="Xác nhận đặt ghế" />
