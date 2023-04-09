@@ -8,26 +8,11 @@
 <form action="<c:url value="/trip"/>">
     <div id="demo1" class="carousel slide" data-bs-ride="carousel" style="padding-top:10px; height: 500px;  ">
 
-        <!-- Indicators/dots -->
-        <!--        <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-                    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-                </div>-->
-
-        <!-- The slideshow/carousel -->
         <div class="carousel-inner" style="height: 520px;">
             <div class="carousel-item active">
                 <img src="https://res.cloudinary.com/dvsqhstsi/image/upload/v1676619172/3_bbq0ou.jpg" alt="Tuyến 1" class="d-block w-100 " style="height: 400px;">
-                <!--            <div class="carousel-caption">
-                                <h1 style="padding-top: 100px; ">CÁC TUYẾN ĐƯỜNG PHỔ BIẾN</h1>
-                                <p>We will give you a great experience!!!</p>
-                            </div>-->
+                
             </div>
-
-            <!--    <div id="demo" class="carousel slide" data-bs-ride="carousel" style="padding-top:10px; position: relative ">-->
-
-
             <!--     Left and right controls/icons -->
             <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
@@ -38,8 +23,8 @@
             <!--<form action="">-->
             <div class="row searchRoute" >
                 <div style="width:100%; display:flex; ">
-                    <div class="selectPoint" >
-                        <h5>ĐIỂM ĐI</h5>
+                    <div class="selectPoint" style="border: 1px solid #A4A4A4" >
+                        <h5 style="margin-top: 10px; color: #a4a4a4">ĐIỂM ĐI</h5>
                         <div class="nav-item point" style="margin-left: 10px;">
                             <input class="form-control" list="browsers" name="kw" id="startingpoint">
                             <datalist id="browsers" >
@@ -54,9 +39,9 @@
                             </datalist>
                         </div>
                     </div>
-                    <div class="nav-item " style="border-color: #262626; margin-top: 40px;"><i class="fa-solid fa-arrow-right-arrow-left btnpoint"></i></div>
-                    <div class="selectPoint">
-                        <h5>ĐIỂM ĐẾN</h5>
+                    <div class="nav-item " style="border-color: #262626; margin-top: 30px;"><i class="fa-solid fa-arrow-right-arrow-left btnpoint"></i></div>
+                    <div class="selectPoint" style="border: 1px solid #A4A4A4" >
+                        <h5 style="margin-top: 10px; color: #a4a4a4">ĐIỂM ĐẾN</h5>
                         <div class="nav-item point" style="margin-left: 10px;">
                             <input class="form-control" list="browsers" name="kw1" id="destination">
                             <datalist id="browsers">
@@ -71,8 +56,8 @@
                             </datalist>
                         </div> 
                     </div>
-                    <div class="selectPoint">
-                        <h5>CHỌN NGÀY ĐI</h5>
+                    <div class="selectPoint"  style="border: 1px solid #A4A4A4; margin-left: 10px" >
+                        <h5 style="margin-top: 10px; color: #a4a4a4">CHỌN NGÀY ĐI</h5>
                         <div class="nav-item point" style="margin-left: 10px;">
                             <input type="date" name="kw2" id="departureday1"  class="form-control" /> 
                         </div>
@@ -100,7 +85,6 @@
         <div class="col-md-4 col-xs-12" style="padding:10px;">
             <div class="card">
                 <img style=" height: 250px;" class=" img1 img-fluid card-header" src="<c:url value="${route.image}"/>" alt="${route.routename}" />                
-
                 <div class="card-body ">
                     <h3 style="font-family: 'Cambria', sans-serif;"><i class="fa-solid fa-map-location-dot"></i> ${route.startingpoint} - ${route.destination}</h3>
                     <hr>
@@ -114,6 +98,7 @@
                         
                     </diV>
                     <a href="<c:url value="/trip/${route.id}"/>"  id="priceInfo" class="btn btn-dark action" style="width: 100%; font-size: 20px;">Xem chi tiết</a>
+
                 </div>
             </div>
         </div>

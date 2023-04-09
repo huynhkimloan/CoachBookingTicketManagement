@@ -70,8 +70,6 @@ function topFunction() {
     document.documentElement.scrollTop = 0;
 }
 
-
-
 function addRating(event, driverId, tripId) {
     event.preventDefault();
     console.log('trigger on submit', event, driverId, tripId);

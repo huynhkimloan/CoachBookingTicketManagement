@@ -193,5 +193,4 @@ public class DriverDetaiRepositoryImpl implements DriverDetailRepository {
 
         return Integer.parseInt(q.getSingleResult().toString());
     }
-
 }

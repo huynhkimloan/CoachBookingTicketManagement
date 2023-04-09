@@ -360,4 +360,34 @@ public class TripRepositoryImpl implements TripRepository {
         return q.getResultList();
     }
 
+    @Override
+    public int getRouteIdByKeyword(String kw, String kw1, Date fromDate) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+        Root rootT = query.from(Trip.class);
+        Root rootR = query.from(Route.class);
+        List<Predicate> predicates = new ArrayList<>();
+
+        predicates.add(builder.equal(rootT.get("routeId"), rootR.get("id")));
+
+        predicates.add(builder.equal(rootT.get("active"), 1));
+
+        if (fromDate != null) {
+            predicates.add(builder.equal(rootT.get("departureday"), fromDate));
+        }
+        if (kw != null && !kw.isEmpty() && kw1 != null && !kw1.isEmpty()) {
+            predicates.add(builder.like(rootR.get("startingpoint").as(String.class),
+                    String.format("%%%s%%", kw)));
+            predicates.add(builder.like(rootR.get("destination").as(String.class),
+                    String.format("%%%s%%", kw1)));
+
+        }
+        query = query.select(rootR.get("id"));
+        
+        query.where(predicates.toArray(new Predicate[]{}));
+        org.hibernate.query.Query q = session.createQuery(query);
+        return Integer.parseInt(q.getSingleResult().toString());
+    }
+
 }

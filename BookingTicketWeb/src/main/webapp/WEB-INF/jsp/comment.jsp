@@ -24,34 +24,18 @@
     </div>
 
     <div id = "right" style = "margin: 5px;">
-        <p style="font-size: 55px;"><i class="fa-solid fa-bus" style="font-size: 55px;"></i>${trip.routeId.startingpoint} - ${trip.routeId.destination} </p>
+        <h1><i class="fa-solid fa-bus" style="font-size: 2.5rem"></i>${trip.routeId.startingpoint} - ${trip.routeId.destination} </h1>
 
         <h5 style="margin-top: 25px;"><i class="fa-solid fa-calendar-check"></i> Ngày khởi hành: <fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.departureday}" /></h5>
         <div style="display: flex; margin-top: 35px; ">
             <h5 ><i class="fa-solid fa-hourglass-start"></i> Thời gian đi: <fmt:formatDate type = "time" value = "${trip.departuretime}" /> </h5>  
             <h5 style="margin-left: 160px;"><i class="fa-solid fa-hourglass-end"></i> Thời gian đến: <fmt:formatDate type = "time" value = "${trip.arrivaltime}" /></h5>
         </div>  
-<!--        <form id="rating-form">
-            <h1>${rating}</h1>
-            <div class="rating-box" style="display: flex; margin-top: 40px;" >
-                <p style="margin: 5px;">Đánh giá: </p>
-                <div class="stars">
-                    <i class="fa-solid fa-star" ></i>
-                    <i class="fa-solid fa-star" ></i>
-                    <i class="fa-solid fa-star" ></i>
-                    <i class="fa-solid fa-star" ></i>
-                    <i class="fa-solid fa-star" ></i>
-                </div>
-            </div>
-                <input type="hidden" name="driverId" value="${driverId}">
-                <input type="hidden" name="tripId" value="${tripId}">
-                            <input type="submit" value="Submit">
-                <input id="sendcomment" type="submit"  style="width: 20%; margin-left: 40%; margin-top: 30px; " value="Đánh giá" />
-        </form>-->
 
-            <form  onsubmit="addRating(event, ${driverId}, ${tripId})" id="star-rating">
+        <form  onsubmit="addRating(event, ${driverId}, ${tripId})" id="star-rating">
                 <div id="error-message" class="text-center alert-danger"></div>
-                <h5>${userDriver.name}: ${rating} <i class="fa-solid fa-star"></i></h5>
+                <h5 style="margin-top: 25px;">${driver.userIdDriver.user.name}: ${Math.ceil(rating * 10) / 10}  
+                    <i class="fa-solid fa-star" style="color: orange; font-size: 25px; margin-left: 5px"></i></h5>
                 <div class="rating-box" style="display: flex; margin-top: 40px;" >
                     <p style="margin: 5px;">Đánh giá: </p>
                     <div class="stars">
@@ -63,7 +47,7 @@
                     </div>
                 </div>
                 <input id="sendcomment" type="submit"  style="width: 20%; margin-left: 40%; margin-top: 30px; " value="Đánh giá" />
-            </form>
+        </form>
     </div>
 </div>
 

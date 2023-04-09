@@ -212,16 +212,7 @@ input.invalid {
 }
 
 #priceInfo{
-    animation: doimau 0.9s ease-in infinite;
-}
-@keyframes doimau{
-    from{
-        color:#ffc107; 
-
-    }
-    to{
-        color:#198754;
-    }
+   background-color: #c19b77;
 }
 
 /*ADMIN*/
@@ -262,7 +253,7 @@ input.invalid {
 }
 
 #submitdepartureday {
-    margin-left: 74%;
+    margin-left: 75%;
     width:21%;
    font-weight: bold;
     height: 48px;
@@ -465,36 +456,19 @@ div.infomation > div {
 
 /*TRIP*/
 #nen {
-    margin: 20px 0 20px 10px ;
-    padding: 20px 12px 12px 12px;
-    border-radius: 10px 10px 0 0;
-    width: 30%;
-    border: 1px solid black;
+    margin: 20px 0 5px 10px ;
     text-align: center;
-    font-size: 30px;
+    font-size: 3rem;
     font-weight: bold;
-    animation: doimauh1 2s infinite;    
-    box-shadow: 4px 4px 4px black; 
-}  
-@keyframes doimauh1 {
-    from {
-        background-image: linear-gradient(to right, #8cd9b2, white);
-    }
-    to {
-        background-image: linear-gradient(to right,white, #c7ff82) ;
-    }
-
 }
 
 #blocktrip {
-    display: flex; 
-    border: 3px ridge; 
-    margin: 10px;
-    /*background: #f2ffcc;*/
-    margin-bottom: 20px;
-    margin-left: 15px;
-    width: 98%;
-/*    box-shadow: 3px 3px 3px #198754;*/
+    display: flex;  
+    padding-left: 0;
+    margin: 20px auto;
+    width: 70%;
+    border-radius: 5px;
+    border: 1px solid #a4a4a4;
 }
 #blocktrip:hover {     
      /*box-shadow:  10px  10px  5px lightgrey;*/
@@ -503,32 +477,43 @@ div.infomation > div {
 
 #trip-right {
     width: 60%; 
-    margin-left: 20px; 
-    padding: 10px; 
-    border-left: 1px solid gray;
+    padding: 10px 0 0 20px; 
 }
 
 #trip-a {
     display: flex; 
-    margin-top: 40px;
-    font-size: 20px;
 }
 
 #trip-a > a {
     width: 45%; 
     font-size: 20px;
+    font-weight: bold;
 }
+
 #trip-p {
     display: flex; 
-    margin-top: 30px; 
-    font-size: 20px;
+    margin-top: 10px; 
 }
+
+#trip-p p{
+    font-size: 16px;
+}
+
+#trip-p b{
+    font-size: 14px;
+}
+
+.pri b{
+    font-size: 17px;
+}
+
 #p-1{
-    width: 63%;
-    
+    width: 65%; 
+    margin-bottom: 0;
 }
 #p-2{
     width: 50%;
+    margin-bottom: 0;
 }
 #search-departureday {
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.19);
@@ -560,13 +545,8 @@ div.infomation > div {
 
 
 #trip-img {
-    height: 250px;
-    transition: transform 50s ;
-}
-
-#trip-img:hover {
-    transform: rotate(180deg);
-
+    height: 225px;
+    border-radius: 5px;
 }
 
 /*COMMENT*/
@@ -589,11 +569,10 @@ div.infomation > div {
     /*position:fixed;*/
     /*animation: chaychu 20s infinite, doimauchu 3s infinite ;*/
     width: 100%;
-    font-size: 55px;
+    font-size: 3rem;
     font-weight: bold;
     display: block;
-    margin-top: 30px;
-    margin-left:40px;
+    margin-top: 20px;
     text-align: center;
 
 
