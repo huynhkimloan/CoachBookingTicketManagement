@@ -10,9 +10,9 @@
 
 <!DOCTYPE html>
 <h2 class="text-center text-secondary">THAY ĐỔI THÔNG TIN CHUYẾN XE</h2>
-<div id="error-message" class="text-center alert alert-danger"></div>
+<div id="error-message" class="text-center alert-danger"></div>
 
-<form:form id="formUpdateTrip" modelAttribute="trip" enctype="multipart/form-data" acceptCharset="UTF-8">
+<form:form id="formUpdateTrip" modelAttribute="trip" style="width: 70%; margin: 10px auto" enctype="multipart/form-data" acceptCharset="UTF-8">
     <div class="mb-3">
         <label class="form-label">Mã chuyến</label>
         <form:input type="text" class="form-control" path="id" id="id" name="id" readonly="true"/>
@@ -67,8 +67,8 @@
     <div class="mb-3">
         <label class="form-label">Trạng thái</label>
         <form:select class="form-select" path="active" id="active" name="active">
-            <option value="true" ${trip.active =="true"?"selected":""}>true</option>
-            <option value="false" ${trip.active =="false"?"selected":""}>false</option>
+            <option value="true" ${trip.active =="true"?"selected":""}>Chưa khởi hành</option>
+            <option value="false" ${trip.active =="false"?"selected":""}>Đã kết thúc</option>
         </form:select>
     </div>
     <div class="mb-3">
@@ -77,7 +77,7 @@
     </div>
     <div>
         <input class="btn btn-warning" type="submit" onclick="updateTrip()" value="Sửa"/>     
-        <a href="<c:url value="/admin/trips/list" />" class="btn btn-info" type="button" data-toggle="tooltip" 
+        <a href="<c:url value="/admin/trips/list" />" class="btn btn-info" style="margin-top: -13px;" type="button" data-toggle="tooltip" 
            data-placement="top" title="Hủy"><i class="fas fa-undo"></i></a> 
     </div>
 </form:form>

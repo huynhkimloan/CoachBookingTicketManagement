@@ -49,30 +49,9 @@ function deleteSeat(seatId) {
         });
     }
 
-//    let s = document.getElementById(`s-${seatId}`);
-//    s.style.display = "none";
-
 }
 
-function pay(tripId, method) {
-    var option = confirm('Bạn có chắc chắn muốn thanh toán không?');
-    if (option === true) {
-        fetch("/BookingTicketWeb/api/pay", {
-            method: 'post',
-            body: JSON.stringify({
-                "method": method
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(function (res) {
-            return res.json();
-        }).then(function (code) {
-            console.log(code);
-            document.location.href = `/BookingTicketWeb/reservation/${tripId}/confirm-seat/user-information/success`;
-        });
-    }
-}
+
 
 function pay(tripId, method) {
     var option = confirm('Bạn có chắc chắn muốn thanh toán không?');
@@ -135,4 +114,6 @@ function addTicket(tripId, method) {
         });
     }
 }
+
+
 

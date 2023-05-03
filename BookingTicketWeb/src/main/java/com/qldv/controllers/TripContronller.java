@@ -7,7 +7,9 @@ package com.qldv.controllers;
 
 import com.qldv.pojo.Route;
 import com.qldv.pojo.Trip;
+import com.qldv.service.PassengerService;
 import com.qldv.service.RouteService;
+import com.qldv.service.TicketDetailService;
 import com.qldv.service.TripService;
 import com.qldv.utils.Utils;
 import java.util.Date;
@@ -35,7 +37,7 @@ public class TripContronller {
 
     @Autowired
     private RouteService routeService;
-
+    
     @RequestMapping("/trip")
     public String trip(Model model, @RequestParam(required = false) Map<String, String> params) throws ParseException {
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");

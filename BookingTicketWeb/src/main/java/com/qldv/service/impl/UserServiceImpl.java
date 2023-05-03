@@ -143,6 +143,7 @@ public class UserServiceImpl implements UserService {
     public User addC(User user) {
         user.setPassword(this.passwordEncoder.encode(user.getPassword()));//Băm mật khẩu
         user.setActive(Boolean.TRUE);
+        user.setUserrole(User.CUSTOMER);
         return this.userRepository.addU(user);
     }
 

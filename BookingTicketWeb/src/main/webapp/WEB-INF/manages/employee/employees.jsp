@@ -64,10 +64,10 @@
                 <td>${r.user.email}</td>
 
                 <c:if test="${r.gender=='Nữ'}">
-                    <td class="text-center"><i class="fas fa-venus"></i></td>
+                    <td class="text-center"><i class="fas fa-venus" style="color: palevioletred"></i></td>
                     </c:if>
                     <c:if test="${r.gender=='Nam'}">
-                    <td class="text-center"><i class="fas fa-mars"></i></td>
+                    <td class="text-center"><i class="fas fa-mars text-info"></i></td>
                     </c:if>
 
                 <td>${r.user.phone}</td>

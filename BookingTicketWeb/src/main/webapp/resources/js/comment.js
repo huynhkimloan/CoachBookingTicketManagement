@@ -30,15 +30,15 @@ function addComment(event, tripId) {
                 </div>
                 <div class="be-comment-content">
 
-                    <span class="be-comment-name">
-                        <a href="blog-detail-2.html">${data.customerId.name}</a>
+                    <span class="be-comment-name" style="margin-bottom: 0px;">
+                        <a href="blog-detail-2.html" style="font-size:18px; text-decoration: none">${data.customerId.name}</a>
                     </span>
-                    <span class="be-comment-time comment-date">
-                         <i class="fa-solid fa-clock"></i>
-                         ${moment(data.createddate).fromNow()}
+                    <span class="be-comment-time comment-date" style="font-size:12px; ">
+                         Thời gian:
+                         ${moment(data.createddate).locale("vi").fromNow()}
                     </span>
 
-                    <p class="be-comment-text">
+                   <p class="be-comment-text" style="font-size:15px; margin-bottom: 30px;">
                         ${data.content}
                     </p>
                 </div>
@@ -101,40 +101,3 @@ function addRating(event, driverId, tripId) {
         console.error(error);
     });
 }
-
-//const ratingForm = document.getElementById('rating-form');
-//
-//ratingForm.addEventListener('submit', function(event) {
-//    event.preventDefault();
-//
-//    let ratingValue = 0;
-//    const stars = document.querySelectorAll(".stars i");
-//    stars.forEach((star, i) => {
-//        if (star.classList.contains('active')) {
-//            ratingValue = i + 1;
-//        }
-//    });
-//
-//    const driverId = this.elements.driverId.value;
-//    const tripId = this.elements.tripId.value;
-//
-//    fetch("/BookingTicketWeb/rating", {
-//        method: 'POST',
-//        body: JSON.stringify({
-//            "stars": ratingValue,
-//            "driver": driverId
-//
-//        }),
-//        headers: {
-//            "Content-Type": "application/json"
-//        }
-//    }).then((res) => {
-//        return res.json();
-//    }).then(() => {
-//        document.location.href = `/BookingTicketWeb/comment/${tripId}`;
-//    }).catch((error) => {
-//        const errEle = document.getElementById('error-message');
-//        errEle.textContent = "Có lỗi xảy ra, vui lòng thử lại lần nữa!!";
-//        console.error(error);
-//    });
-//});

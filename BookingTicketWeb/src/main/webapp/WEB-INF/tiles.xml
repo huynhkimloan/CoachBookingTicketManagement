@@ -9,8 +9,6 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="menu" value="" />
         <put-attribute name="header"
                        value="/WEB-INF/layout/header.jsp" />
-        <put-attribute name="imagePage"
-                       value="" />
         <put-attribute name="content" value="" />
         <put-attribute name="m_content" value="" />
         <put-attribute name="footer"
@@ -56,8 +54,6 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     </definition>
     <definition name="trip" extends="baseLayout">
         <put-attribute name="title" value="Chuyến" />
-<!--        <put-attribute name="imagePage"
-                       value="/WEB-INF/jsp/imagepage.jsp" />-->
         <put-attribute name="content"
                        value="/WEB-INF/jsp/trip.jsp" />
     </definition>
@@ -65,6 +61,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Đặt vé" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/reservation.jsp" />
+    </definition>
+    <definition name="reservationVIP" extends="baseLayout">
+        <put-attribute name="title" value="Đặt vé" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/reservationVIP.jsp" />
     </definition>
     <definition name="bill" extends="baseLayout">
         <put-attribute name="title" value="Thanh toán" />

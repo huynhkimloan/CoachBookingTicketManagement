@@ -12,7 +12,7 @@
 
 
 
-<div style="font-family: ui-rounded; text-align: center; margin-top: 20px; background: #c19b77; color: white;font-size: 25px; font-weight: bold; padding: 0.5%;">THÔNG TIN MUA VÉ - XEM TRƯỚC</div>
+<div style="font-family: ui-rounded; text-align: center; background: #c19b77; color: white;font-size: 25px; font-weight: bold; padding: 0.5%;">THÔNG TIN MUA VÉ - XEM TRƯỚC</div>
 
 <div style="margin: 1% 25%; border: 1px solid #a4a4a4 ">
     <div style="font-family: ui-rounded; padding: 0.5%; font-size: 20px; font-weight: bold; background: #f3f3f3; padding-left: 20px;">Thông tin chuyến xe</div>
@@ -43,7 +43,7 @@
         </div>
         <div Style ="display: flex">
             <p style ="margin-left: 35px; width: 80%">Giá vé: <span id="price"></span> </p>
-            <p style="text-align: left;"><fmt:formatNumber value="${trip.routeId.price}" maxFractionDigits="3" type = "number" /> VNĐ </p>
+            <p style="text-align: left;"><fmt:formatNumber value="${price}" maxFractionDigits="3" type = "number" /> VNĐ </p>
         </div>
         <div Style ="display: flex">
             <p style ="margin-left: 35px; width: 80%">Điểm tích lũy: <span id="price"></span> </p><!-- comment -->
@@ -62,8 +62,6 @@
 <a onclick="pay(${tripId}, 'Paypal')" class="btn btn-info" type="button">
     <div style="font-size: 20px;margin-top: 15px; font-weight: bold; margin-left: 67%; width: 7%;padding: 0.5%; background: #c19b77; color: white; cursor: pointer">Thanh toán</div>
 </a>
-
-
 
 <script src="<c:url value="/js/reservation.js"/>"></script>
 

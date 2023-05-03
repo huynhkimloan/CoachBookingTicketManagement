@@ -115,7 +115,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/admin/**").access("hasAuthority('Admin')");
         http.authorizeRequests().antMatchers("/tickets/**").access("hasAnyAuthority('Employee', 'Admin')");
         http.authorizeRequests().antMatchers("/ad/driverdetails/list").access("hasAnyAuthority('Driver', 'Admin')");
-          
+        http.authorizeRequests().antMatchers("/ad/driverdetails/adddriver").access("hasAnyAuthority('Admin')");  
         http.csrf().disable();
     }
     

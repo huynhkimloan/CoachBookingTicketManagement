@@ -64,10 +64,10 @@
                 <td><fmt:formatDate type = "time" value = "${r.departuretime}" /></td>
                 <td><fmt:formatDate type = "time" value = "${r.arrivaltime}" /></td>
                 <c:if test="${r.active==true}">
-                    <td class="text-center"><i class="fas fa-check-square"></i></td>
+                    <td class="text-center"><i class="fas fa-check-square" style="color: #2196F3"></i></td>
                     </c:if>
                     <c:if test="${r.active==false}">
-                    <td class="text-center"><i class="fas fa-window-close"></i></td>
+                    <td class="text-center"><i class="fas fa-window-close" style="color: red"></i></td>
                     </c:if>
                 <td>${r.routeId.routename}</td>
                 <td>${r.userIdEmployee.user.name}</td>
@@ -106,5 +106,6 @@
         var option = confirm('Bạn có chắc chắn muốn xóa không?');
         if (option === true)
             window.location.href = '/BookingTicketWeb/admin/trips/deletetrip/' + id;
+        alert("Xóa chuyến xe không thành công");
     }
 </script>

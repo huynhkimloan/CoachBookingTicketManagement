@@ -8,25 +8,38 @@
 <form action="<c:url value="/trip"/>">
     <div id="demo1" class="carousel slide" data-bs-ride="carousel" style="padding-top:10px; height: 500px;  ">
 
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo1" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#demo1" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#demo1" data-bs-slide-to="2"></button>
+        </div>
+
+
         <div class="carousel-inner" style="height: 520px;">
             <div class="carousel-item active">
-                <img src="https://res.cloudinary.com/dvsqhstsi/image/upload/v1676619172/3_bbq0ou.jpg" alt="Tuyến 1" class="d-block w-100 " style="height: 400px;">
-                
+                <img src="https://res.cloudinary.com/ddqevaeix/image/upload/v1682612736/routes/LOAN_HI%E1%BB%80N_LOHIBUS_2_fuwr3c.png" alt="Tuyến 1" class="d-block w-100 " style="height: 400px;">
+            </div>
+            <div class="carousel-item">
+                <img src="https://res.cloudinary.com/ddqevaeix/image/upload/v1682612737/routes/LOAN_HI%E1%BB%80N_LOHIBUS_1_dv0j4x.png" alt="Tuyến 2" class="d-block w-100 " style="height: 400px;">
+            </div>
+            <div class="carousel-item">
+                <img src="https://res.cloudinary.com/ddqevaeix/image/upload/v1682612737/routes/LOAN_HI%E1%BB%80N_LOHIBUS_mx9t5c.png" alt="Tuyến 3" class="d-block w-100 " style="height: 400px;">
             </div>
             <!--     Left and right controls/icons -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#demo1" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#demo1" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
             </button>
             <!--<form action="">-->
             <div class="row searchRoute" >
                 <div style="width:100%; display:flex; ">
                     <div class="selectPoint" style="border: 1px solid #A4A4A4" >
-                        <h5 style="margin-top: 10px; color: #a4a4a4">ĐIỂM ĐI</h5>
+                        <h5 style="margin-top: 10px; color: #a4a4a4; font-weight: bold">ĐIỂM ĐI</h5>
                         <div class="nav-item point" style="margin-left: 10px;">
-                            <input class="form-control" list="browsers" name="kw" id="startingpoint">
+                            <input class="form-control" list="browsers" name="kw" id="startingpointIndex">
                             <datalist id="browsers" >
                                 <option value="Sài Gòn" >
                                 <option value="Bình Định">
@@ -41,9 +54,9 @@
                     </div>
                     <div class="nav-item " style="border-color: #262626; margin-top: 30px;"><i class="fa-solid fa-arrow-right-arrow-left btnpoint"></i></div>
                     <div class="selectPoint" style="border: 1px solid #A4A4A4" >
-                        <h5 style="margin-top: 10px; color: #a4a4a4">ĐIỂM ĐẾN</h5>
+                        <h5 style="margin-top: 10px; color: #a4a4a4; font-weight: bold">ĐIỂM ĐẾN</h5>
                         <div class="nav-item point" style="margin-left: 10px;">
-                            <input class="form-control" list="browsers" name="kw1" id="destination">
+                            <input class="form-control" list="browsers" name="kw1" id="destinationIndex">
                             <datalist id="browsers">
                                 <option value="Sài Gòn">
                                 <option value="Bình Định">
@@ -76,37 +89,41 @@
 </c:if>
 
 
-<h1 style="margin-top: 30px; font-weight: bold; font-size: 3rem">CÁC TUYẾN PHỔ BIẾN</h1>
+<h1 style="margin-top: 50px; font-weight: bold; font-size: 3rem">CÁC TUYẾN ĐƯỜNG PHỔ BIẾN</h1>
 
 <div class="row" style="margin-top: 20px">
 
     <c:forEach var="route" items="${routes}"> 
 
-        <div class="col-md-4 col-xs-12" style="padding:10px;">
-            <div class="card">
-                <img style=" height: 250px;" class=" img1 img-fluid card-header" src="<c:url value="${route.image}"/>" alt="${route.routename}" />                
-                <div class="card-body ">
-                    <h3 style="font-family: 'Cambria', sans-serif;"><i class="fa-solid fa-map-location-dot"></i> ${route.startingpoint} - ${route.destination}</h3>
-                    <hr>
-                    <diV style="display: flex;" class="show-p">
-
-                        <g style="font-family: 'Cambria', sans-serif; font-weight: bold"><i class="fa-solid fa-location-dot" ></i> ${route.stretch} km </g>
-                        <p style="font-family: 'Cambria', sans-serif; font-weight: bold"><i class="fa-solid fa-clock"></i> ${route.time} h </p>
-                        <p class="product-carousel-price" style="font-family: 'Cambria', sans-serif; font-weight: bold">
-                            <i class="fa-solid fa-money-bill-wave"></i> <fmt:formatNumber 
-                                value="${route.price}" maxFractionDigits="3" type = "number" /> VNĐ</p> 
-                        
-                    </diV>
-                    <a href="<c:url value="/trip/${route.id}"/>"  id="priceInfo" class="btn text-white action" style="width: 100%; font-size: 20px; font-weight: bold">Xem chi tiết</a>
-
+        <div class="col-md-4 col-xs-12" id="ads">
+            <!-- Category Card -->
+            <div>
+                <div class="card rounded">
+                    <div class="card-image">
+                        <span class="card-notify-badge">${route.routename}</span>
+                        <span class="card-notify-year">Ưu đãi</span>
+                        <img class="img-fluid" style=" height: 220px; width: 100%" src="<c:url value="${route.image}"/>" alt="${route.routename}"/>
+                    </div>
+                    <div class="card-image-overlay" style="margin: 15px auto">
+                        <span class="card-detail-badge"><i class="fa-solid fa-location-dot" ></i> ${route.stretch} km</span>
+                        <span class="card-detail-badge"><i class="fa-solid fa-clock"></i> ${route.time} h</span>
+                        <span class="card-detail-badge" style="font-weight: bold"><i class="fa-solid fa-money-bill-wave"></i> <fmt:formatNumber 
+                                value="${route.price}" maxFractionDigits="3" type = "number" /> VNĐ</span>
+                    </div>
+                    <div class="card-body text-center" style="padding: 0">
+                        <div class="ad-title">
+                            <h5>${route.startingpoint} - ${route.destination}</h5>
+                        </div>
+                        <a class="ad-btn" href="<c:url value="/trip/${route.id}"/>">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </c:forEach>
-    
+
 </div>
 <c:if test="${routes.size() != 0}">
-    <div Style = "margin-left: 93%;">
+    <div style = "margin-left: 93%;">
         <ul class="pagination"  style = "margin-top:10px;">
             <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="a">
                 <li class="page-item"><a class="page-link" href="<c:url value="/" />?page=${a}">${a}</a></li>
@@ -125,7 +142,7 @@
             Trải qua hơn 20 năm vận chuyển đưa đón hành khách Hiền Loan đã từng bước khẳng định và giữ vững vị thế - uy tín chất lượng dịch vụ hàng đầu tại Hồ Chí Minh, làm hài lòng hàng trăm triệu lượt khách hàng trong nước cũng như khách quốc tế đến Việt Nam
         </p>
     </div>
-   <div style="width: 24%; margin: 1%;">
+    <div style="width: 24%; margin: 1%;">
         <div >
             <img src="https://res.cloudinary.com/dvsqhstsi/image/upload/v1680932548/2_uagro7.png" style="height:100px; width: 100px;margin-left: 85px;" >
         </div>

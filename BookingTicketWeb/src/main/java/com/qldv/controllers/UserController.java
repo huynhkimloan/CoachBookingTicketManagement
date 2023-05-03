@@ -1,12 +1,14 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package com.qldv.controllers;
 
+import com.qldv.pojo.Passengercar;
 import com.qldv.pojo.Ticketdetail;
 import com.qldv.pojo.User;
+import com.qldv.service.PassengerService;
 import com.qldv.service.TicketDetailService;
 import com.qldv.service.UserService;
 import java.text.ParseException;
@@ -39,6 +41,9 @@ public class UserController {
 
     @Autowired
     private TicketDetailService ticketDetailService;
+    
+    @Autowired
+    private PassengerService passengerService;
 
     @Autowired
     private MailSender mailSender;
@@ -65,8 +70,8 @@ public class UserController {
             model.addAttribute("errMsg", errMsg);
         } else {
             if (this.userDetailService.addUser(user) == true) {
-                sendMail("1951052049hien@ou.edu.vn", user.getEmail(), "Đăng ký", "Bạn đã đăng ký thành viên LoHiBusLine thành công"
-                            + "\nNhanh tay đặt vé đến những nơi bạn mong muốn nhé!");
+                sendMail("1951052049hien@ou.edu.vn", user.getEmail(), "ĐĂNG KÝ THÀNH CÔNG", "Bạn đã đăng ký thành viên LoHiBusLine thành công"
+                        + "\nNhanh tay đặt vé đến những nơi bạn mong muốn nhé!");
                 return "redirect:/login";
             } else {
                 errMsg = "Đã có lỗi xảy ra!";
@@ -77,50 +82,42 @@ public class UserController {
         return "register";
 
     }
-    
+
     @GetMapping("/info-ticket/{id}")
     public String cancelTicket(Model model, @PathVariable(value = "id") int ticketId) {
         model.addAttribute("cancel", this.ticketDetailService.getTicketById(ticketId));
         return "cancel-ticket";
     }
-    
+
     @PostMapping("/info-ticket-confirm")
-    public String cancelTicket(Model model, @ModelAttribute(value="cancel") @Valid Ticketdetail cancel, 
-           
-            BindingResult result, Authentication a) throws ParseException{
-        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+    public String cancelTicket(Model model, @ModelAttribute(value = "cancel") @Valid Ticketdetail cancel,
+            BindingResult result, Authentication a) throws ParseException {
         User u = this.userDetailService.getUsers(a.getName()).get(0);
-        String errMsg ="";
-//         if(result.hasErrors())
-//            errMsg = "Vui lòng kiểm tra lại thông tin hủy vé!";
-//        else{
-//            Date d = (f.parse(params.getOrDefault("cd", null)));
-        
-            cancel.setUserId(u);
-            cancel.setCreateddate(new Date());
-//            String date = f.format(cancel.getCreateddate());
-//        try {
-//            cancel.setCreateddate(f.parse(date));
-//        } catch (ParseException ex) {
-//            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-            if(this.ticketDetailService.cancelTicket(cancel) ==  true)
+        String errMsg = "";
+
+        cancel.setUserId(u);
+        cancel.setCreateddate(new Date());
+        if (cancel.getNote().isEmpty()) {
+            errMsg = "Bạn phải điền lý do hủy vé!";
+            model.addAttribute("errMsg", errMsg);
+        } else {
+            if (this.ticketDetailService.cancelTicket(cancel) == true) {
                 return "redirect:/info-ticket";
-            else
-                errMsg = "Đã có lỗi xảy ra, không hủy vé được!!!"; 
-//            }
-        model.addAttribute("errMsg", errMsg);
-        model.addAttribute("d", cancel.getCreateddate());
+            } else {
+                errMsg = "Đã có lỗi xảy ra, không hủy vé được!!!";
+                model.addAttribute("errMsg", errMsg);
+            }
+        }
         return "cancel-ticket";
     }
-    
-    public void sendMail(String from, String to, String subject, String content){
+
+    public void sendMail(String from, String to, String subject, String content) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(from);
         mailMessage.setTo(to);
         mailMessage.setSubject(subject);
         mailMessage.setText(content);
-        
+
         mailSender.send(mailMessage);
     }
 }

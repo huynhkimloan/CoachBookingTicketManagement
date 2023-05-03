@@ -80,6 +80,7 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
         predicates.add(builder.equal(rootR.get("tripId"), rootT.get("id")));
         predicates.add(builder.equal(rootR.get("seatId"), rootS.get("id")));
         predicates.add(builder.equal(rootR.get("tripId"), tripId));
+        predicates.add(builder.notEqual(rootR.get("active"), 0));
         query = query.multiselect(rootS.get("id"));
         query.where(predicates.toArray(new Predicate[]{}));
         Query q = session.createQuery(query);
@@ -152,7 +153,7 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
                 ticket.setTripId(this.tripRepository.tripById(s.getTripId()));
                 ticket.setUserId(this.userRepository.getById(uId));
                 ticket.setPassengercarId(this.passengerRepository.getById(s.getPasCarId()));
-                ticket.setActive(Boolean.TRUE);
+                ticket.setActive(1);
                 ticket.setPointplus((int)(s.getPrice()*0.001));
                 
                 session.save(ticket);
@@ -290,7 +291,7 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
         predicates.add(builder.equal(rootU.get("id"), rootT.get("userId")));
         predicates.add(builder.equal(rootTrip.get("id"), rootT.get("tripId")));
         predicates.add(builder.equal(rootT.get("userId"), userId));
-        predicates.add(builder.equal(rootT.get("active"), 1));
+        predicates.add(builder.notEqual(rootT.get("active"), 0));
         predicates.add(builder.greaterThanOrEqualTo(rootTrip.get("departureday"), date));
         query.where(predicates.toArray(new Predicate[]{}));
         query = query.select(rootT);
@@ -301,10 +302,8 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
     @Override
     public boolean cancelTicket(Ticketdetail cancel) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-
         try {
-            cancel.setActive(Boolean.FALSE);
-//            cancel.setCreateddate(new Date());
+            cancel.setActive(2);
             session.update(cancel);
             return true;
         } catch (Exception ex) {

@@ -8,8 +8,6 @@ package com.qldv.repository.impl;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.qldv.pojo.Driver;
-import com.qldv.pojo.Driverdetail;
-import com.qldv.pojo.Trip;
 import com.qldv.pojo.User;
 import com.qldv.repository.UserRepository;
 import com.qldv.service.impl.UserServiceImpl;
@@ -30,7 +28,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

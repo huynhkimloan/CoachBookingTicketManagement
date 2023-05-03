@@ -9,8 +9,8 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <h2 class="text-center text-secondary">GÁN TÀI XẾ CHẠY CÁC CHUYẾN XE</h2>
-<c:url value="/admin/driverdetails/savedriver" var="save" />
-<form:form action="${save}" modelAttribute="driver" method="post">
+<c:url value="/ad/driverdetails/savedriver" var="save" />
+<form:form action="${save}" style="width: 70%; margin: 10px auto" modelAttribute="driver" method="post">
     <div class="mb-3">
         <label class="form-label">Tên tuyến</label>
         <form:select path="tripId" class="form-select">
@@ -38,10 +38,10 @@
     <div>
         <input class="btn btn-success" type="submit" value="Thêm"/>
 
-        <a href="<c:url value="/admin/driverdetails/adddriver" />" class="btn btn-info" type="button" data-toggle="tooltip" 
+        <a href="<c:url value="/ad/driverdetails/adddriver" />" class="btn btn-info" style="margin-top: -13px;" type="button" data-toggle="tooltip" 
            data-placement="top" title="Quay lại"><i class="fas fa-undo"></i></a>
 
-        <a href="<c:url value="/admin/driverdetails/list" />" class="btn btn-secondary" type="button" data-toggle="tooltip" 
+        <a href="<c:url value="/ad/driverdetails/list" />" class="btn btn-secondary" style="margin-top: -13px;" type="button" data-toggle="tooltip" 
            data-placement="top" title="Danh sách"> <i class="fas fa-list"></i></a> 
     </div>
 </form:form>

@@ -10,16 +10,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h2 class="text-center text-danger">THỐNG KÊ MẬT ĐỘ - DOANH THU CHUYẾN </h2>
+<h1 class="text-center text-danger">THỐNG KÊ MẬT ĐỘ - DOANH THU CHUYẾN </h1>
 
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#density">Thống kê mật độ chuyến xe</a>
+        <a class="nav-link" style="font-size: 15px; color: #c19b77" data-bs-toggle="tab" href="#density">Thống kê mật độ chuyến xe</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#turnover">Thống kê doanh thu theo chuyến</a>
+        <a class="nav-link" style="font-size: 15px; color: #c19b77" data-bs-toggle="tab" href="#turnover">Thống kê doanh thu theo chuyến</a>
     </li>
     
 
@@ -32,7 +32,7 @@
     <div class="tab-pane container fade" id="density">
         <div class="row">
             <h4 class="text-center text-secondary mt-4"> Bảng số liệu thống kê </h4>
-            <table class="table">
+            <table class="table" style="width: 80%; margin: 0 auto 20px auto">
                 <tr>
                     <th>Mã tuyến </th>
                     <th>Tên tuyến </th>
@@ -61,9 +61,9 @@
     </div>
 
     <!--Thống kê doanh thu theo chuyến--> 
-    <div class="tab-pane container  active" id="turnover">
+    <div class="tab-pane container  active" id="turnover" style="margin-top: 10px;">
         <div class="row">
-            <form action="">
+            <form action="" style=" width: 50%; margin: 0 auto">
                 <div class="form-group">
                     <label>Tên chuyến</label>
                     <input type="text" name="kw" class="form-control" />
@@ -76,10 +76,10 @@
                     <label>Đến thời điểm</label>
                     <input type="date" name="toDate" class="form-control" />
                 </div>
-                <input type="submit" value="Thống kê" class="btn btn-success"/>
+                <input type="submit" value="Thống kê" class="btn text-white" style="background-color: #c19b77; margin-left: 420px"/>
             </form>
-            <h4 class="text-center text-danger"> Bảng số liệu thống kê </h4>
-            <table class="table">
+            <h4 class="text-center text-secondary"> Bảng số liệu thống kê </h4>
+            <table class="table" style="width: 80%; margin: 0 auto">
                 <tr>
                     <th>Mã chuyến </th>
                     <th>Tên chuyến </th>

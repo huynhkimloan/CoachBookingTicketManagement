@@ -33,7 +33,7 @@
                     <div class="selectPoint" style="border: 1px solid #A4A4A4" >
                         <h5 style="margin-top: 10px;  color: #a4a4a4">ĐIỂM ĐI</h5>
                         <div class="nav-item point" style="margin-left: 10px;">
-                            <input class="form-control" list="browsers" name="kw" id="startingpoint">
+                            <input class="form-control" list="browsers" name="kw" id="startingpointIndex">
                             <datalist id="browsers" >
                                 <option value="Sài Gòn" >
                                 <option value="Bình Định">
@@ -50,7 +50,7 @@
                     <div class="selectPoint" style="border: 1px solid #A4A4A4" >
                         <h5 style="margin-top: 10px;  color: #a4a4a4">ĐIỂM ĐẾN</h5>
                         <div class="nav-item point" style="margin-left: 10px;">
-                            <input class="form-control" list="browsers" name="kw1" id="destination">
+                            <input class="form-control" list="browsers" name="kw1" id="destinationIndex">
                             <datalist id="browsers">
                                 <option value="Sài Gòn">
                                 <option value="Bình Định">

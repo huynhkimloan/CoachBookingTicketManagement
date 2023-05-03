@@ -213,7 +213,6 @@ function updateTrip() {
     }
 }
 function cRemain(tripId) {
-//    const fSRemain = document.getElementById(`formShowRemain-${tripId}`);
     fetch("/BookingTicketWeb/api/trip/countRemain", {
         method: 'post',
         body: JSON.stringify({
@@ -227,6 +226,22 @@ function cRemain(tripId) {
     }).then(data => {
         let show = document.getElementById(`result-${tripId}`);
         show.value = data;
-//        alert(data);
+    });
+}
+
+function cRemainVIP(tripId) {
+    fetch("/BookingTicketWeb/api/trip/countRemainVIP", {
+        method: 'post',
+        body: JSON.stringify({
+            "tripId": tripId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then((res) => {
+        return res.json();
+    }).then(data => {
+        let show = document.getElementById(`result-${tripId}`);
+        show.value = data;
     });
 }

@@ -12,9 +12,9 @@
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-md-6">
             <form id="regForm"  style="padding: 0">
-                <h1 id="register" class="text-success" style="font-weight: 700;">ĐẶT VÉ</h1>
+                <h1 id="register" style="font-weight: 700; color: black">ĐẶT VÉ</h1>
                 <div class="all-steps mt-0" id="all-steps">
-                    <span class="step" style="background-color: green"></span> 
+                    <span class="step" style="background-color: brown"></span> 
                     <span class="step" style="background-color: black"></span> 
                     <span class="step"></span> 
                     <span class="step"></span> 
@@ -49,11 +49,11 @@
                         </table>
                         <div style="display: flex">
                             <div style="margin-right: 150px">
-                                <p class="formatP" style="font-weight: bold;">Tổng số lượng vé: <span id="count" class="text-info">${counter}</span></p>
+                                <p class="formatP" style="font-weight: bold;">Tổng số lượng vé: <span id="count" class="text-info" style="font-size: 18px">${counter}</span></p>
                             </div>
                             <div>
-                                <strong class="text-danger formatP" style="float: right">Tổng tiền:
-                                    <span id="amount"><fmt:formatNumber value="${seatStats.amount}" maxFractionDigits="3" type = "number" /></span> VNĐ</strong>
+                                <strong class="text-danger formatP" style="float: right; margin-left: 30px;">Tổng tiền:
+                                    <span id="amount" style="font-size: 18px"><fmt:formatNumber value="${seatStats.amount}" maxFractionDigits="3" type = "number" /></span> VNĐ</strong>
                             </div>
                         </div>
                         <!--<div style="float: right"><button class="btn btn-warning" onclick="pay()">Thanh toán</button></div>-->
@@ -65,15 +65,20 @@
                 </c:if>
                 <div style="overflow:auto;" id="nextprevious">
                     <div style="float:right;"> 
-                        <a type="button" id="prevBtn" class="button btn btn-secondary" href="<c:url value="/reservation/${tripId}"/>">Quay lại</a> 
+                        <c:if test="${trip.passengercarId.categoryId.id == 1}">
+                            <a type="button" id="prevBtn" class="button btn btn-secondary" href="<c:url value="/reservation/${tripId}"/>">Quay lại</a> 
+                        </c:if>
+                        <c:if test="${trip.passengercarId.categoryId.id == 2}">
+                            <a type="button" id="prevBtn" class="button btn btn-secondary" href="<c:url value="/reservation/passengerCarVIP/${tripId}"/>">Quay lại</a> 
+                        </c:if>
                         <c:if test="${counter!=0}">
                             <c:if test="${user.userrole!='Customer'}">
-                                <a type="button" id="nextBtn" class="button btn btn-success"
+                                <a type="button" id="nextBtn" class="button text-white" style="background-color: #c19b77; text-decoration: none; border-radius: 3px"
                                    href="<c:url value="/reservation/${tripId}/confirm-seat/user-information-byEmployee"/>"> Tiếp tục</a> 
                             </c:if>
                             <c:if test="${user.userrole=='Customer'}">
-                            <a type="button" id="nextBtn" class="button btn btn-success"
-                               href="<c:url value="/reservation/${tripId}/confirm-seat/user-information"/>"> Tiếp tục</a> 
+                                <a type="button" id="nextBtn" class="button text-white" style="background-color: #c19b77; text-decoration: none; border-radius: 3px"
+                                   href="<c:url value="/reservation/${tripId}/confirm-seat/user-information"/>"> Tiếp tục</a> 
                             </c:if>
                         </c:if>
                     </div>

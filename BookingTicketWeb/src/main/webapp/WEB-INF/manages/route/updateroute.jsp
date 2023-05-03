@@ -10,7 +10,7 @@
 
 <h2 class="text-center text-secondary">THAY ĐỔI THÔNG TIN TUYẾN XE</h2>
 <c:url value="/admin/routes/editroute" var="edit" />
-<form:form action="${edit}" modelAttribute="route" method="post" enctype="multipart/form-data" acceptCharset="UTF-8">
+<form:form action="${edit}" modelAttribute="route" style="width: 70%; margin: 10px auto" method="post" enctype="multipart/form-data" acceptCharset="UTF-8">
     <div class="mb-3">
         <label class="form-label">Mã tuyến</label>
         <form:input type="text" class="form-control" path="id" readonly="true"/>
@@ -45,7 +45,7 @@
     </div>
     <div>
         <input class="btn btn-warning" type="submit" value="Sửa"/>     
-        <a href="<c:url value="/admin/routes/list" />" class="btn btn-info" type="button" data-toggle="tooltip" 
+        <a href="<c:url value="/admin/routes/list" />" class="btn btn-info" style="margin-top: -13px;"type="button" data-toggle="tooltip" 
            data-placement="top" title="Hủy"><i class="fas fa-undo"></i></a> 
     </div>
 </form:form>

@@ -9,7 +9,7 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<h2 class="text-center text-secondary">BẢNG ĐIỀU KHIỂN</h2>
+<h1 class="text-center text-secondary">BẢNG ĐIỀU KHIỂN</h1>
 <div class="container-fluid" style="display: flex">
     <div class="col" style="margin-right: 30px">
         <div class="card row-sm-6 mb-3 box">

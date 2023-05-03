@@ -34,13 +34,20 @@
                     <p id="p-2" ><b><i class="fa-solid fa-hourglass-end"></i> Thời gian đến:</b> <fmt:formatDate type = "time" value = "${trip.arrivaltime}" /> </p>
                 </div> 
                 <div id="trip-p">
+                    <c:if test="${trip.passengercarId.categoryId.id == 1}">
                     <p id="p-1" ><b><i class="fa-solid fa-chair"></i> Ghế trống: </b>
                         <input style=" border: none;background-color: white; margin-bottom: 0" id="result-${trip.id}"
                                                                                      onmouseover ="cRemain(${trip.id})"/></p>
+                    </c:if>
+                    <c:if test="${trip.passengercarId.categoryId.id == 2}">
+                    <p id="p-1" ><b><i class="fa-solid fa-chair"></i> Ghế trống: </b>
+                        <input style=" border: none;background-color: white; margin-bottom: 0" id="result-${trip.id}"
+                                                                                     onmouseover ="cRemainVIP(${trip.id})"/></p>
+                    </c:if>
                     <p id="p-2" ><b><i class="fa-solid fa-bus-simple"></i> Loại: </b>${trip.passengercarId.categoryId.categoryname}</p>
                 </div>
                 <p class="text-center pri" style="margin-bottom: 5px;"><b style="font-size: 14px">Giá vé:</b> 
-                        <strong style=" color: orange; font-weight: bold; font-size: 16px"><fmt:formatNumber value="${price}" maxFractionDigits="3" type = "number" /> VNĐ</strong></p>
+                        <strong style=" color: #e6de08; font-weight: bold; font-size: 16px"><fmt:formatNumber value="${price}" maxFractionDigits="3" type = "number" /> VNĐ</strong></p>
 
                 <div id="trip-a" >                        
                     <c:if test="${pageContext.request.userPrincipal.name == null}">
@@ -48,8 +55,14 @@
                            class="btn text-white action">Đặt vé</a>
                     </c:if>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
+                        <c:if test="${trip.passengercarId.categoryId.id == 1}">
                         <a href="<c:url value="/reservation/${trip.id}"/>" id="priceInfo" style="margin-left: 145px"
                            class="btn text-white action">Đặt vé</a>
+                        </c:if>
+                        <c:if test="${trip.passengercarId.categoryId.id == 2}">
+                        <a href="<c:url value="/reservation/passengerCarVIP/${trip.id}"/>" id="priceInfo" style="margin-left: 145px"
+                           class="btn text-white action">Đặt vé</a>
+                        </c:if>
                     </c:if>        
                 </div>
             </div>

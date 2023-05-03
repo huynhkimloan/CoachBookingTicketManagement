@@ -11,7 +11,7 @@
 <h2 class="text-center text-secondary">THAY ĐỔI THÔNG TIN NHÂN VIÊN</h2>
 <div id="error-message" class="text-center alert-danger"></div>
 
-<form:form id="formUser" modelAttribute="user" method="post">
+<form:form id="formUser" modelAttribute="user" style="width: 70%; margin: 10px auto" method="post">
     <div class="mb-3">
         <label class="form-label">Mã nhân viên</label>
         <form:input type="number" class="form-control" name="id" id="id" path="id" readonly="true"/>
@@ -32,7 +32,7 @@
      <div id="invalid-feedback-phone" class="invalid-feedback"></div>
     </div>
 </form:form>
-<form:form id="formEmployee" modelAttribute="employee">
+<form:form id="formEmployee" style="width: 70%; margin: 10px auto" modelAttribute="employee">
     <div class="mb-3">
         <label class="form-label">CMND/CCCD</label>
         <form:input type="number" class="form-control" name="identityCard" id="identityCard" path="identitycard"/>
@@ -57,8 +57,8 @@
     </div>
 </form:form>
 
-<div>
-    <button class="btn btn-warning" onclick="updateEmployee()">Sửa</button>   
+<div style="margin-left: 160px">
+    <button class="btn btn-warning" onclick="updateEmployee()" style="width: 6%">Sửa</button>   
     <a href="<c:url value="/admin/employees/list" />" class="btn btn-info" type="button" data-toggle="tooltip" 
        data-placement="top" title="Hủy"><i class="fas fa-undo"></i></a> 
 </div>

@@ -64,7 +64,7 @@ public class Ticketdetail implements Serializable {
     private String note;
     
     @Column(name = "active")
-    private Boolean active;
+    private Integer active;
     
     @Column(name = "pointplus")
     private Integer pointplus;
@@ -200,20 +200,6 @@ public class Ticketdetail implements Serializable {
     }
 
     /**
-     * @return the active
-     */
-    public Boolean getActive() {
-        return active;
-    }
-
-    /**
-     * @param active the active to set
-     */
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    /**
      * @return the pointplus
      */
     public Integer getPointplus() {
@@ -226,5 +212,20 @@ public class Ticketdetail implements Serializable {
     public void setPointplus(Integer pointplus) {
         this.pointplus = pointplus;
     }
+
+    /**
+     * @return the active
+     */
+    public Integer getActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(Integer active) {
+        this.active = active;
+    }
+
     
 }

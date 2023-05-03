@@ -40,11 +40,11 @@ public class ApiUserProfileController {
     @ResponseStatus(HttpStatus.OK)
     public void editProfileCustomer(@RequestBody Map<String, String> params) {
         try {
+            String userId = params.get("userId");
+            User updateU = this.userDetailService.getById(Integer.parseInt(userId));
             String name = params.get("name");
             String email = params.get("email");
             String phone = params.get("phone");
-            String userId = params.get("userId");
-            User updateU = this.userDetailService.getById(Integer.parseInt(userId));
             updateU.setName(name);
             updateU.setEmail(email);
             updateU.setPhone(phone);

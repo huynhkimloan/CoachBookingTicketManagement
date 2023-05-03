@@ -12,12 +12,12 @@
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-md-6">
             <form id="regForm"  style="padding: 0">
-                <h1 id="register" class="text-success" style="font-weight: 700;">ĐẶT VÉ</h1>
+                <h1 id="register" style="font-weight: 700; color: black">ĐẶT VÉ</h1>
                 <div class="all-steps mt-0" id="all-steps">
-                    <span class="step" style="background-color: green"></span> 
-                    <span class="step" style="background-color: green"></span> 
-                    <span class="step" style="background-color: green"></span>
-                    <span class="step" style="background-color: green"></span> 
+                    <span class="step" style="background-color: brown"></span> 
+                    <span class="step" style="background-color: brown"></span> 
+                    <span class="step" style="background-color: brown"></span>
+                    <span class="step" style="background-color: black"></span> 
                 </div>
                 <div class="thanks-message text-center" id="text-message"> <img src="https://i.imgur.com/O18mJ1K.png" width="100" class="mb-4">
                     <h3>Bạn đã thanh toán thành công!</h3> 
@@ -25,7 +25,7 @@
                     <p class="formatP text-danger" style="font-weight: bold">Quay lại trang chủ trong vòng <span id="container"></span> giây!</p>
                 </div>
                 <div style="float:right;"> 
-                 <a type="button" class="btn btn-info" href="<c:url value="/"/>">Trở về</a> 
+                    <a type="button" class="btn text-white" style="background-color: #c19b77" href="<c:url value="/"/>">Trở về</a> 
                 </div>
             </form>
         </div>

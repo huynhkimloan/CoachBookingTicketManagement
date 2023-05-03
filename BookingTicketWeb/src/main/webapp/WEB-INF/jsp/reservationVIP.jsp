@@ -1,7 +1,7 @@
 <%-- 
-    Document   : reservation
-    Created on : Aug 22, 2022, 11:02:55 AM
-    Author     : Admin
+    Document   : paybymomo
+    Created on : Aug 24, 2022, 9:05:52 AM
+    Author     : dieuh
 --%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -88,30 +88,6 @@
                                         </c:choose>
                                     </c:forEach>
                             </div>
-                            <div class="row">
-                                <c:forEach items="${listSeatA}" var="seat" begin="11" end="13">
-                                    <c:choose>
-                                        <c:when test="${seat.active eq 1}">
-                                            <div class="col mb-2"><button class="disableBtn" type="button" name="seats" disabled>${seat.name}</button></div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div class="col mb-2"><button class="activeBtn" type="button" id="seat-${seat.id}" onclick="addToPay(${seat.id}, '${seat.name}', ${price}, ${pasCar.id}, ${tripId})">${seat.name}</button></div>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
-                            </div>
-                            <div class="row">
-                                <c:forEach items="${listSeatA}" var="seat" begin="14">
-                                    <c:choose>
-                                        <c:when test="${seat.active eq 1}">
-                                            <div class="col mb-2"><button class="disableBtn" type="button" name="seats" disabled>${seat.name}</button></div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div class="col mb-2"><button class="activeBtn" type="button" id="seat-${seat.id}" onclick="addToPay(${seat.id}, '${seat.name}', ${price}, ${pasCar.id}, ${tripId})">${seat.name}</button></div>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
-                            </div>
                         </div>
 
                         <div class="col-sm-6">
@@ -169,30 +145,6 @@
                                         </c:when>
                                         <c:otherwise>
                                             <div class="col mb-2"><button class="activeBtn" type="button" id="seat-${seat.id}" onclick="addToPay(${seat.id}, '${seat.name}', ${price}, ${pasCar.id}, ${tripId})">${seat.name}</button></div>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
-                            </div>
-                            <div class="row">
-                                <c:forEach items="${listSeatB}" var="seat" begin="11" end="13">
-                                    <c:choose>
-                                        <c:when test="${seat.active eq 1}">
-                                            <div class="col mb-2"><button class="disableBtn" type="button" name="seats" disabled>${seat.name}</button></div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div class="col mb-2"><button class="activeBtn" type="button" id="seat-${seat.id}" onclick="addToPay(${seat.id}, '${seat.name}', ${price}, ${pasCar.id}, ${tripId})">${seat.name}</button></div>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
-                            </div>
-                            <div class="row">
-                                <c:forEach items="${listSeatB}" var="seat" begin="14">
-                                    <c:choose>
-                                        <c:when test="${seat.active eq 1}">
-                                            <div class="col mb-2"><button class="disableBtn" type="button" name="seats" disabled>${seat.name}</button></div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div class="col mb-2"><button class="activeBtn" type="button" id="seat-${seat.id}" onclick="addToPay(${seat.id}, '${seat.name}', ${price}, ${pasCar.id}, ${tripId})" name="seats" >${seat.name}</button></div>
                                             </c:otherwise>
                                         </c:choose>
                                     </c:forEach>
