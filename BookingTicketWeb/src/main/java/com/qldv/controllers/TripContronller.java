@@ -37,11 +37,12 @@ public class TripContronller {
 
     @Autowired
     private RouteService routeService;
-    
+
     @RequestMapping("/trip")
     public String trip(Model model, @RequestParam(required = false) Map<String, String> params) throws ParseException {
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
         Date fromDate = null;
+        long price;
         String kw = params.getOrDefault("kw", null);
         String kw1 = params.getOrDefault("kw1", null);
         String from = params.getOrDefault("kw2", null);
@@ -53,8 +54,12 @@ public class TripContronller {
         }
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         model.addAttribute("trips", this.tripService.getRouteTrips(kw, kw1, fromDate, page));
-        Route route = this.routeService.findById(this.tripService.getRouteIdByKeyword(kw, kw1, fromDate));
-        long price = (long)Utils.sumMoney(new Date(), route);
+        if (this.tripService.getRouteIdByKeyword(kw, kw1) == 0) {
+            price = 0;
+        } else {
+            Route route = this.routeService.findById(this.tripService.getRouteIdByKeyword(kw, kw1));
+            price = (long) Utils.sumMoney(new Date(), route);
+        }
         model.addAttribute("date", fromDate);
         model.addAttribute("price", price);
         return "trip";
@@ -64,10 +69,10 @@ public class TripContronller {
     public String trip1(Model model, @PathVariable("routeId") int routeId, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         Route route = this.routeService.findById(routeId);
-        long price = (long)Utils.sumMoney(new Date(), route);
+        long price = (long) Utils.sumMoney(new Date(), route);
         model.addAttribute("trips", this.tripService.getDeparturedayTrips(routeId, page));
-        model.addAttribute("counter", this.tripService.countTrip(route.getStartingpoint(),route.getDestination(), null));
-        model.addAttribute("routeId", routeId );
+        model.addAttribute("counter", this.tripService.countTrip(route.getStartingpoint(), route.getDestination(), null));
+        model.addAttribute("routeId", routeId);
         model.addAttribute("price", price);
         return "trip";
     }

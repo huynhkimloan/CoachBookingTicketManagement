@@ -6,6 +6,7 @@
 package com.qldv.service;
 
 import com.qldv.pojo.Employee;
+import com.qldv.pojo.User;
 import java.util.List;
 import java.util.Map;
 
@@ -30,4 +31,8 @@ public interface EmployeeService {
     Employee findById(int employeeId);
 
     Employee addE(Employee employee);
+    
+    boolean lockEmployee(User userEmployee);
+    
+    boolean openEmployee(User userEmployee);
 }

@@ -38,7 +38,7 @@ public class TripRepositoryImpl implements TripRepository {
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
-    @Override
+//    @Override
 //    public List<Trip> getRouteTrips(String kw, String kw1, Date fromDate, int page) {
 //        Session session = this.sessionFactory.getObject().getCurrentSession();
 //        CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -59,11 +59,11 @@ public class TripRepositoryImpl implements TripRepository {
 //                    String.format("%%%s%%", kw)));
 //            predicates.add(builder.like(rootR.get("destination").as(String.class),
 //                    String.format("%%%s%%", kw1)));
-////            Predicate p = builder.like(rootR.get("startingpoint").as(String.class),
-////                    String.format("%%%s%%", kw));
-////            Predicate p1 = builder.like(rootR.get("destination").as(String.class),
-////                    String.format("%%%s%%", kw1));
-////            query = query.where(p, p1);
+//            Predicate p = builder.like(rootR.get("startingpoint").as(String.class),
+//                    String.format("%%%s%%", kw));
+//            Predicate p1 = builder.like(rootR.get("destination").as(String.class),
+//                    String.format("%%%s%%", kw1));
+//            query = query.where(p, p1);
 //
 //        }
 //        query = query.select(rootT);
@@ -72,7 +72,7 @@ public class TripRepositoryImpl implements TripRepository {
 //        query.orderBy(builder.asc(rootT.get("departureday")));
 //        org.hibernate.query.Query q = session.createQuery(query);
 //
-//        //Phân trang
+//        Phân trang
 //        int max = 6;
 //        q.setMaxResults(max);
 //        q.setFirstResult((page - 1) * max);
@@ -106,7 +106,7 @@ public class TripRepositoryImpl implements TripRepository {
 
         }
         query = query.select(rootT);
-        
+
         query.where(predicates.toArray(new Predicate[]{}));
         query.orderBy(builder.asc(rootT.get("departureday")));
         org.hibernate.query.Query q = session.createQuery(query);
@@ -332,7 +332,7 @@ public class TripRepositoryImpl implements TripRepository {
             predicates.add(builder.like(rootR.get("destination").as(String.class),
                     String.format("%%%s%%", kw1)));
         }
-        
+
         query.where(predicates.toArray(new Predicate[]{}));
         query = query.multiselect(builder.count(rootT));
         org.hibernate.query.Query q = session.createQuery(query);
@@ -348,8 +348,7 @@ public class TripRepositoryImpl implements TripRepository {
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(builder.equal(rootT.get("routeId"), id));
         predicates.add(builder.equal(rootT.get("active"), 1));
-        
-        
+
         query.where(predicates.toArray(new Predicate[]{}));
         query.orderBy(builder.asc(rootT.get("departureday")));
         query = query.select(rootT);
@@ -361,7 +360,7 @@ public class TripRepositoryImpl implements TripRepository {
     }
 
     @Override
-    public int getRouteIdByKeyword(String kw, String kw1, Date fromDate) {
+    public int getRouteIdByKeyword(String kw, String kw1) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
@@ -373,9 +372,6 @@ public class TripRepositoryImpl implements TripRepository {
 
         predicates.add(builder.equal(rootT.get("active"), 1));
 
-        if (fromDate != null) {
-            predicates.add(builder.equal(rootT.get("departureday"), fromDate));
-        }
         if (kw != null && !kw.isEmpty() && kw1 != null && !kw1.isEmpty()) {
             predicates.add(builder.like(rootR.get("startingpoint").as(String.class),
                     String.format("%%%s%%", kw)));
@@ -383,11 +379,16 @@ public class TripRepositoryImpl implements TripRepository {
                     String.format("%%%s%%", kw1)));
 
         }
-        query = query.select(rootR.get("id"));
-        
-        query.where(predicates.toArray(new Predicate[]{}));
-        org.hibernate.query.Query q = session.createQuery(query);
-        return Integer.parseInt(q.getSingleResult().toString());
+
+        try {
+            query = query.select(rootR.get("id"));
+            query.where(predicates.toArray(new Predicate[]{}));
+            org.hibernate.query.Query q = session.createQuery(query);
+            return Integer.parseInt(q.getSingleResult().toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
     }
 
 }

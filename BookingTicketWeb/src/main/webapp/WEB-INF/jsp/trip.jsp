@@ -17,6 +17,10 @@
             </h5>
         </c:if>
     </div>
+    <c:if test="${price == 0}">
+        <div class="alert alert-danger" style="margin-left: 27%; width: 50%; font-size: 15px; text-align: center"> Bạn cần nhập thông tin tìm kiếm !!!</div>  
+    </c:if>
+    <c:if test="${price != 0}">
     <c:forEach var="trip" items="${trips}">
         <div id="blocktrip">  
             <div class="card" style="width: 30%;">
@@ -68,7 +72,7 @@
             </div>
         </div>
     </c:forEach>
-    
+    </c:if>
      <c:if test="${trips.size() == 0}">
         <div class="alert alert-danger" style="margin-left: 27%; width: 50%; font-size: 15px; text-align: center">Hôm nay không có chuyến xe nào khởi hành !!!</div>  
     </c:if>

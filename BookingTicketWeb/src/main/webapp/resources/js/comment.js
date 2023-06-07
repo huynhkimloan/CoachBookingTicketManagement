@@ -101,3 +101,43 @@ function addRating(event, driverId, tripId) {
         console.error(error);
     });
 }
+
+//let hasReviewed = false;
+//
+//function addRating(event, driverId, tripId) {
+//    event.preventDefault();
+//    
+//    if (hasReviewed) {
+//        console.log("Người dùng đã đánh giá rồi.");
+//        return;
+//    }
+//    
+//    console.log('trigger on submit', event, driverId, tripId);
+//    let ratingValue = 0;
+//    const stars = document.querySelectorAll(".stars i");
+//    stars.forEach((star, i) => {
+//        if (star.classList.contains('active')) {
+//            ratingValue = i + 1;
+//        }
+//    });
+//    
+//    fetch("/BookingTicketWeb/rating", {
+//        method: 'POST',
+//        body: JSON.stringify({
+//            "stars": ratingValue,
+//            "driver": driverId
+//        }),
+//        headers: {
+//            "Content-Type": "application/json"
+//        }
+//    }).then((res) => {
+//        return res.json();
+//    }).then(() => {
+//        document.location.href = `/BookingTicketWeb/comment/${tripId}`;
+//        hasReviewed = true; // Đánh dấu đã đánh giá
+//    }).catch((error) => {
+//        const errEle = document.getElementById('error-message');
+//        errEle.textContent = "Có lỗi xảy ra, vui lòng thử lại lần nữa!!";
+//        console.error(error);
+//    });
+//}

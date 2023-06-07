@@ -6,7 +6,6 @@
 package com.qldv.controllers;
 
 import com.qldv.pojo.Seat;
-import com.qldv.pojo.Ticketdetail;
 import com.qldv.pojo.User;
 import com.qldv.service.TicketDetailService;
 import com.qldv.service.UserService;
@@ -147,7 +146,7 @@ public HttpStatus removeSeat(HttpSession session) {
         return HttpStatus.BAD_REQUEST;
     }
      
-     public void sendMail(String from, String to, String subject, String content) {
+    public void sendMail(String from, String to, String subject, String content) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(from);
         mailMessage.setTo(to);

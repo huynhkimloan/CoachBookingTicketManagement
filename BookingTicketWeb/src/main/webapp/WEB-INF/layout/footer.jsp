@@ -117,9 +117,9 @@
             <div class="col-md-2 link-footer">
                 <a href="<c:url value="/news-page" />" >Tin tức</a></div>
             <div class="col-md-2 link-footer">
-                <a href="https://futabus.vn" >Liên hệ</a></div>
+                <a href="<c:url value="/contact" />" >Liên hệ</a></div>
             <div class="col-md-3 link-footer">
-                <a href="https://futabus.vn" >Về chúng tôi</a></div>
+                <a href="<c:url value="/about" />" >Về chúng tôi</a></div>
         </div>
     </div>
     <div>

@@ -50,5 +50,5 @@ public interface TripService {
     
     public List<Trip> getDeparturedayTrips(int id, int page);
     
-    public int getRouteIdByKeyword(String kw, String kw1, Date fromDate);
+    public int getRouteIdByKeyword(String kw, String kw1);
 }

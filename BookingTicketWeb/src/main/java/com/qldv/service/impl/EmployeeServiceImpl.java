@@ -6,6 +6,7 @@
 package com.qldv.service.impl;
 
 import com.qldv.pojo.Employee;
+import com.qldv.pojo.User;
 import com.qldv.repository.EmployeeRepository;
 import com.qldv.service.EmployeeService;
 import java.util.List;
@@ -61,6 +62,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee addE(Employee employee) {
         return this.employeeRepository.addE(employee);
+    }
+
+    @Override
+    public boolean lockEmployee(User userEmployee) {
+        return this.employeeRepository.lockEmployee(userEmployee);
+    }
+
+    @Override
+    public boolean openEmployee(User userEmployee) {
+        return this.employeeRepository.openEmployee(userEmployee);
     }
 
 }

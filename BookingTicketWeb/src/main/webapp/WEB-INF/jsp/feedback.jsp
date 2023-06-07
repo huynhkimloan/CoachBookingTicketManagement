@@ -81,7 +81,7 @@
     
     
     <c:if test="${tripFeedback.size() == 0}">
-        <div class="alert alert-danger" style="margin-left: 27%; width: 50%; font-size: 20px; text-align: center">Hôm nay không có chuyến xe nào khởi hành !!!</div>  
+        <div class="alert alert-danger" style="margin-left: 27%; width: 50%; font-size: 20px; text-align: center">Không có chuyến xe nào đã khởi hành !!!</div>  
     </c:if>
     <c:forEach var="trip" items="${tripFeedback}">
         <div id="blocktrip">  
@@ -101,9 +101,6 @@
                 </div> 
                     <p class="text-center" style="margin-top: 12px"><i class="fa-solid fa-bus-simple"></i><strong style="font-size: 15px">
                         ${trip.passengercarId.categoryId.categoryname}</strong></p>
-         
-                
-               
 
                 <div id="trip-a" >            
                     <a href="<c:url value="/comment/${trip.id}"/>"  id="priceInfo" style="margin-left: 150px;" class="btn text-white action">Phản hồi</a>

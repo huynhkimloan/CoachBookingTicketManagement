@@ -49,4 +49,6 @@ public interface TicketDetailRepository {
     Ticketdetail getTicketById(int id);
     
     long sumPointPlus(int userId);
+    
+    List<Object> listTripIdUserMoved(int userId);
 }

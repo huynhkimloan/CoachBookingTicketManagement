@@ -124,8 +124,8 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public int getRouteIdByKeyword(String string, String string1, Date date) {
-        return this.tripRepository.getRouteIdByKeyword(string, string1, date);
+    public int getRouteIdByKeyword(String string, String string1) {
+        return this.tripRepository.getRouteIdByKeyword(string, string1);
     }
 
 }
