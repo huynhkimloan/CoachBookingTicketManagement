@@ -11,11 +11,11 @@
 <div class="containerbb container-fluid">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-md-6">
-            <form id="regForm"  style="padding: 0">
-                <h1 id="register" class="text-success" style="font-weight: 700;">ĐẶT VÉ</h1>
+            <form id="regForm"  style="padding: 0" action="<c:url value="/paybyPaypal"/>" method="post">
+                <h1 id="register" style="font-weight: 700; color: black">ĐẶT VÉ</h1>
                 <div class="all-steps mt-0" id="all-steps">
-                    <span class="step" style="background-color: green"></span> 
-                    <span class="step" style="background-color: green"></span> 
+                    <span class="step" style="background-color: brown"></span> 
+                    <span class="step" style="background-color: brown"></span> 
                     <span class="step" style="background-color: black"></span>
                     <span class="step"></span> 
                 </div>
@@ -36,40 +36,34 @@
                                 <p class="formatP"><i class="fa-solid fa-clock"></i> Giờ xuất phát: <fmt:formatDate type = "time" value = "${trip.departuretime}" /></p>
                             </div>
                             <div class="col-sm-5 form-check">
-                                <p class="formatP"><i class="fa-solid fa-check-to-slot"></i> Số lượng ghế: <span id="count">${counter}</span> </p>                       
+                                <p class="formatP"><i class="fa-solid fa-check-to-slot"></i> Số lượng ghế: <span id="count" style="font-size: 18px">${counter}</span> </p>                       
                             </div>
                         </div>
                     </div> 
                     <div>
-                        <h6 style="text-align: right;"> <i class="fa-solid fa-hand-holding-dollar"></i>
-                            Tổng tiền: <span id="amount" class="text-success" style="font-weight: bold"><fmt:formatNumber value="${seatStats.amount}" maxFractionDigits="3" type = "number" /></span> VNĐ  </h6>
+                        <h6 style="text-align: right; font-size: 17px"> <i class="fa-solid fa-hand-holding-dollar"></i>
+                            Tổng tiền: <span id="amount" class="text-success" style="font-weight: bold; font-size: 18px"><fmt:formatNumber value="${seatStats.amount}" maxFractionDigits="3" type = "number" /></span> VNĐ  </h6>
+                    </div>
+                    <div>
+                        <input type="hidden" name="tripId" value="${tripId}"/>
+                        <input type="hidden" name="amount" value="${seatStats.amount}"/>
+                        <input type="hidden" name="price" value="${price}"/>
+                        <input type="hidden" name="quantity" value="${counter}"/>
                     </div>
 
                     <div>  
                         <h5 class="alert alert-secondary">Phương thức thanh toán</h5> 
                         <div class="row" style="margin-right: 7px">
                             <div class="col-sm-6 form-check" style="width: 50%">
-                                <a href="<c:url value="/reservation/${tripId}/confirm-seat/user-information/success-momo"/>">
+                                <a>
                                     <div class="col">
                                         <span class="btn border border-warning">
-                                            <img class="img-fluid icon" src="<c:url value="/img/momo.jpg"/>" alt="Momo" />
-                                            <p style="margin-bottom: 0">Ví MoMo</p>
+                                            <img class="img-fluid icon" style="height: 75px" src="<c:url value="/img/paypal.jpg"/>" alt="Paypal" />
+                                            <input type="submit" style="border-bottom: none; margin: 0" value="Ví paypal"/>
                                         </span>
-                                    </div>
-                                </a>                              
+                                    </div>   
+                                </a>
                             </div>
-                            <c:if test="${user.userrole=='Employee'||user.userrole=='Admin'}">  
-                                <div class="col-sm-6 form-check" style="width: 50%"> 
-                                    <a onclick="pay(${tripId}, 'Tiền mặt')">
-                                        <div class="col" >
-                                            <span class="btn border border-warning" >
-                                                <img class="img-fluid icon" src="<c:url value="/img/tienmat.jpg"/>" alt="Tiền mặt" />
-                                                <p style="margin-bottom: 0">Trực tiếp tại quầy</p>
-                                            </span>
-                                        </div> 
-                                    </a>
-                                </div>
-                            </c:if>
                         </div>
                     </div>
                 </div>

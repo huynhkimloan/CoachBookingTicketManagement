@@ -10,7 +10,7 @@
 
 <h2 class="text-center text-secondary">THAY ĐỔI ẢNH CHUYẾN XE</h2>
 <div id="error-message" class="text-center alert-danger"></div>
-<form:form id="imageTrip" modelAttribute="trip" enctype="multipart/form-data" acceptCharset="UTF-8">
+<form:form id="imageTrip" modelAttribute="trip" enctype="multipart/form-data" style="width: 70%; margin: 10px auto" acceptCharset="UTF-8">
     <div class="mb-3">
         <label class="form-label">Mã chuyến</label>
         <form:input type="text" class="form-control" path="id" readonly="true"/>
@@ -19,12 +19,12 @@
         <label class="form-label">Ảnh</label>
         <form:input type="text" class="form-control" path="image" id="display-image" readonly="true"/>
 
-        <label for="firstimg"><i class="btn btn-secondary" style = "margin: 5px 0 5px 0; cursor: pointer;">Chọn ảnh </i></label>
+        <label for="firstimg"><i class="btn btn-secondary" style = "margin: 5px 0 5px 0; cursor: pointer;">Chọn ảnh <span class="asterisc">*</span></i></label>
         <input type = "file" id = "firstimg" hidden="hidden" onchange="getImage()"/>
     </div>
     <div>
         <input class="btn btn-warning" type="submit" onclick="updateImageTrip()" value="Sửa"/>     
-        <a href="<c:url value="/admin/trips/list" />" class="btn btn-info" type="button" data-toggle="tooltip" 
+        <a href="<c:url value="/admin/trips/list" />" class="btn btn-info" style="margin-top: -13px;" type="button" data-toggle="tooltip" 
            data-placement="top" title="Hủy"><i class="fas fa-undo"></i></a> 
     </div>
 </form:form>

@@ -29,10 +29,14 @@ public interface UserRepository {
             String email, String phone, String avtUrl);
 
     User addU(User user);
+    
+    User addC(User user);
 
     User getById(int userId);
 
     boolean editUser(User u);
 
     int totalItem(String kw);
+    
+    User getName (int driverId);
 }

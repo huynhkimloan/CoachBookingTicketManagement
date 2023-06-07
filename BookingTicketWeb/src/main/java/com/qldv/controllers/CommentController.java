@@ -5,9 +5,17 @@
  */
 package com.qldv.controllers;
 
+import com.qldv.pojo.Route;
 import com.qldv.service.CommentService;
+import com.qldv.service.DriverDetailService;
 import com.qldv.service.TripService;
+import com.qldv.utils.Utils;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +36,9 @@ public class CommentController {
     @Autowired
     private TripService tripService;
     
+    @Autowired
+    private DriverDetailService driverDetailService;
+    
     @RequestMapping("/comment/{tripId}")
     public String comment(Model model, @PathVariable("tripId") int tripId, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
@@ -35,9 +46,36 @@ public class CommentController {
         model.addAttribute("comments", this.commentService.getCommentsByTripId(tripId, page));
         model.addAttribute("commentCounter", this.commentService.countTrip(tripId));
         model.addAttribute("trip", this.tripService.tripById(tripId));
-        
+        model.addAttribute("rating", this.driverDetailService.avgStar(tripId));
+        model.addAttribute("driverId", this.driverDetailService.driverId(tripId));
+        model.addAttribute("driver", this.driverDetailService.findById(this.driverDetailService.driverId(tripId)));
         return "comment";
     }
+    
+    @RequestMapping("/feedback")
+    public String viewFeedbackPage(Model model, @RequestParam(required = false) Map<String, String> params) {
+       int page = Integer.parseInt(params.getOrDefault("page", "1"));
+       model.addAttribute("tripFeedback", this.tripService.getListTripComment());
+       return "feedback";
+    } 
+    
+    @RequestMapping("/feedbackByKeyword")
+    public String viewFeedbackKeyWord(Model model, @RequestParam(required = false) Map<String, String> params) {
+      SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        Date fromDate = null;
+        String kw = params.getOrDefault("kw", null);
+        String kw1 = params.getOrDefault("kw1", null);
+        String from = params.getOrDefault("kw2", null);
+        if (from != null)
+            try {
+            fromDate = f.parse(from);
+        } catch (ParseException ex) {
+            Logger.getLogger(TripContronller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        model.addAttribute("tripFeedback", this.tripService.searchTripOnComment(kw, kw1, fromDate, page));;
+       return "feedback";
+    } 
     
     
 }

@@ -47,4 +47,6 @@ public interface TicketDetailRepository {
     boolean cancelTicket(Ticketdetail cancel);
     
     Ticketdetail getTicketById(int id);
+    
+    long sumPointPlus(int userId);
 }

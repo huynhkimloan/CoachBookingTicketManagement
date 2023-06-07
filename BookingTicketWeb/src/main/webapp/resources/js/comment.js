@@ -1,30 +1,4 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* global trip, fetch */
-//function loadComments() {
-//     fetch("/BookingTicketWeb/comment").then(function (res) {
-//        return res.json();
-//    }).then(function (data) {
-//        let area = document.getElementById("commentArea");
-//        let h = '';
-//        for (let d of data)
-//            h += `
-//                <div class="col-md-4 col-xs-12" style="padding:10px;">
-//                     <div class="card-body ">
-//                         <p>Nội dung: ${d.content}</li>
-//                         <p class="comment-date">${moment(d.createddate).fromNow()} </p>
-//                         <hr>                   
-//                     </div>
-//
-//                 </div>
-//            `;
-//        area.innerHTML = h;
-//    });
-//}
+/* global fetch, moment */
 
 function addComment(event, tripId) {
     event.preventDefault();
@@ -56,15 +30,15 @@ function addComment(event, tripId) {
                 </div>
                 <div class="be-comment-content">
 
-                    <span class="be-comment-name">
-                        <a href="blog-detail-2.html">${data.customerId.name}</a>
+                    <span class="be-comment-name" style="margin-bottom: 0px;">
+                        <a href="blog-detail-2.html" style="font-size:18px; text-decoration: none">${data.customerId.name}</a>
                     </span>
-                    <span class="be-comment-time comment-date">
-                         <i class="fa-solid fa-clock"></i>
-                         ${moment(data.createddate).fromNow()}
+                    <span class="be-comment-time comment-date" style="font-size:12px; ">
+                         Thời gian:
+                         ${moment(data.createddate).locale("vi").fromNow()}
                     </span>
 
-                    <p class="be-comment-text">
+                   <p class="be-comment-text" style="font-size:15px; margin-bottom: 30px;">
                         ${data.content}
                     </p>
                 </div>
@@ -80,17 +54,50 @@ function addComment(event, tripId) {
 
 let mybutton = document.getElementById("myBtn");
 
-window.onscroll = function() {scrollFunction();};
+window.onscroll = function () {
+    scrollFunction();
+};
 
 function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
 }
 
 function topFunction() {
-  document.documentElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }
 
+function addRating(event, driverId, tripId) {
+    event.preventDefault();
+    console.log('trigger on submit', event, driverId, tripId);
+    let ratingValue = 0;
+    const stars = document.querySelectorAll(".stars i");
+    stars.forEach((star, i) => {
+        
+        if (star.classList.contains('active')) {
+            ratingValue = i + 1;
+        }
+    });
+    fetch("/BookingTicketWeb/rating", {
+        method: 'POST',
+        body: JSON.stringify({
+            "stars": ratingValue,
+            "driver": driverId
+
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then((res) => {
+        return res.json();
+    }).then(() => {
+        document.location.href = `/BookingTicketWeb/comment/${tripId}`;
+    }).catch((error) => {
+        const errEle = document.getElementById('error-message');
+        errEle.textContent = "Có lỗi xảy ra, vui lòng thử lại lần nữa!!";
+        console.error(error);
+    });
+}

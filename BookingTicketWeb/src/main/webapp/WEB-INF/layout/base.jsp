@@ -28,11 +28,15 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/vfs_fonts.js"></script>
+
     </head>
     <body>
         <i class="fas fa-arrow-alt-circle-up" onclick="topFunction()" id="myBtn"></i>
-            <tiles:insertAttribute name="header" />
-            <div class="container">
+        <tiles:insertAttribute name="header" />
+        <div class="container">
             <div class="container-fluid">
                 <div class="row flex-nowrap">
                     <tiles:insertAttribute name="menu" />
@@ -45,7 +49,7 @@
         </div>
         <tiles:insertAttribute name="footer" />
 
-        
+
         <script src="<c:url value="/js/stats.js"/>"></script>
         <script src="<c:url value="/js/comment.js"/>"></script>
 

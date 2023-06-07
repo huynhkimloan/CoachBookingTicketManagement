@@ -42,9 +42,9 @@ function updateUProfile(userId) {
             method: 'put',
             body: JSON.stringify({
                 "userId": userId,
-                "name": formChangeInfo.elements.name.value,
-                "email": formChangeInfo.elements.email.value,
-                "phone": formChangeInfo.elements.phone.value
+                "name": document.getElementById("name").value,
+                "email": document.getElementById("email").value,
+                "phone": document.getElementById("phone").value
             }),
             headers: {
                 "Content-Type": "application/json"

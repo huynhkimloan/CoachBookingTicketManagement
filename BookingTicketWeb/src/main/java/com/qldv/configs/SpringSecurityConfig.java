@@ -76,7 +76,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
-        mailSender.setUsername("1951052049Hien@ou.edu.vn");
+        mailSender.setUsername("1951052049hien@ou.edu.vn");
         mailSender.setPassword("phanthidieuhien1");
         mailSender.setDefaultEncoding("UTF-8");
 
@@ -115,7 +115,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/admin/**").access("hasAuthority('Admin')");
         http.authorizeRequests().antMatchers("/tickets/**").access("hasAnyAuthority('Employee', 'Admin')");
         http.authorizeRequests().antMatchers("/ad/driverdetails/list").access("hasAnyAuthority('Driver', 'Admin')");
-          
+        http.authorizeRequests().antMatchers("/ad/driverdetails/adddriver").access("hasAnyAuthority('Admin')");  
         http.csrf().disable();
     }
     

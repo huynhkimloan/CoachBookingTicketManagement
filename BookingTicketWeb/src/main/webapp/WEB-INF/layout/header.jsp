@@ -19,23 +19,29 @@
                     <c:url value="/" var="action" />
                     <a class="nav-link text-white" href="${action}" style= "font-weight: bold;">TRANG CHỦ</a>
                 </li>
+                <c:if test="${currentUser.userrole == 'Customer'}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/feedback" />" style="margin-left: 40px; font-weight: bold; color: #c19b77">
+                            PHẢN HỒI</a>
+                    </li>
+                </c:if>
                 <c:if test="${currentUser.userrole == 'Driver'}">
-                <li class="nav-item">
-                    <a class="nav-link text-info" href="<c:url value="/ad/driverdetails/list" />" style="margin-left: 40px; font-weight: bold">
-                        PHÂN CÔNG</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/ad/driverdetails/list" />" style="margin-left: 40px; font-weight: bold; color: #c19b77">
+                            PHÂN CÔNG</a>
+                    </li>
                 </c:if>
                 <c:if test="${currentUser.userrole == 'Admin'}">
-                <li class="nav-item">
-                    <a class="nav-link text-info" href="<c:url value="/admin" />" style="margin-left: 40px; font-weight: bold;">QUẢN TRỊ</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/admin" />" style="margin-left: 40px; font-weight: bold; color: #c19b77">QUẢN TRỊ</a>
+                    </li>
                 </c:if>
                 <c:if test="${currentUser.userrole == 'Employee'}">
-                <li class="nav-item">
-                    <a class="nav-link text-info" href="<c:url value="/tickets/list" />" style="margin-left: 40px; font-weight: bold;">QUẢN LÝ VÉ</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/tickets/list" />" style="margin-left: 40px; font-weight: bold; color: #c19b77">QUẢN LÝ VÉ</a>
+                    </li>
                 </c:if>
-                
+
                 <li class="nav-item">
                     <a class="nav-link text-white" style="margin-left: 40px; font-weight: bold;" href="<c:url value="/news-page" />">TIN TỨC</a>
                 </li>
@@ -45,14 +51,14 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" style="margin-left: 40px; font-weight: bold;" href="<c:url value="/about" />">VỀ CHÚNG TÔI</a>
                 </li>
-                
-<!--                <li class="nav-item">
-                    <a class="nav-link text-white" href="tel:0222.33.44.55"><i class="fas fa-phone-alt callNumber"></i> 0222.33.44.55</a>
-                </li>-->
+
+                <!--                <li class="nav-item">
+                                    <a class="nav-link text-white" href="tel:0222.33.44.55"><i class="fas fa-phone-alt callNumber"></i> 0222.33.44.55</a>
+                                </li>-->
             </ul>
             <ul class="navbar-nav me-auto" style="margin-left: 40px"> 
                 <!--    Khi đăng nhập thất bại hiện ra link login -->
-<c:if test="${pageContext.request.userPrincipal.name == null}">
+                <c:if test="${pageContext.request.userPrincipal.name == null}">
                     <li class="nav-item">
                         <a class="nav-link text-white" href="<c:url value="/login" />" style="background-color: #c19b77; border-radius: 3px; font-weight: bold;">
                             ĐĂNG NHẬP
@@ -64,7 +70,7 @@
                         </a>
                     </li>
                 </c:if>
-                    
+
                 <!-- Ngược lại thì hiện ra logout và tên -->
                 <c:if test="${pageContext.request.userPrincipal.name != null}">
                     <li class="nav-item">
@@ -94,9 +100,9 @@
                         <c:if test="${currentUser.avatar == null}">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </c:if> 
-                       
+
                     </li>
-                    
+
                 </c:if>
             </ul>
 

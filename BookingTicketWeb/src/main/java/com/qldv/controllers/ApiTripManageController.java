@@ -147,4 +147,13 @@ public class ApiTripManageController {
 
         return count;
     }
+    
+    @PostMapping("/api/trip/countRemainVIP")
+    public int countRemainSeatVIP(@RequestBody Map<String, String> params, HttpSession session) {
+        String tripId = params.get("tripId");
+        
+        int count = Math.abs(22 -(this.ticketDetailService.countTicketsByTripId(Integer.parseInt(tripId))));
+
+        return count;
+    }
 }

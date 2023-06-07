@@ -19,7 +19,7 @@
                     <span class="step" style="background-color: green"></span>
                     <span class="step" style="background-color: black"></span> 
                 </div>
-                <h3 class="text-center text-info mb-4" style="font-family: ui-rounded;">Thanh toán MoMo </h3>
+                <h3 class="text-center text-info mb-4" style="font-family: ui-rounded;">Thanh toán Paypal thành công</h3>
                 <div class="card" style="width:400px; margin-left: 18%;">
                     <img class="card-img-top" src="https://res.cloudinary.com/dvsqhstsi/image/upload/v1662561968/t%E1%BA%A3i_xu%E1%BB%91ng_1_buk34j.png" alt="Card image" >
                 </div>

@@ -6,6 +6,7 @@
 package com.qldv.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -75,15 +76,6 @@ public class Category implements Serializable {
 
     public void setCategoryname(String categoryname) {
         this.categoryname = categoryname;
-    }
-
-    @XmlTransient
-    public Set<Passengercar> getPassengercarSet() {
-        return passengercarSet;
-    }
-
-    public void setPassengercarSet(Set<Passengercar> passengercarSet) {
-        this.passengercarSet = passengercarSet;
     }
 
     @Override

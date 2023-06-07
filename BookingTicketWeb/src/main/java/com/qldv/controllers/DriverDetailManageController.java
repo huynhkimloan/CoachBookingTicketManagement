@@ -88,7 +88,7 @@ public class DriverDetailManageController {
         }
         if (this.driverDetailService.editDriver(driverdt) == true) {
             viewDriverList(mm, a, request);
-            return "redirect:/admin/driverdetails/list";
+            return "redirect:/ad/driverdetails/list";
         }
         return "updatedriverdt";
     }
@@ -101,7 +101,7 @@ public class DriverDetailManageController {
         }
         if (this.driverDetailService.addDriver(driver) == true) {
             viewDriverList(mm, a, request);
-            return "redirect:/admin/driverdetails/list";
+            return "redirect:/ad/driverdetails/list";
         }
         return "adddriverdt";
     }
@@ -117,7 +117,7 @@ public class DriverDetailManageController {
     @GetMapping("/search")
     public String search(@RequestParam Map<String, String> params, ModelMap mm) {
         if (params.get("kw").equals("")) {
-            return "redirect:/admin/driverdetails/list";
+            return "redirect:/ad/driverdetails/list";
         }
         mm.addAttribute("listDrivers", driverDetailService.getDrivers(params, 0, 8));
         mm.addAttribute("totalItem", routeService.countItem(driverDetailService.getDrivers(params, 0, 8)) / 8);

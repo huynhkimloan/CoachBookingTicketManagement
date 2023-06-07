@@ -22,13 +22,13 @@
                     <i class="fas fa-chart-pie"></i><span class="ms-1 d-none d-sm-inline">Thống kê</span> 
                 </a>
                 <ul class="collapse collapse-horizontal nav flex-column mb-0" id="info" style="padding-left: 10px">
-                    <li><a class="nav-link px-0 text-success" href="<c:url value="/admin/tripstatistics" />">
+                    <li><a class="nav-link px-0" style="color: #c19b77" href="<c:url value="/admin/tripstatistics" />">
                             <i class="fas fa-star-half"></i> Mật độ chuyến</a></li>
-                    <li><a class="nav-link px-0 text-success" href="<c:url value="/admin/tripsmonthstats" />">
+                    <li><a class="nav-link px-0" style="color: #c19b77" href="<c:url value="/admin/tripsmonthstats" />">
                             <i class="fas fa-star-half"></i> Theo tháng</a></li>
-                    <li><a class="nav-link px-0 text-success" href="<c:url value="/admin/tripsquarterstats" />">
+                    <li><a class="nav-link px-0" style="color: #c19b77" href="<c:url value="/admin/tripsquarterstats" />">
                             <i class="fas fa-star-half"></i> Theo quý</a></li>
-                    <li><a class="nav-link px-0 text-success" href="<c:url value="/admin/tripsyearstats" />">
+                    <li><a class="nav-link px-0" style="color: #c19b77" href="<c:url value="/admin/tripsyearstats" />">
                             <i class="fas fa-star-half"></i> Theo năm</a></li>
                 </ul>
             </li>
@@ -62,6 +62,11 @@
                 <c:url value="/tickets/list" var="ticket" />
                 <a href="${ticket}" class="nav-link px-0 align-middle">
                     <i class="fas fa-ticket"></i> <span class="ms-1 d-none d-sm-inline">Quản lý vé</span></a>
+            </li>
+            <li>
+                <c:url value="/admin/rating/list" var="rating" />
+                <a href="${rating}" class="nav-link px-0 align-middle">
+                    <i class="fas fa-ticket"></i> <span class="ms-1 d-none d-sm-inline">Quản lý đánh giá tài xế</span></a>
             </li>
         </ul>
         <hr>

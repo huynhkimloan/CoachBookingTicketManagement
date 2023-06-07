@@ -6,6 +6,8 @@
 package com.qldv.repository;
 
 import com.qldv.pojo.Driverdetail;
+import com.qldv.pojo.Rating;
+import com.qldv.pojo.User;
 import java.util.List;
 import java.util.Map;
 
@@ -28,4 +30,11 @@ public interface DriverDetailRepository {
     int totalItem();
 
     Driverdetail findById(int id);
+    
+    Rating addRaing(int stars, Driverdetail driverId, User user);
+    
+    Double avgStar(int id);
+    
+    int driverId(int tripId);
+
 }

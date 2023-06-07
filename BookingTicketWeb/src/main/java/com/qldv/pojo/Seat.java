@@ -70,6 +70,9 @@ public class Seat implements Serializable {
     
     @Transient
     private Long price;
+    
+    @Transient
+    private Long amount;
 
     public Seat() {
     }
@@ -82,6 +85,13 @@ public class Seat implements Serializable {
         this.id = id;
         this.name = name;
         this.seatrow = seatrow;
+    }
+    
+    public Seat(Long price, Long amount, int quantity, int tripId) {
+        this.price = price; 
+        this.amount = amount;
+        this.quantity = quantity;
+        this.tripId = tripId;
     }
 
     public Integer getId() {
@@ -210,6 +220,20 @@ public class Seat implements Serializable {
      */
     public void setTripId(Integer tripId) {
         this.tripId = tripId;
+    }
+
+    /**
+     * @return the amount
+     */
+    public Long getAmount() {
+        return amount;
+    }
+
+    /**
+     * @param amount the amount to set
+     */
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
 }

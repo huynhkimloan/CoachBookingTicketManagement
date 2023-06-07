@@ -134,4 +134,17 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getPassById(id);
     }
 
+    @Override
+    public User getName(int driverId) {
+        return this.userRepository.getName(driverId);
+    }
+
+    @Override
+    public User addC(User user) {
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));//Băm mật khẩu
+        user.setActive(Boolean.TRUE);
+        user.setUserrole(User.CUSTOMER);
+        return this.userRepository.addU(user);
+    }
+
 }

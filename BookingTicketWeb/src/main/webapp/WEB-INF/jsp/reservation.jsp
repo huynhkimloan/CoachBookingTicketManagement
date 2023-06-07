@@ -12,10 +12,11 @@
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-md-6">
             <form id="regForm"  style="padding: 0">
-                <h1 id="register" class="text-success" style="font-weight: 700;">ĐẶT VÉ</h1>
+                <h1 id="register" style="font-weight: 700; color: black">ĐẶT VÉ</h1>
                 <div class="all-steps mt-0" id="all-steps">
                     <span class="step" style="background-color: black"></span> 
-                    <span class="step"></span> 
+                    <a type="button" id="nextBtn" 
+                       href="<c:url value="/reservation/${tripId}/confirm-seat"/>"> <span class="step"></span> </a>
                     <span class="step"></span> 
                     <span class="step"></span> 
                 </div>
@@ -28,7 +29,7 @@
                         </div>
                     </div>
                     <div style="display: flex" class="mt-3">
-                        <div class="col-sm-6" style="margin-right: 18px">
+                        <div class="col-sm-6" style="margin-right: 37px">
                             <div class="row">
                                 <c:forEach items="${listSeatA}" var="seat" begin="0" end="0">
                                     <c:choose>
@@ -213,9 +214,9 @@
                     </div>
                 </div>
 
-                        <div style="overflow:auto;" id="nextprevious">
+                <div style="overflow:auto;" id="nextprevious">
                     <div style="float:right;"> 
-                        <a type="button" id="nextBtn" class="button btn btn-success" href="<c:url value="/reservation/${tripId}/confirm-seat"/>"> Tiếp tục</a> 
+                        <a type="button" id="nextBtn" class="button text-white" style="background-color: #c19b77; text-decoration: none; border-radius: 3px" href="<c:url value="/reservation/${tripId}/confirm-seat"/>"> Tiếp tục</a> 
                     </div>
                 </div>
             </form>

@@ -9,7 +9,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h2 class="text-center text-danger">THỐNG KÊ THEO QUÝ </h2>
+<h1 class="text-center text-danger">THỐNG KÊ THEO QUÝ </h1>
 
 <section class="search-sec">
     <div class="container">
@@ -25,8 +25,8 @@
                         <input type="date" name="toDate" class="form-control" />
                     </div> 
                 </div>
-                <div  style="margin-left: 10px; margin-top:12px; ">
-                    <input type="submit" value="Thống kê" class="btn btn-success mt-3"/>
+                <div  style="margin-left: 10px; margin-top:19px; ">
+                    <input type="submit" value="Thống kê" class="btn text-white" style="background-color: #c19b77"/>
                 </div>
             </div>
         </form>
@@ -35,8 +35,8 @@
 
 
 <div class="row">
-    <h4 class="text-center text-secondary alert-success" style="width: 40%; margin-left: 30%;"> Bảng số liệu thống kê </h4>
-    <table class="table" >
+    <h4 class="text-center text-secondary" style="width: 40%; margin-left: 30%;"> Bảng số liệu thống kê </h4>
+    <table class="table" style="width: 80%; margin: 10px auto 20px auto"   >
         <tr>
             <th>Thời gian </th>
             <th>Doanh thu </th>
@@ -48,7 +48,7 @@
             </tr>
         </c:forEach>
     </table>
-    <h4 class="text-center text-secondary alert-success" style="width: 40%; margin-left: 30%;"> Thống kê theo dạng biểu đồ </h4>
+    <h4 class="text-center text-secondary " style="width: 40%; margin-left: 30%;"> Thống kê theo dạng biểu đồ </h4>
     <div>
         <canvas id="myTripsQuarterTurnoverTatisticsChart"></canvas>
     </div>

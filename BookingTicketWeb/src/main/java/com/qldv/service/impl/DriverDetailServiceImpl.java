@@ -6,6 +6,8 @@
 package com.qldv.service.impl;
 
 import com.qldv.pojo.Driverdetail;
+import com.qldv.pojo.Rating;
+import com.qldv.pojo.User;
 import com.qldv.repository.DriverDetailRepository;
 import com.qldv.service.DriverDetailService;
 import java.util.List;
@@ -56,5 +58,20 @@ public class DriverDetailServiceImpl implements DriverDetailService {
     @Override
     public boolean deleteDriver(int id) {
         return this.driverDetailRepository.deleteDriver(id);
+    }
+    
+    @Override
+    public Rating addRaing(int stars, Driverdetail driverId, User user) {
+        return this.driverDetailRepository.addRaing(stars, driverId, user);
+    }
+
+    @Override
+    public Double avgStar(int id) {
+        return this.driverDetailRepository.avgStar(id);
+    }
+
+    @Override
+    public int driverId(int i) {
+        return this.driverDetailRepository.driverId(i);
     }
 }
