@@ -102,6 +102,6 @@
                 {text: 'Tổng tiền: ' + totalPrice, fontSize: 12, bold: true, color: '#c19b77', alignment: 'center'}
             ]
         };
-        pdfMake.createPdf(docDefinition).download('ticket-' + ticketId + '.pdf');
+        pdfMake.createPdf(docDefinition).download('ticket - ' + ticketId + ' - ' + customerName +'.pdf');
     }
 </script>

@@ -14,6 +14,7 @@
     <class>com.qldv.pojo.Route</class>
     <class>com.qldv.pojo.Employee</class>
     <class>com.qldv.pojo.Seat</class>
+    <class>com.qldv.pojo.Rating</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bookingticketdb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

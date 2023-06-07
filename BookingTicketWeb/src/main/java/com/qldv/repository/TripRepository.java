@@ -19,7 +19,7 @@ import java.util.Map;
 public interface TripRepository {
 
     List<Trip> searchTripOnComment(String kw, String kw1, Date fromDate, int page);
-    
+ 
     List<Trip> getRouteTrips(String kw, String kw1, Date fromDate, int page);
 
     List<Trip> findById(int routeId);

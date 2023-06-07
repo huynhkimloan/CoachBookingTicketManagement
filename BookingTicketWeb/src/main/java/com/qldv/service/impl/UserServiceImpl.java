@@ -11,11 +11,15 @@ import com.qldv.pojo.User;
 import com.qldv.repository.UserRepository;
 import com.qldv.service.UserService;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
+import org.springframework.security.authentication.AccountStatusException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -60,7 +64,6 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-
     @Override
     public List<User> getUsers(String username) {
         return this.userRepository.getUsers(username);
@@ -75,6 +78,10 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = users.get(0);
+
+        if (!user.getActive()) {
+            throw new DisabledException("Tài khoản của bạn bị khóa hoặc chưa được kích hoạt.");
+        }
 
         Set<GrantedAuthority> auth = new HashSet<>();
         auth.add(new SimpleGrantedAuthority(user.getUserrole()));

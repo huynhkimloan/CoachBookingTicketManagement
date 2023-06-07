@@ -65,10 +65,10 @@
                 <td><fmt:formatDate type = "time" value = "${r.arrivaltime}" /></td>
                 <c:if test="${r.active==true}">
                     <td class="text-center"><i class="fas fa-check-square" style="color: #2196F3"></i></td>
-                    </c:if>
-                    <c:if test="${r.active==false}">
+                </c:if>
+                <c:if test="${r.active==false}">
                     <td class="text-center"><i class="fas fa-window-close" style="color: red"></i></td>
-                    </c:if>
+                </c:if>
                 <td>${r.routeId.routename}</td>
                 <td>${r.userIdEmployee.user.name}</td>
                 <td>${r.passengercarId.name}</td>

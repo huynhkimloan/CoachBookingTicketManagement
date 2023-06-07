@@ -15,7 +15,7 @@
 <div>
     <h1 id="nen">BÌNH LUẬN - ĐÁNH GIÁ</h1>
 </div>
-
+${t}
 
 <div style = "display: flex;">
     <div id = "left" style = "margin: 5px; width:50%;">
@@ -28,15 +28,16 @@
 
         <h5 style="margin-top: 10px; text-align: center;"> <span class="text-secondary">Ngày khởi hành: </span>
             <span style="font-weight: bold; font-size: 16px"><fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.departureday}" /></span></h5>
-         
+
 
         <form  onsubmit="addRating(event, ${driverId}, ${tripId})" id="star-rating">
-                <div id="error-message" class="text-center alert-danger"></div>
-                <h5 style="margin-top: 20px; text-align: center"> <span class="text-secondary">Tài xế chuyến:</span> 
-                    <span style="font-weight: bold; font-size: 16px">${driver.userIdDriver.user.name}</span></h5>
-                <h5 style="margin-top: 20px; text-align: center"> <span class="text-secondary">Điểm đánh giá:</span> 
-                    <span style="font-weight: bold; font-size: 16px">${Math.ceil(rating * 10) / 10}</span> 
-                    <i class="fa-solid fa-star" style="color: orange; font-size: 25px; margin-left: 5px"></i></h5>
+            <div id="error-message" class="text-center alert-danger"></div>
+            <h5 style="margin-top: 20px; text-align: center"> <span class="text-secondary">Tài xế chuyến:</span> 
+                <span style="font-weight: bold; font-size: 16px">${driver.userIdDriver.user.name}</span></h5>
+            <h5 style="margin-top: 20px; text-align: center"> <span class="text-secondary">Điểm đánh giá:</span> 
+                <span style="font-weight: bold; font-size: 16px">${Math.ceil(rating * 10) / 10}</span> 
+                <i class="fa-solid fa-star" style="color: orange; font-size: 25px; margin-left: 5px"></i></h5>
+                <c:if test = "${isMoved == 1}">
                 <div class="rating-box" style="display: flex; margin-top: 40px;" >
                     <p style="margin: 5px; font-weight: bold" class="text-secondary">Đánh giá: </p>
                     <div class="stars">
@@ -48,6 +49,7 @@
                     </div>
                 </div>
                 <input id="sendcomment" type="submit"  style="width: 30%; margin-left: 40%; margin-top: 30px; " value="Đánh giá" />
+            </c:if>
         </form>
     </div>
 </div>
@@ -80,18 +82,16 @@
     </div> 
     <form class="form-block" onsubmit="addComment(event, ${tripId})">
         <div class="row" style="width:80%; margin-left: 13.5%">
-            <div class="col-xs-12">
-                <div class="form-group">
-                    <textarea class="form-input" id="commentId" placeholder="Bình luận của bạn là..."></textarea>
+            <c:if test = "${isMoved == 1}">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <textarea class="form-input" id="commentId" placeholder="Bình luận của bạn là..."></textarea>
+                    </div>
                 </div>
-            </div>
-            <c:if test="${pageContext.request.userPrincipal.name == null}">
-                <input id="sendcomment" onclick="showMess()" type="submit" style="width: 20%; margin-left: 30px;"   value="Gửi bình luận" />    
+                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                    <input id="sendcomment" type="submit" style="width: 20%; margin-left: 30px;" value="Gửi bình luận" />                         
+                </c:if> 
             </c:if>
-            <c:if test="${pageContext.request.userPrincipal.name != null}">
-                <input id="sendcomment" type="submit" style="width: 20%; margin-left: 30px;" value="Gửi bình luận" />                         
-            </c:if> 
-
         </div>
     </form>
 </div>
@@ -113,11 +113,6 @@
 </script>
 
 
-<script>
-    function showMess() {
-        alert('Bạn cần phải đăng nhập trước khi bình luận!');
-    }
-</script>
 <script src="<c:url value="/js/comment.js"/>"></script>
 
 <script>

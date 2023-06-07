@@ -139,10 +139,6 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
     public boolean addReceipt(Map<Integer, Seat> seat, int uId, String method) {
         try {
             Session session = this.sessionFactory.getObject().getCurrentSession();
-//            
-//            User user = this.userRepository.getById(uId);
-//            user.setPointplus(point);
-//            this.userRepository.editUser(user);
 
             for (Seat s : seat.values()) {
                 Ticketdetail ticket = new Ticketdetail();
@@ -154,8 +150,8 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
                 ticket.setUserId(this.userRepository.getById(uId));
                 ticket.setPassengercarId(this.passengerRepository.getById(s.getPasCarId()));
                 ticket.setActive(1);
-                ticket.setPointplus((int)(s.getPrice()*0.001));
-                
+                ticket.setPointplus((int) (s.getPrice() * 0.001));
+              
                 session.save(ticket);
             }
             
@@ -293,6 +289,7 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
         predicates.add(builder.equal(rootT.get("userId"), userId));
         predicates.add(builder.notEqual(rootT.get("active"), 0));
         predicates.add(builder.greaterThan(rootTrip.get("departureday"), date));
+
         query.where(predicates.toArray(new Predicate[]{}));
         query = query.select(rootT);
         Query q = session.createQuery(query);
@@ -329,7 +326,28 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return 0l; 
+        return 0l;
+    }
+
+    @Override
+    public List<Object> listTripIdUserMoved(int userId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object> query = builder.createQuery(Object.class);
+        Root root = query.from(Ticketdetail.class);
+        List<Predicate> predicates = new ArrayList<>();
+        try {
+            predicates.add(builder.equal(root.get("userId"), userId));
+            predicates.add(builder.equal(root.get("active"), 1));
+            query = query.multiselect(root.get("tripId")).distinct(true);
+            query.where(predicates.toArray(new Predicate[]{}));
+
+            Query q = session.createQuery(query);
+            return q.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
 }

@@ -45,6 +45,7 @@
         <tr>
             <th style="width: 20px">Mã NV</th>
             <th>Họ và tên</th>
+            <th style="width: 30px">Trạng thái</th>
             <th>Ngày sinh</th>
             <th>CMND</th>
             <th style="width: 150px">Email</th>
@@ -59,6 +60,16 @@
             <tr>
                 <td>${r.userIdEmployee}</td>
                 <td>${r.user.name}</td>
+
+                <c:if test="${r.user.active==true}">
+                    <td class="text-center"><a onclick="showLock(${r.userIdEmployee})" style="cursor: pointer">
+                            <i class="fa-solid fa-lock-open" style="color: green"></i></a></td>
+                        </c:if>
+                        <c:if test="${r.user.active==false}">
+                    <td class="text-center"><a onclick="showOpenLock(${r.userIdEmployee})" style="cursor: pointer">
+                            <i class="fa-solid fa-lock" style="color: red"></i></a></td>
+                        </c:if>
+
                 <td><fmt:formatDate pattern = "dd/MM/yyyy" value = "${r.dateofbirth}" /></td>
                 <td>${r.identitycard}</td>
                 <td>${r.user.email}</td>
@@ -92,7 +103,7 @@
         <c:forEach var="i" begin="0" end="${totalItem}">
             <c:url value="/admin/employees/list/${i+1}" var="action" />
             <li class="page-item"><a class="page-link" href="${action}"><c:out value="${i+1}"/></a></li>
-        </c:forEach>
+            </c:forEach>
     </ul>
 </nav>
 <script>
@@ -101,5 +112,17 @@
         if (option === true)
             alert('Vì nhân viên liên quan đến nhiều trường dữ liệu khác nhau => KHÔNG được phép xóa!\n\
                                         VUI LÒNG QUAY LẠI!');
+    }
+
+    function showLock(id) {
+        var option = confirm('Bạn có chắc chắn muốn khóa tài khoản này ?');
+        if (option === true)
+            window.location.href = '/BookingTicketWeb/admin/employees/lockEmployee/' + id;
+    }
+
+    function showOpenLock(id) {
+        var option = confirm('Bạn có chắc chắn muốn mở tài khoản này ?');
+        if (option === true)
+            window.location.href = '/BookingTicketWeb/admin/employees/openEmployee/' + id;
     }
 </script>

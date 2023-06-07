@@ -102,4 +102,9 @@ public class TicketDetailServiceImpl implements TicketDetailService{
     public long sumPointPlus(int i) {
         return this.ticketDetailRepository.sumPointPlus(i);
     }
+
+    @Override
+    public List<Object> listTripIdUserMoved(int i) {
+        return this.ticketDetailRepository.listTripIdUserMoved(i);
+    }
 }

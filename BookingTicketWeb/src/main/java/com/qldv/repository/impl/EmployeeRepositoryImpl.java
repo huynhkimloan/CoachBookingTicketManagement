@@ -155,4 +155,56 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         return null;
     }
 
+    @Override
+    public boolean lockEmployee(User userEmployee) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        try {
+            // Lấy đối tượng Employee hiện tại từ cơ sở dữ liệu
+            User existingUser = session.get(User.class, userEmployee.getId());
+
+            // Kiểm tra xem đối tượng Employee có tồn tại hay không
+            if (existingUser == null) {
+                return false;
+            }
+
+            // Cập nhật giá trị thuộc tính "active" thành 0
+            existingUser.setActive(Boolean.FALSE);
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            session.update(existingUser);
+
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean openEmployee(User userEmployee) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        try {
+            // Lấy đối tượng Employee hiện tại từ cơ sở dữ liệu
+            User existingUser = session.get(User.class, userEmployee.getId());
+
+            // Kiểm tra xem đối tượng Employee có tồn tại hay không
+            if (existingUser == null) {
+                return false;
+            }
+
+            // Cập nhật giá trị thuộc tính "active" thành 0
+            existingUser.setActive(Boolean.TRUE);
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            session.update(existingUser);
+
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
 }

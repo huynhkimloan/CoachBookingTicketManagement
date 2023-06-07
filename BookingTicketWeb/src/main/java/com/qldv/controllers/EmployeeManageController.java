@@ -5,22 +5,18 @@
  */
 package com.qldv.controllers;
 
-import com.qldv.pojo.Driver;
 import com.qldv.pojo.Employee;
 import com.qldv.service.EmployeeService;
 import com.qldv.service.RouteService;
 import com.qldv.service.UserService;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -39,6 +35,9 @@ public class EmployeeManageController {
     
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private MailSender mailSender;
 
     @GetMapping("/list")
     public String viewEmployeeList(ModelMap mm) {
@@ -84,4 +83,31 @@ public class EmployeeManageController {
         mm.addAttribute("totalItem", routeService.countItem(employeeService.getEmployees(params, 0, 8)) / 8);
         return "employees";
     } 
+    
+    @GetMapping("/lockEmployee/{employeeId}")
+    public String lockEmployee(ModelMap mm, @PathVariable("employeeId") int employeeId) {
+        employeeService.lockEmployee(userService.getById(employeeId));
+        sendMail("1951052049hien@ou.edu.vn", userService.getById(employeeId).getEmail(), "KHÓA TÀI KHOẢN", "Xin chào " + userService.getById(employeeId).getName()
+                        +"\nTài khoản của bạn đã bị khóa. Bạn không thể đăng nhập vào website LoHiBusLine. Vui lòng liên hệ admin để mở khóa tài khoản."
+                        +"\nTrân trọng.");
+        viewEmployeeList(mm);
+        return "employees";
+    }
+    
+    @GetMapping("/openEmployee/{employeeId}")
+    public String openEmployee(ModelMap mm, @PathVariable("employeeId") int employeeId) {
+        employeeService.openEmployee(userService.getById(employeeId));
+        viewEmployeeList(mm);
+        return "employees";
+    }
+    
+    public void sendMail(String from, String to, String subject, String content) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom(from);
+        mailMessage.setTo(to);
+        mailMessage.setSubject(subject);
+        mailMessage.setText(content);
+
+        mailSender.send(mailMessage);
+    }
 }

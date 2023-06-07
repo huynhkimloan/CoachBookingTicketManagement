@@ -149,6 +149,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="m_content"
                        value="/WEB-INF/manages/rating/rating.jsp" />
     </definition>
+
     <definition name="addroute" extends="baseLayout">
         <put-attribute name="title" value="Thêm tuyến xe" />
         <put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />

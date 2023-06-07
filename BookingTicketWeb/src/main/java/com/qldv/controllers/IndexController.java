@@ -86,8 +86,8 @@ public class IndexController {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         List<Route> route = this.routeService.getRoutes(kw, kw1, page);
 
-        for (Route r : route ){
-              r.setPrice((long)Utils.sumMoney(new Date(), r));
+        for (Route r : route) {
+            r.setPrice((long) Utils.sumMoney(new Date(), r));
         }
 
         model.addAttribute("routes", route);
@@ -126,7 +126,7 @@ public class IndexController {
         String email = params.getOrDefault("email-contact", null);
         String name = params.getOrDefault("name", null);
         String message = params.getOrDefault("message", null);
-        sendMail("1951052049Hien@ou.edu.vn", email, "PHẢN HỒI", "Chúng tôi đã nhận được thông tin liên hệ của bạn " + name + "\nNội dung: " + message + "\nSau khoảng thời gian 15 phút, bộ phận chăm sóc khách hàng sẽ liên hệ lại với ban.\nTrân trọng.");
+        sendMail("1951052049Hien@ou.edu.vn", email, "PHẢN HỒI", "Chúng tôi đã nhận được thông tin liên hệ của bạn " + name + "\nNội dung: " + message + "\nSau khoảng thời gian 15 phút, bộ phận chăm sóc khách hàng sẽ liên hệ lại với bạn.\nTrân trọng.");
         return "redirect:/contact";
     }
 

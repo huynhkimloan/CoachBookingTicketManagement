@@ -147,7 +147,8 @@ public HttpStatus removeSeat(HttpSession session) {
         return HttpStatus.BAD_REQUEST;
     }
      
-     public void sendMail(String from, String to, String subject, String content) {
+
+    public void sendMail(String from, String to, String subject, String content) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(from);
         mailMessage.setTo(to);

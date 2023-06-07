@@ -17,7 +17,7 @@ import java.util.Map;
  * @author Admin
  */
 public interface TicketDetailService {
-    
+
     List<Ticketdetail> getTickets(Map<String, String> params, int start, int limit);
 
     List<Ticketdetail> getListNav(int start, int limit);
@@ -33,18 +33,21 @@ public interface TicketDetailService {
     Object getUsers(String uname);
 
     boolean addReceipt(Map<Integer, Seat> seat, int uId, String method);
-    
+
     int totalItem();
-    
+
     Long sumItem();
-    
+
     int countTicketsByTripId(int tripId);
-    
+
     List<Ticketdetail> getTicketOfUser(int userId, Date date);
-    
+
     boolean cancelTicket(Ticketdetail cancel);
-    
+
     Ticketdetail getTicketById(int id);
-    
+
     long sumPointPlus(int userId);
+
+    List<Object> listTripIdUserMoved(int userId);
+  
 }

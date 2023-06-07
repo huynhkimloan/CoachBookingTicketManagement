@@ -64,15 +64,15 @@ public class TripContronller {
         model.addAttribute("price", price);
         return "trip";
     }
-    
+  
     @RequestMapping("/trip/{routeId}")
     public String trip1(Model model, @PathVariable("routeId") int routeId, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         Route route = this.routeService.findById(routeId);
-        long price = (long)Utils.sumMoney(new Date(), route);
+        long price = (long) Utils.sumMoney(new Date(), route);
         model.addAttribute("trips", this.tripService.getDeparturedayTrips(routeId, page));
-        model.addAttribute("counter", this.tripService.countTrip(route.getStartingpoint(),route.getDestination(), null));
-        model.addAttribute("routeId", routeId );
+        model.addAttribute("counter", this.tripService.countTrip(route.getStartingpoint(), route.getDestination(), null));
+        model.addAttribute("routeId", routeId);
         model.addAttribute("price", price);
         return "trip";
     }

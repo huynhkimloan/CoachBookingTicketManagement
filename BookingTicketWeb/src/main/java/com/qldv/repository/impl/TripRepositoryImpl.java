@@ -38,6 +38,7 @@ public class TripRepositoryImpl implements TripRepository {
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
+
     @Override
     public List<Trip> searchTripOnComment(String kw, String kw1, Date fromDate, int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -98,7 +99,20 @@ public class TripRepositoryImpl implements TripRepository {
 
         }
         query = query.select(rootT);
-        
+
+        predicates.add(builder.equal(rootT.get("active"), 1));
+
+        if (fromDate != null) {
+            predicates.add(builder.equal(rootT.get("departureday"), fromDate));
+        }
+        if (kw != null && !kw.isEmpty() && kw1 != null && !kw1.isEmpty()) {
+            predicates.add(builder.like(rootR.get("startingpoint").as(String.class),
+                    String.format("%%%s%%", kw)));
+            predicates.add(builder.like(rootR.get("destination").as(String.class),
+                    String.format("%%%s%%", kw1)));
+
+        }
+        query = query.select(rootT);
         query.where(predicates.toArray(new Predicate[]{}));
         query.orderBy(builder.asc(rootT.get("departureday")));
         org.hibernate.query.Query q = session.createQuery(query);
@@ -324,7 +338,6 @@ public class TripRepositoryImpl implements TripRepository {
             predicates.add(builder.like(rootR.get("destination").as(String.class),
                     String.format("%%%s%%", kw1)));
         }
-        
         query.where(predicates.toArray(new Predicate[]{}));
         query = query.multiselect(builder.count(rootT));
         org.hibernate.query.Query q = session.createQuery(query);
@@ -340,8 +353,7 @@ public class TripRepositoryImpl implements TripRepository {
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(builder.equal(rootT.get("routeId"), id));
         predicates.add(builder.equal(rootT.get("active"), 1));
-        
-        
+
         query.where(predicates.toArray(new Predicate[]{}));
         query.orderBy(builder.asc(rootT.get("departureday")));
         query = query.select(rootT);

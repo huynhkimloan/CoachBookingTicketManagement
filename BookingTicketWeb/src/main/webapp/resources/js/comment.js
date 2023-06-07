@@ -101,3 +101,4 @@ function addRating(event, driverId, tripId) {
         console.error(error);
     });
 }
+

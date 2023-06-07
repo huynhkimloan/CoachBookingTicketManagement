@@ -45,6 +45,7 @@
         <tr>
             <th style="width: 30px">Mã TX</th>
             <th>Họ và tên</th>
+            <th style="width: 30px">Trạng thái</th>
             <th>Ngày sinh</th>
             <th>CMND</th>
             <th>Email</th>
@@ -53,12 +54,22 @@
             <th style="width: 30px">Hạng bằng</th>
             <th colspan="2" style="width: 25px">Chức năng</th>
         </tr>
-        </thead>
+    </thead>
     <tbody>
         <c:forEach items="${listDrivers}" var="r">
             <tr>
                 <td>${r.userIdDriver}</td>
                 <td>${r.user.name}</td>
+
+                <c:if test="${r.user.active==true}">
+                    <td class="text-center"><a onclick="showLock(${r.userIdDriver})" style="cursor: pointer">
+                            <i class="fa-solid fa-lock-open" style="color: green"></i></a></td>
+                        </c:if>
+                        <c:if test="${r.user.active==false}">
+                    <td class="text-center"><a onclick="showOpenLock(${r.userIdDriver})" style="cursor: pointer">
+                            <i class="fa-solid fa-lock" style="color: red"></i></a></td>
+                        </c:if>
+
                 <td><fmt:formatDate pattern = "dd/MM/yyyy" value = "${r.dateofbirth}" /></td>
                 <td>${r.identitycard}</td>
                 <td>${r.user.email}</td>
@@ -93,5 +104,17 @@
         if (option === true)
             alert('Vì tài xế liên quan đến nhiều trường dữ liệu khác nhau => KHÔNG được phép xóa!\n\
                                         VUI LÒNG QUAY LẠI!');
+    }
+    
+    function showLock(id) {
+        var option = confirm('Bạn có chắc chắn muốn khóa tài khoản này ?');
+        if (option === true)
+            window.location.href = '/BookingTicketWeb/admin/drivers/lockDriver/' + id;
+    }
+
+    function showOpenLock(id) {
+        var option = confirm('Bạn có chắc chắn muốn mở tài khoản này ?');
+        if (option === true)
+            window.location.href = '/BookingTicketWeb/admin/drivers/openDriver/' + id;
     }
 </script>
