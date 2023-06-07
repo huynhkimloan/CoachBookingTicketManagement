@@ -38,6 +38,7 @@ public class TripServiceImpl implements TripService {
     @Override
     public List<Trip> searchTripOnComment(String kw, String kw1, Date date, int page) {
         return this.tripRepository.searchTripOnComment(kw, kw1, date, page);
+    }
 
     @Override
     public List<Trip> getRouteTrips(String kw, String kw1, Date date, int page) {
