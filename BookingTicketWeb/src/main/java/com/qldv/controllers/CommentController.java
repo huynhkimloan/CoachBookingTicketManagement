@@ -52,7 +52,7 @@ public class CommentController {
 
     @Autowired
     private UserService userDetailService;
-
+  
     @RequestMapping("/comment/{tripId}")
     public String comment(Model model, @PathVariable("tripId") int tripId, @RequestParam(required = false) Map<String, String> params, Authentication au) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
@@ -96,8 +96,7 @@ public class CommentController {
             Logger.getLogger(TripContronller.class.getName()).log(Level.SEVERE, null, ex);
         }
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        model.addAttribute("tripFeedback", this.tripService.getRouteTrips(kw, kw1, fromDate, page));;
-        return "feedback";
-    }
-
+        model.addAttribute("tripFeedback", this.tripService.searchTripOnComment(kw, kw1, fromDate, page));;
+       return "feedback";
+    } 
 }

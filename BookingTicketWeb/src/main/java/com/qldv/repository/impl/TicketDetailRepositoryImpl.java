@@ -151,9 +151,11 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
                 ticket.setPassengercarId(this.passengerRepository.getById(s.getPasCarId()));
                 ticket.setActive(1);
                 ticket.setPointplus((int) (s.getPrice() * 0.001));
-
+              
                 session.save(ticket);
             }
+            
+           
 
             return true;
         } catch (HibernateException ex) {
@@ -286,7 +288,8 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
         predicates.add(builder.equal(rootTrip.get("id"), rootT.get("tripId")));
         predicates.add(builder.equal(rootT.get("userId"), userId));
         predicates.add(builder.notEqual(rootT.get("active"), 0));
-        predicates.add(builder.greaterThanOrEqualTo(rootTrip.get("departureday"), date));
+        predicates.add(builder.greaterThan(rootTrip.get("departureday"), date));
+
         query.where(predicates.toArray(new Predicate[]{}));
         query = query.select(rootT);
         Query q = session.createQuery(query);

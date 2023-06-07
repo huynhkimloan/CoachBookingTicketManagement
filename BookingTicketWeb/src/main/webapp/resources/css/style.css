@@ -550,7 +550,8 @@ div.infomation > div {
     display: flex;  
     padding-left: 0;
     margin: 20px auto;
-    width: 70%;
+
+    width: 75%;
     border-radius: 5px;
     border: 1px solid #a4a4a4;
 }
@@ -581,6 +582,7 @@ div.infomation > div {
 
 #trip-p p{
     font-size: 16px;
+
 }
 
 #trip-p b{
@@ -590,6 +592,7 @@ div.infomation > div {
 .pri b{
     font-size: 17px;
 }
+
 
 #p-1{
     width: 65%; 

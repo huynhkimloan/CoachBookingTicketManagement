@@ -67,6 +67,11 @@ public class Trip implements Serializable {
     private Date departureday;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "arrivalday")
+    @Temporal(TemporalType.DATE)
+    private Date arrivalday;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "departuretime")
     @Temporal(TemporalType.TIME)
     private Date departuretime;
@@ -259,6 +264,20 @@ public class Trip implements Serializable {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    /**
+     * @return the arrivalday
+     */
+    public Date getArrivalday() {
+        return arrivalday;
+    }
+
+    /**
+     * @param arrivalday the arrivalday to set
+     */
+    public void setArrivalday(Date arrivalday) {
+        this.arrivalday = arrivalday;
     }
     
 }

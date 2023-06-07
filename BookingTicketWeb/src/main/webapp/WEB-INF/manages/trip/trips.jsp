@@ -106,6 +106,6 @@
         var option = confirm('Bạn có chắc chắn muốn xóa không?');
         if (option === true)
             window.location.href = '/BookingTicketWeb/admin/trips/deletetrip/' + id;
-        alert("Xóa chuyến xe không thành công");
+        alert("Xóa chuyến xe thành công");
     }
 </script>

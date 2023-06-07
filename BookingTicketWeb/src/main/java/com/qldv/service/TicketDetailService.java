@@ -49,4 +49,5 @@ public interface TicketDetailService {
     long sumPointPlus(int userId);
 
     List<Object> listTripIdUserMoved(int userId);
+  
 }

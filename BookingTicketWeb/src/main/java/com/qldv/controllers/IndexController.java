@@ -7,6 +7,7 @@ package com.qldv.controllers;
 
 import com.qldv.pojo.Route;
 import com.qldv.pojo.Seat;
+import com.qldv.pojo.Trip;
 import com.qldv.pojo.User;
 import com.qldv.service.CategoryService;
 import com.qldv.service.RouteService;
@@ -21,6 +22,8 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -90,6 +94,8 @@ public class IndexController {
         model.addAttribute("counter", this.routeService.countRoute());
         return "index";
     }
+
+    
 
     @RequestMapping("/user-profile")
     public String userProfile(Authentication a, HttpServletRequest request) {

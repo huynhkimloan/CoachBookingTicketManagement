@@ -64,7 +64,7 @@ public class TripContronller {
         model.addAttribute("price", price);
         return "trip";
     }
-
+  
     @RequestMapping("/trip/{routeId}")
     public String trip1(Model model, @PathVariable("routeId") int routeId, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
