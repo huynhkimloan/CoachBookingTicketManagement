@@ -20,7 +20,8 @@ import org.springframework.stereotype.Service;
  * @author Admin
  */
 @Service
-public class TicketDetailServiceImpl implements TicketDetailService{
+public class TicketDetailServiceImpl implements TicketDetailService {
+
     @Autowired
     private TicketDetailRepository ticketDetailRepository;
 
@@ -41,16 +42,16 @@ public class TicketDetailServiceImpl implements TicketDetailService{
 
     @Override
     public Object getUsers(String uname) {
-         return this.ticketDetailRepository.getUsers(uname);
+        return this.ticketDetailRepository.getUsers(uname);
     }
 
     @Override
     public boolean addReceipt(Map<Integer, Seat> seat, int uId, String method) {
-        if(seat!=null){
+        if (seat != null) {
             return this.ticketDetailRepository.addReceipt(seat, uId, method);
         }
         return false;
-        
+
     }
 
     @Override
@@ -75,7 +76,7 @@ public class TicketDetailServiceImpl implements TicketDetailService{
 
     @Override
     public List<Ticketdetail> getListNav(int start, int limit) {
-       return this.ticketDetailRepository.getListNav(start, limit);
+        return this.ticketDetailRepository.getListNav(start, limit);
     }
 
     @Override
@@ -109,6 +110,13 @@ public class TicketDetailServiceImpl implements TicketDetailService{
     }
 
     @Override
+    public List<Ticketdetail> getTicketsCancel(Map<String, String> params, int start, int limit) {
+        return this.ticketDetailRepository.getTicketsCancel(params, start, limit);
+    }
+
+    @Override
+    public List<Ticketdetail> getTicketsProcess(Map<String, String> params, int start, int limit) {
+        return this.ticketDetailRepository.getTicketsProcess(params, start, limit);
     public boolean changeStatusPayment(Ticketdetail ticket) {
         return this.ticketDetailRepository.changeStatusPayment(ticket);
     }

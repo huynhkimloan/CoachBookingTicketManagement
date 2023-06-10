@@ -51,7 +51,12 @@ public interface TicketDetailRepository {
     long sumPointPlus(int userId);
   
     List<Object> listTripIdUserMoved(int userId);
+        
     
+    List<Ticketdetail> getTicketsCancel(Map<String, String> params, int start, int limit);
+    
+    List<Ticketdetail> getTicketsProcess(Map<String, String> params, int start, int limit);
+
     boolean changeStatusPayment(Ticketdetail ticket);
     
     boolean changeActive(Ticketdetail ticket);

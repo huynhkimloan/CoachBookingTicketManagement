@@ -30,9 +30,15 @@ public class TicketManageController {
     private RouteService routeService;
     
     @GetMapping("/list")
-    public String viewTicketList(ModelMap mm) {
+    public String viewTicketList(ModelMap mm, @RequestParam Map<String, String> params) {
         mm.addAttribute("listTickets", ticketDetailService.getListNav(0, 20));
         mm.addAttribute("totalItem", Math.ceil(ticketDetailService.totalItem()) / 20);
+        
+        mm.addAttribute("listTicketsCancel", ticketDetailService.getTicketsCancel(params, 0, 20));
+        mm.addAttribute("totalItemCancel", routeService.countItem(ticketDetailService.getTicketsCancel(params, 0, 20)) / 20);
+        
+        mm.addAttribute("listTicketsProcess", ticketDetailService.getTicketsProcess(params, 0, 20));
+        mm.addAttribute("totalItemProcess", routeService.countItem(ticketDetailService.getTicketsProcess(params, 0, 20)) / 20);
         return "tickets";
     }
     
@@ -50,6 +56,8 @@ public class TicketManageController {
         }
         mm.addAttribute("listTickets", ticketDetailService.getTickets(params, 0, 20));
         mm.addAttribute("totalItem", routeService.countItem(ticketDetailService.getTickets(params, 0, 20)) / 20);
+        
+        
         return "tickets";
     }
     
