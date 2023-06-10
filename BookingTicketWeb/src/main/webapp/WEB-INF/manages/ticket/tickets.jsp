@@ -31,55 +31,179 @@
 <c:if test="${listTrips.size()==0}">
     <p><em>Không có vé nào có thông tin bạn đang tìm!!!</em></p>
 </c:if> 
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" style="font-size: 15px; color: #c19b77" data-bs-toggle="tab" href="#active1">Vé đã mua</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" style="font-size: 15px; color: #c19b77" data-bs-toggle="tab" href="#active2">Vé đang hủy</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" style="font-size: 15px; color: #c19b77" data-bs-toggle="tab" href="#active0">Vé đã hủy</a>
+    </li>
+</ul>
 
-<table class="table table-bordered">
-    <thead class="admin-table text-center">
-        <tr>
-            <th style="width: 5px">Mã vé</th>
-            <th style="width: 150px">Người mua</th>
-            <th style="width: 5px">SĐT</th>
-            <th style="width: 30px">Vị trí ngồi</th>
-            <th style="width: 80px">Phương thức trả</th>
-            <th style="width: 90px">Xe</th>
-            <th style="width: 150px">Chuyến</th>
-            <th style="width: 40px">Trạng thái</th>
-            <th style="width: 150px">Ngày mua</th>
-            <th style="width: 100px">Tổng tiền</th>
-            <th style="width: 15px">Chức năng</th>
-        </tr>
-    </thead>
-    <tbody>
 
-        <c:forEach items="${listTickets}" var="r">
-            <tr>
-                <td>${r.id}</td>
-                <td>${r.userId.name}</td>
-                <td>${r.userId.phone}</td>
-                <td>${r.seatId.name}</td>
-                <td>${r.paymentmethod}</td>
-                <td>${r.passengercarId.name}</td>
-                <td>${r.tripId.coachname}</td>
-                <c:if test="${r.active==0}">
-                    <td class="text-center"><i class="fas fa-check-square" style="color: #2196F3"></i></td>
-                </c:if>
-                <c:if test="${r.active==1}">
-                    <td class="text-center"><i class="fas fa-window-close" style="color: red"></i></td>
-                </c:if>
-                <c:if test="${r.active==2}">
-                    <td class="text-center"><i class="fa-solid fa-pause" style="color: #e6de08"></i></td>
-                </c:if>
-                <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${r.createddate}" /></td>
-                <td><fmt:formatNumber value="${r.totalprice}" maxFractionDigits="3" type = "number" /></td>
-                <td class="text-center">
-                    <a style="color: #7c4c02; cursor: pointer" title="Xuất"
-                       onclick="exportPdf('${r.id}', '${r.userId.name}', '${r.tripId.coachname}', '${r.seatId.name}', '${r.totalprice}')">
-                        <i class="fas fa-file-export"></i>
-                    </a>
-                </td>
-            </tr>
-        </c:forEach>
-    </tbody>
-</table>
+<div class="tab-content">
+    <!-- Vé đã mua -->
+    <div class="tab-pane container active" id="active1">
+        <div class="row">
+           
+            <table class="table table-bordered">
+                <thead class="admin-table text-center">
+                    <tr>
+                        <th style="width: 5px">Mã vé</th>
+                        <th style="width: 150px">Người mua</th>
+                        <th style="width: 5px">SĐT</th>
+                        <th style="width: 30px">Vị trí ngồi</th>
+                        <th style="width: 80px">Phương thức trả</th>
+                        <th style="width: 90px">Xe</th>
+                        <th style="width: 150px">Chuyến</th>
+                        <th style="width: 40px">Trạng thái</th>
+                        <th style="width: 150px">Ngày mua</th>
+                        <th style="width: 100px">Tổng tiền</th>
+                        <th style="width: 15px">Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <c:forEach items="${listTickets}" var="r">
+                        <tr>
+                            <td>${r.id}</td>
+                            <td>${r.userId.name}</td>
+                            <td>${r.userId.phone}</td>
+                            <td>${r.seatId.name}</td>
+                            <td>${r.paymentmethod}</td>
+                            <td>${r.passengercarId.name}</td>
+                            <td>${r.tripId.coachname}</td>
+                            <c:if test="${r.active==0}">
+                                <td class="text-center"><i class="fas fa-check-square" style="color: #2196F3"></i></td>
+                                </c:if>
+                                <c:if test="${r.active==1}">
+                                <td class="text-center"><i class="fas fa-window-close" style="color: red"></i></td>
+                                </c:if>
+                                <c:if test="${r.active==2}">
+                                <td class="text-center"><i class="fa-solid fa-pause" style="color: #e6de08"></i></td>
+                                </c:if>
+                            <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${r.createddate}" /></td>
+                            <td><fmt:formatNumber value="${r.totalprice}" maxFractionDigits="3" type = "number" /></td>
+                            <td class="text-center">
+                                <a style="color: #7c4c02; cursor: pointer" title="Xuất"
+                                   onclick="exportPdf('${r.id}', '${r.userId.name}', '${r.tripId.coachname}', '${r.seatId.name}', '${r.totalprice}')">
+                                    <i class="fas fa-file-export"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- Vé đã hủy -->
+    <div class="tab-pane container fade" id="active2">
+        <div class="row">
+            <table class="table table-bordered">
+                <thead class="admin-table text-center">
+                    <tr>
+                        <th style="width: 5px">Mã vé</th>
+                        <th style="width: 150px">Người mua</th>
+                        <th style="width: 5px">SĐT</th>
+                        <th style="width: 30px">Vị trí ngồi</th>
+                        <th style="width: 80px">Phương thức trả</th>
+                        <th style="width: 90px">Xe</th>
+                        <th style="width: 150px">Chuyến</th>
+                        <th style="width: 40px">Trạng thái</th>
+                        <th style="width: 150px">Ngày mua</th>
+                        <th style="width: 100px">Tổng tiền</th>
+                        <th style="width: 15px">Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <c:forEach items="${listTicketsProcess}" var="a">
+                        <tr>
+                            <td>${a.id}</td>
+                            <td>${a.userId.name}</td>
+                            <td>${a.userId.phone}</td>
+                            <td>${a.seatId.name}</td>
+                            <td>${a.paymentmethod}</td>
+                            <td>${a.passengercarId.name}</td>
+                            <td>${a.tripId.coachname}</td>
+
+                            <c:if test="${a.active==2}">
+                                <td class="text-center"><i class="fa-solid fa-pause" style="color: #e6de08"></i></td>
+                            </c:if>
+                            <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${a.createddate}" /></td>
+                            <td><fmt:formatNumber value="${a.totalprice}" maxFractionDigits="3" type = "number" /></td>
+                            <td class="text-center">
+                                <a style="color: #7c4c02; cursor: pointer" title="Xuất"
+                                   onclick="exportPdf('${a.id}', '${a.userId.name}', '${a.tripId.coachname}', '${a.seatId.name}', '${a.totalprice}')">
+                                    <i class="fas fa-file-export"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- Vé đã hủy -->
+    <div class="tab-pane container fade" id="active0">
+        <div class="row">
+           
+            <table class="table table-bordered">
+                <thead class="admin-table text-center">
+                    <tr>
+                        <th style="width: 5px">Mã vé</th>
+                        <th style="width: 150px">Người mua</th>
+                        <th style="width: 5px">SĐT</th>
+                        <th style="width: 30px">Vị trí ngồi</th>
+                        <th style="width: 80px">Phương thức trả</th>
+                        <th style="width: 90px">Xe</th>
+                        <th style="width: 150px">Chuyến</th>
+                        <th style="width: 40px">Trạng thái</th>
+                        <th style="width: 150px">Ngày mua</th>
+                        <th style="width: 100px">Tổng tiền</th>
+                        <th style="width: 15px">Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <c:forEach items="${listTicketsCancel}" var="r">
+                        <tr>
+                            <td>${r.id}</td>
+                            <td>${r.userId.name}</td>
+                            <td>${r.userId.phone}</td>
+                            <td>${r.seatId.name}</td>
+                            <td>${r.paymentmethod}</td>
+                            <td>${r.passengercarId.name}</td>
+                            <td>${r.tripId.coachname}</td>
+                            <c:if test="${r.active==0}">
+                                <td class="text-center"><i class="fas fa-check-square" style="color: #2196F3"></i></td>
+                            </c:if>
+
+                            <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${r.createddate}" /></td>
+                            <td><fmt:formatNumber value="${r.totalprice}" maxFractionDigits="3" type = "number" /></td>
+                            <td class="text-center">
+                                <a style="color: #7c4c02; cursor: pointer" title="Xuất"
+                                   onclick="exportPdf('${r.id}', '${r.userId.name}', '${r.tripId.coachname}', '${r.seatId.name}', '${r.totalprice}')">
+                                    <i class="fas fa-file-export"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
 
 <nav aria-label="Page navigation example" style="float: right">
     <ul class="pagination">
@@ -102,6 +226,6 @@
                 {text: 'Tổng tiền: ' + totalPrice, fontSize: 12, bold: true, color: '#c19b77', alignment: 'center'}
             ]
         };
-        pdfMake.createPdf(docDefinition).download('ticket - ' + ticketId + ' - ' + customerName +'.pdf');
+        pdfMake.createPdf(docDefinition).download('ticket - ' + ticketId + ' - ' + customerName + '.pdf');
     }
 </script>

@@ -350,4 +350,84 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
         return null;
     }
 
+    @Override
+    public List<Ticketdetail> getTicketsCancel(Map<String, String> params, int start, int limit) {
+Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Ticketdetail> query = builder.createQuery(Ticketdetail.class);
+        Root root = query.from(Ticketdetail.class);
+        Root rootU = query.from(User.class);
+        Root rootP = query.from(Passengercar.class);
+        Root rootT = query.from(Trip.class);
+       List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.equal(root.get("userId"), rootU.get("id")));
+        predicates.add(builder.equal(root.get("passengercarId"), rootP.get("id")));
+        
+        predicates.add(builder.equal(root.get("tripId"), rootT.get("id"))) ;
+        predicates.add(builder.equal(root.get("active"), 0));
+        
+
+        if (params != null) {
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                predicates.add(builder.like(rootT.get("coachname").as(String.class),
+                        String.format("%%%s%%", kw))) ;
+                predicates.add(builder.like(rootU.get("name").as(String.class),
+                        String.format("%%%s%%", kw))) ;
+                predicates.add( builder.like(rootP.get("name").as(String.class),
+                        String.format("%%%s%%", kw)));
+                predicates.add(builder.like(rootU.get("phone").as(String.class),
+                        String.format("%%%s%%", kw))) ;
+                
+            }
+        }
+        query = query.select(root);
+        query.where(predicates.toArray(new Predicate[]{}));
+
+        Query q = session.createQuery(query);
+        q.setFirstResult(start);
+        q.setMaxResults(limit);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Ticketdetail> getTicketsProcess(Map<String, String> params, int start, int limit) {
+Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Ticketdetail> query = builder.createQuery(Ticketdetail.class);
+        Root root = query.from(Ticketdetail.class);
+        Root rootU = query.from(User.class);
+        Root rootP = query.from(Passengercar.class);
+        Root rootT = query.from(Trip.class);
+        
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.equal(root.get("userId"), rootU.get("id")));
+        predicates.add(builder.equal(root.get("passengercarId"), rootP.get("id")));
+        
+        predicates.add(builder.equal(root.get("tripId"), rootT.get("id"))) ;
+        predicates.add(builder.equal(root.get("active"), 2));
+        
+
+        if (params != null) {
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                predicates.add(builder.like(rootT.get("coachname").as(String.class),
+                        String.format("%%%s%%", kw))) ;
+                predicates.add(builder.like(rootU.get("name").as(String.class),
+                        String.format("%%%s%%", kw))) ;
+                predicates.add( builder.like(rootP.get("name").as(String.class),
+                        String.format("%%%s%%", kw)));
+                predicates.add(builder.like(rootU.get("phone").as(String.class),
+                        String.format("%%%s%%", kw))) ;
+                
+            }
+        }
+        query = query.select(root);
+        query.where(predicates.toArray(new Predicate[]{}));
+        Query q = session.createQuery(query);
+        q.setFirstResult(start);
+        q.setMaxResults(limit);
+        return q.getResultList();
+    }
+
 }
