@@ -41,14 +41,14 @@ public class ApiBookingController {
 
     @Autowired
     private UserService userDetailService;
-    
+
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private MailSender mailSender;
 
-     @PostMapping("/api/reservation")
+    @PostMapping("/api/reservation")
     public int addTicketDetail(@RequestBody Seat params, HttpSession session) {
         Map<Integer, Seat> seat = (Map<Integer, Seat>) session.getAttribute("seat");
         if (seat == null) {
@@ -79,12 +79,12 @@ public class ApiBookingController {
         }
         return new ResponseEntity<>(Utils.seatStats(seat), HttpStatus.OK);
     }
-    
+
     @PostMapping(value = "/api/removeSeat")
-public HttpStatus removeSeat(HttpSession session) {
-    session.removeAttribute("seat");
-    return HttpStatus.OK;
-}
+    public HttpStatus removeSeat(HttpSession session) {
+        session.removeAttribute("seat");
+        return HttpStatus.OK;
+    }
 
     @PostMapping(value = "/api/pay")
     public HttpStatus pay(HttpSession session, @RequestBody Map<String, String> params,
@@ -94,17 +94,17 @@ public HttpStatus removeSeat(HttpSession session) {
         String method = params.get("method");
 
         if (this.ticketDetailService.addReceipt((Map<Integer, Seat>) session.getAttribute("seat"), u.getId(), method) == true) {
-            
+
             session.removeAttribute("seat");
             sendMail("1951052049hien@ou.edu.vn", u.getEmail(), "ĐẶT VÉ THÀNH CÔNG", "Chúc mừng bạn đã đặt vé thành công!"
-                        +"\nBạn vui lòng di chuyển đến quầy lấy vé trước thời gian khởi hành 30 phút."
-                        +"\nTrân trọng.");
+                    + "\nBạn vui lòng di chuyển đến quầy lấy vé trước thời gian khởi hành 30 phút."
+                    + "\nTrân trọng.");
             return HttpStatus.OK;
         }
 
         return HttpStatus.BAD_REQUEST;
     }
-    
+
     @PostMapping(path = "/api/add-user-booking", produces = {
         MediaType.APPLICATION_JSON_VALUE
     })
@@ -130,23 +130,22 @@ public HttpStatus removeSeat(HttpSession session) {
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-    
-    @PostMapping(value = "/api/add-ticket-customer")
-     public HttpStatus addTicket(HttpSession session, @RequestBody Map<String, String> params) {
-        
-            int userId = Integer.parseInt(params.get("userId"));
-            String method = params.get("method");
 
-            if (this.ticketDetailService.addReceipt((Map<Integer, Seat>) session.getAttribute("seat"), userId, method) == true) {
-            
+    @PostMapping(value = "/api/add-ticket-customer")
+    public HttpStatus addTicket(HttpSession session, @RequestBody Map<String, String> params) {
+
+        int userId = Integer.parseInt(params.get("userId"));
+        String method = params.get("method");
+
+        if (this.ticketDetailService.addReceipt((Map<Integer, Seat>) session.getAttribute("seat"), userId, method) == true) {
+
             session.removeAttribute("seat");
-            
+
             return HttpStatus.OK;
         }
 
         return HttpStatus.BAD_REQUEST;
     }
-     
 
     public void sendMail(String from, String to, String subject, String content) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -157,5 +156,5 @@ public HttpStatus removeSeat(HttpSession session) {
 
         mailSender.send(mailMessage);
     }
-    
+
 }

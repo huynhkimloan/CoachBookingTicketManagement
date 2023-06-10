@@ -107,4 +107,14 @@ public class TicketDetailServiceImpl implements TicketDetailService{
     public List<Object> listTripIdUserMoved(int i) {
         return this.ticketDetailRepository.listTripIdUserMoved(i);
     }
+
+    @Override
+    public boolean changeStatusPayment(Ticketdetail ticket) {
+        return this.ticketDetailRepository.changeStatusPayment(ticket);
+    }
+
+    @Override
+    public boolean changeActive(Ticketdetail ticket) {
+        return this.ticketDetailRepository.changeActive(ticket);
+    }
 }

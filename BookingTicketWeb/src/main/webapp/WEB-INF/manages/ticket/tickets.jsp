@@ -39,7 +39,7 @@
             <th style="width: 150px">Người mua</th>
             <th style="width: 5px">SĐT</th>
             <th style="width: 30px">Vị trí ngồi</th>
-            <th style="width: 80px">Phương thức trả</th>
+            <th style="width: 100px">Phương thức thanh toán</th>
             <th style="width: 90px">Xe</th>
             <th style="width: 150px">Chuyến</th>
             <th style="width: 40px">Trạng thái</th>
@@ -56,18 +56,29 @@
                 <td>${r.userId.name}</td>
                 <td>${r.userId.phone}</td>
                 <td>${r.seatId.name}</td>
-                <td>${r.paymentmethod}</td>
+                <c:if test="${r.paymentmethod == 'Tiền mặt'}">
+                    <td style="font-weight: bold; color: blue">${r.paymentmethod}</td>
+                </c:if>
+                <c:if test="${r.paymentmethod == 'Paypal'}">
+                    <td style="font-weight: bold; color: #e6de08">${r.paymentmethod}</td>
+                </c:if>
+                <c:if test="${r.paymentmethod == 'Trả sau'}">
+                    <td class="text-danger"><a onclick="changeStatusPayment(${r.id})" style="cursor: pointer; font-weight: bold">
+                            ${r.paymentmethod}</a></td>
+                        </c:if>
                 <td>${r.passengercarId.name}</td>
                 <td>${r.tripId.coachname}</td>
-                <c:if test="${r.active==0}">
+                    <c:if test="${r.active==0}">
                     <td class="text-center"><i class="fas fa-check-square" style="color: #2196F3"></i></td>
-                </c:if>
-                <c:if test="${r.active==1}">
-                    <td class="text-center"><i class="fas fa-window-close" style="color: red"></i></td>
-                </c:if>
-                <c:if test="${r.active==2}">
-                    <td class="text-center"><i class="fa-solid fa-pause" style="color: #e6de08"></i></td>
-                </c:if>
+                    </c:if>
+                    <c:if test="${r.active==1}">
+                    <td class="text-center"><a onclick="changeActive(${r.id})" style="cursor: pointer">
+                            <i class="fas fa-window-close" style="color: red"></i></a></td>
+                    </c:if>
+                    <c:if test="${r.active==2}">
+                    <td class="text-center"><a onclick="changeActive(${r.id})" style="cursor: pointer">
+                            <i class="fa-solid fa-pause" style="color: #e6de08"></i></a></td>
+                    </c:if>
                 <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${r.createddate}" /></td>
                 <td><fmt:formatNumber value="${r.totalprice}" maxFractionDigits="3" type = "number" /></td>
                 <td class="text-center">
@@ -102,6 +113,18 @@
                 {text: 'Tổng tiền: ' + totalPrice, fontSize: 12, bold: true, color: '#c19b77', alignment: 'center'}
             ]
         };
-        pdfMake.createPdf(docDefinition).download('ticket - ' + ticketId + ' - ' + customerName +'.pdf');
+        pdfMake.createPdf(docDefinition).download('ticket - ' + ticketId + ' - ' + customerName + '.pdf');
+    }
+
+    function changeStatusPayment(id) {
+        var option = confirm('Bạn muốn chuyển đổi trạng thái thanh toán ?');
+        if (option === true)
+            window.location.href = '/BookingTicketWeb/tickets/changeStatusPayment/' + id;
+    }
+
+    function changeActive(id) {
+        var option = confirm('Bạn muốn hủy vé ?');
+        if (option === true)
+            window.location.href = '/BookingTicketWeb/tickets/changeActive/' + id;
     }
 </script>

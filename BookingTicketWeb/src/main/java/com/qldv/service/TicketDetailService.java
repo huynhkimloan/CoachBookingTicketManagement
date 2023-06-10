@@ -49,5 +49,9 @@ public interface TicketDetailService {
     long sumPointPlus(int userId);
 
     List<Object> listTripIdUserMoved(int userId);
-  
+    
+    boolean changeStatusPayment(Ticketdetail ticket);
+    
+    boolean changeActive(Ticketdetail ticket);
+    
 }
