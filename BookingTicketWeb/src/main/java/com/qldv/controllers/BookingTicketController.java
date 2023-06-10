@@ -72,6 +72,7 @@ public class BookingTicketController {
         model.addAttribute("tripId", tripId);
         model.addAttribute("pasCar", t.getPassengercarId());
         model.addAttribute("price", price);
+        model.addAttribute("counter", 0);
         return "reservation";
     }
     

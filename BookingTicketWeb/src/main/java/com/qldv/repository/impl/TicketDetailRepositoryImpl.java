@@ -428,6 +428,48 @@ Session session = this.sessionFactory.getObject().getCurrentSession();
         q.setFirstResult(start);
         q.setMaxResults(limit);
         return q.getResultList();
+      
+    public boolean changeStatusPayment(Ticketdetail ticket) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        try {
+            Ticketdetail existingTicket = session.get(Ticketdetail.class, ticket.getId());
+
+            if (existingTicket == null) {
+                return false;
+            }
+
+            existingTicket.setPaymentmethod("Đã thanh toán");
+
+            session.update(existingTicket);
+
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean changeActive(Ticketdetail ticket) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        try {
+            Ticketdetail existingTicket = session.get(Ticketdetail.class, ticket.getId());
+
+            if (existingTicket == null) {
+                return false;
+            }
+
+            existingTicket.setActive(0);
+
+            session.update(existingTicket);
+
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
 }

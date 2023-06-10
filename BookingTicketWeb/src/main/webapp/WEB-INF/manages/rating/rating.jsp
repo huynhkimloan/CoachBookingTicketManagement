@@ -47,7 +47,7 @@
     <tbody>
         <c:forEach items="${listRating}" var="a">
             <tr>
-                <td><a href="<c:url value="/admin/rating/detail/${a[2]}"/>">${a[0]}</a></td>
+                <td><a href="<c:url value="/admin/rating/detail/${a[2]}"/>" style="text-decoration: none">${a[0]}</a></td>
                 <td>${a[1]}</td>  
                 
             </tr>            

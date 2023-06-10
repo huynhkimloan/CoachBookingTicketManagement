@@ -60,4 +60,18 @@ public class TicketManageController {
         
         return "tickets";
     }
+    
+    @GetMapping("/changeStatusPayment/{ticketId}")
+    public String changeStatusPayment(ModelMap mm, @PathVariable("ticketId") int ticketId) {
+        ticketDetailService.changeStatusPayment(ticketDetailService.getTicketById(ticketId));
+        viewTicketList(mm);
+        return "tickets";
+    }
+    
+    @GetMapping("/changeActive/{ticketId}")
+    public String changeActive(ModelMap mm, @PathVariable("ticketId") int ticketId) {
+        ticketDetailService.changeActive(ticketDetailService.getTicketById(ticketId));
+        viewTicketList(mm);
+        return "tickets";
+    }
 }

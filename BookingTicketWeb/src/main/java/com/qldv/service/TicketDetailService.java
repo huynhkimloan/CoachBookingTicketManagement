@@ -54,4 +54,8 @@ public interface TicketDetailService {
     
     List<Ticketdetail> getTicketsProcess(Map<String, String> params, int start, int limit);
   
+    boolean changeStatusPayment(Ticketdetail ticket);
+    
+    boolean changeActive(Ticketdetail ticket);
+    
 }

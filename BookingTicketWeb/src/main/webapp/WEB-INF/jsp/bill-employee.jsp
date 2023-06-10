@@ -59,7 +59,7 @@
                         <h5 class="alert alert-secondary">Phương thức thanh toán</h5> 
                         <div class="row" style="margin-right: 7px">
                             <div class="col-sm-6 form-check" style="width: 50%"> 
-                                <a onclick="addTicket(${tripId}, 'Tiền mặt')">
+                                <a onclick="addTicket(${tripId}, 'Đã thanh toán')">
                                     <div class="col" >
                                         <span class="btn border border-warning" >
                                             <img class="img-fluid icon" style="height: 88px" src="<c:url value="/img/tienmat.jpg"/>" alt="Tiền mặt" />
@@ -77,7 +77,19 @@
                                         </span>
                                     </div> 
                                 </a>
-                            </div>              
+                            </div> 
+                            <div class="row" style="margin-right: 7px">
+                                <div class="col-sm-6 form-check" style="width: 51.5%">
+                                    <a>
+                                        <div class="col">
+                                            <span class="btn border border-warning">
+                                                <img class="img-fluid icon" style="height: 75px" src="<c:url value="/img/paypal.jpg"/>" alt="Paypal" />
+                                                <input type="submit" style="border-bottom: none; margin: 0" value="Ví paypal"/>
+                                            </span>
+                                        </div>   
+                                    </a>
+                                </div>
+                            </div> 
                         </div>
                     </div>
                 </div>
