@@ -43,8 +43,8 @@ public class TicketManageController {
     }
     
     @GetMapping("/list/{page}")
-    public String viewTicketListByPage(ModelMap mm, @PathVariable("page") int page) {
-        mm.addAttribute("listTickets", ticketDetailService.getListNav((page - 1) * 20, 20));
+    public String viewTicketListByPage(ModelMap mm, @PathVariable("page") int page, @RequestParam Map<String, String> params) {
+        mm.addAttribute("listTickets", ticketDetailService.getListNav(params, (page - 1) * 20, 20));
         mm.addAttribute("totalItem", Math.ceil(ticketDetailService.totalItem()) / 20);
         return "tickets";
     }
