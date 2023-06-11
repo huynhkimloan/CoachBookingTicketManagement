@@ -86,9 +86,11 @@
                                     </c:if>
                             <td>${r.passengercarId.name}</td>
                             <td>${r.tripId.coachname}</td>
-                            <c:if test="${r.active==1}">
+                           
+                                <c:if test="${r.active==1}">
                                 <td class="text-center"><i class="fas fa-window-close" style="color: red"></i></td>
-                            </c:if>
+                                </c:if>
+                                
 
                             <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${r.createddate}" /></td>
                             <td><fmt:formatNumber value="${r.totalprice}" maxFractionDigits="3" type = "number" /></td>
@@ -105,6 +107,7 @@
 
         </div>
     </div>
+
 
     <!-- Vé đang hủy -->
     <div class="tab-pane container fade" id="active2">
@@ -141,9 +144,11 @@
                                 <td style="font-weight: bold; color: #e6de08">${a.paymentmethod}</td>
                             </c:if>
                             <c:if test="${a.paymentmethod == 'Trả sau'}">
-                                <td class="text-danger"><a onclick="changeStatusPayment(${r.id})" style="cursor: pointer; font-weight: bold">
+
+                                <td class="text-danger"><a onclick="changeStatusPayment(${a.id})" style="cursor: pointer; font-weight: bold">
                                         ${a.paymentmethod}</a></td>
-                                    </c:if>
+                            </c:if>
+
                             <td>${a.passengercarId.name}</td>
                             <td>${a.tripId.coachname}</td>
 

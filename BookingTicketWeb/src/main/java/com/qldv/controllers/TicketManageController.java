@@ -31,7 +31,7 @@ public class TicketManageController {
     
     @GetMapping("/list")
     public String viewTicketList(ModelMap mm, @RequestParam Map<String, String> params) {
-        mm.addAttribute("listTickets", ticketDetailService.getListNav(0, 20));
+        mm.addAttribute("listTickets", ticketDetailService.getListNav(params, 0, 20));
         mm.addAttribute("totalItem", Math.ceil(ticketDetailService.totalItem()) / 20);
         
         mm.addAttribute("listTicketsCancel", ticketDetailService.getTicketsCancel(params, 0, 20));
