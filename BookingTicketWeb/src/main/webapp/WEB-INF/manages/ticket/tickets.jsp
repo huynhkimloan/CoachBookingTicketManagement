@@ -109,7 +109,7 @@
         </div>
     </div>
 
-    <!-- Vé đã hủy -->
+    <!-- Vé đang hủy -->
     <div class="tab-pane container fade" id="active2">
         <div class="row">
             <table class="table table-bordered">
@@ -136,7 +136,6 @@
                             <td>${a.userId.name}</td>
                             <td>${a.userId.phone}</td>
                             <td>${a.seatId.name}</td>
-                            
                             <c:if test="${r.paymentmethod == 'Đã thanh toán'}">
                                 <td style="font-weight: bold; color: blue">${r.paymentmethod}</td>
                             </c:if>
@@ -147,11 +146,14 @@
                                 <td class="text-danger"><a onclick="changeStatusPayment(${r.id})" style="cursor: pointer; font-weight: bold">
                                         ${r.paymentmethod}</a></td>
                             </c:if>
+
                             <td>${a.passengercarId.name}</td>
                             <td>${a.tripId.coachname}</td>
 
                             <c:if test="${a.active==2}">
+
                                 <td class="text-center"><a onclick="changeActive(${a.id})" style="cursor: pointer">
+
                                         <i class="fa-solid fa-pause" style="color: #e6de08"></i></a></td>
                                     </c:if>
                             <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${a.createddate}" /></td>
@@ -199,6 +201,7 @@
                             <td>${r.userId.phone}</td>
                             <td>${r.seatId.name}</td>
                             <c:if test="${r.paymentmethod == 'Đã thanh toán'}">
+
                                 <td style="font-weight: bold; color: blue">${r.paymentmethod}</td>
                             </c:if>
                             <c:if test="${r.paymentmethod == 'Paypal'}">
@@ -230,8 +233,6 @@
         </div>
     </div>
 </div>
-
-
 
 <nav aria-label="Page navigation example" style="float: right">
     <ul class="pagination">

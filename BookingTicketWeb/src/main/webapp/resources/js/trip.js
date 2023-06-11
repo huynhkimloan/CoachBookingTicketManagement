@@ -23,7 +23,7 @@ let dateT = document.getElementById('departureday1');
 if (dateT) {
     const currentDate = new Date();
     let year = currentDate.getFullYear();
-    let month = currentDate.getMonth() +1;
+    let month = currentDate.getMonth() + 1;
     let date = currentDate.getDate();
 
     if (month < 10) {

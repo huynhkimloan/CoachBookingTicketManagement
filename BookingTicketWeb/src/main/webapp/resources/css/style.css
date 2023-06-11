@@ -319,6 +319,14 @@ input.invalid {
     background-color: #c19b77;
 }
 
+#priceInfo1{
+    background-color: #c19b77;
+}
+
+#priceInfo2{
+    background-color: #c19b77;
+}
+
 /*ADMIN*/
 .box{
     box-shadow: 3px 3px 3px #7beb12;

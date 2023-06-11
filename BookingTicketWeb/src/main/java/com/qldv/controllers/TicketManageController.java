@@ -62,14 +62,16 @@ public class TicketManageController {
     }
     
     @GetMapping("/changeStatusPayment/{ticketId}")
-    public String changeStatusPayment(ModelMap mm,@RequestParam Map<String, String> params, @PathVariable("ticketId") int ticketId) {
+
+    public String changeStatusPayment(ModelMap mm, @PathVariable("ticketId") int ticketId, @RequestParam Map<String, String> params) {
         ticketDetailService.changeStatusPayment(ticketDetailService.getTicketById(ticketId));
         viewTicketList(mm, params);
         return "tickets";
     }
     
     @GetMapping("/changeActive/{ticketId}")
-    public String changeActive(ModelMap mm, @RequestParam Map<String, String> params, @PathVariable("ticketId") int ticketId) {
+
+    public String changeActive(ModelMap mm, @PathVariable("ticketId") int ticketId, @RequestParam Map<String, String> params) {
         ticketDetailService.changeActive(ticketDetailService.getTicketById(ticketId));
         viewTicketList(mm, params);
         return "tickets";
