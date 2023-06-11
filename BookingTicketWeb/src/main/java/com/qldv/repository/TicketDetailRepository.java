@@ -20,7 +20,7 @@ public interface TicketDetailRepository {
     
     List<Ticketdetail> getTickets(Map<String, String> params, int start, int limit);
 
-    List<Ticketdetail> getListNav(int start, int limit);
+    List<Ticketdetail> getListNav(Map<String, String> params, int start, int limit);
 
     boolean editTicket(Ticketdetail t);
     

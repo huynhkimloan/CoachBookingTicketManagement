@@ -75,8 +75,8 @@ public class TicketDetailServiceImpl implements TicketDetailService {
     }
 
     @Override
-    public List<Ticketdetail> getListNav(int start, int limit) {
-        return this.ticketDetailRepository.getListNav(start, limit);
+    public List<Ticketdetail> getListNav(Map<String, String> params, int start, int limit) {
+        return this.ticketDetailRepository.getListNav(params, start, limit);
     }
 
     @Override
