@@ -10,7 +10,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center text-danger">THỐNG KÊ MẬT ĐỘ - DOANH THU CHUYẾN </h1>
+<h1 class="text-center text-danger"> MẬT ĐỘ CHUYẾN XE - DOANH THU THEO TUYẾN XE</h1>
 
 
 <!-- Nav tabs -->
@@ -19,7 +19,7 @@
         <a class="nav-link" style="font-size: 15px; color: #c19b77" data-bs-toggle="tab" href="#density">Thống kê mật độ chuyến xe</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" style="font-size: 15px; color: #c19b77" data-bs-toggle="tab" href="#turnover">Thống kê doanh thu theo chuyến</a>
+        <a class="nav-link" style="font-size: 15px; color: #c19b77" data-bs-toggle="tab" href="#turnover">Thống kê doanh thu theo tuyến</a>
     </li>
     
 
@@ -65,7 +65,7 @@
         <div class="row">
             <form action="" style=" width: 50%; margin: 0 auto">
                 <div class="form-group">
-                    <label>Tên chuyến</label>
+                    <label>Tên tuyến</label>
                     <input type="text" name="kw" class="form-control" />
                 </div>
                 <div class="form-group">
@@ -81,8 +81,8 @@
             <h4 class="text-center text-secondary"> Bảng số liệu thống kê </h4>
             <table class="table" style="width: 80%; margin: 0 auto">
                 <tr>
-                    <th>Mã chuyến </th>
-                    <th>Tên chuyến </th>
+                    <th>Mã tuyến </th>
+                    <th>Tên tuyến </th>
                     <th>Doanh thu </th>
                 </tr>
                 <c:forEach items="${turnovertatisticsbytrip}" var="b">

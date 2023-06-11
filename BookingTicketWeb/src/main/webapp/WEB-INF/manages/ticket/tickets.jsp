@@ -74,7 +74,7 @@
                             <td>${r.userId.name}</td>
                             <td>${r.userId.phone}</td>
                             <td>${r.seatId.name}</td>
-                            <c:if test="${r.paymentmethod == 'Tiền mặt'}">
+                            <c:if test="${r.paymentmethod == 'Đã thanh toán'}">
                                 <td style="font-weight: bold; color: blue">${r.paymentmethod}</td>
                             </c:if>
                             <c:if test="${r.paymentmethod == 'Paypal'}">
@@ -83,14 +83,16 @@
                             <c:if test="${r.paymentmethod == 'Trả sau'}">
                                 <td class="text-danger"><a onclick="changeStatusPayment(${r.id})" style="cursor: pointer; font-weight: bold">
                                         ${r.paymentmethod}</a></td>
-                                    </c:if>
+                            </c:if>
                             <td>${r.passengercarId.name}</td>
                             <td>${r.tripId.coachname}</td>
+                            <c:if test="${r.active==0}">
+                                <td class="text-center"><i class="fas fa-check-square" style="color: #2196F3"></i></td>
+                                </c:if>
+                                <c:if test="${r.active==1}">
+                                <td class="text-center"><i class="fas fa-window-close" style="color: red"></i></td>
+                                </c:if>
 
-                            <c:if test="${r.active==1}">
-                                <td class="text-center"><a onclick="changeActive(${r.id})" style="cursor: pointer">
-                                        <i class="fas fa-window-close" style="color: red"></i></a></td>
-                                    </c:if>
                             <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${r.createddate}" /></td>
                             <td><fmt:formatNumber value="${r.totalprice}" maxFractionDigits="3" type = "number" /></td>
                             <td class="text-center">
@@ -143,12 +145,15 @@
                             <c:if test="${r.paymentmethod == 'Trả sau'}">
                                 <td class="text-danger"><a onclick="changeStatusPayment(${r.id})" style="cursor: pointer; font-weight: bold">
                                         ${r.paymentmethod}</a></td>
-                                    </c:if>
+                            </c:if>
+
                             <td>${a.passengercarId.name}</td>
                             <td>${a.tripId.coachname}</td>
 
                             <c:if test="${a.active==2}">
-                                <td class="text-center"><a onclick="changeActive(${r.id})" style="cursor: pointer">
+
+                                <td class="text-center"><a onclick="changeActive(${a.id})" style="cursor: pointer">
+
                                         <i class="fa-solid fa-pause" style="color: #e6de08"></i></a></td>
                                     </c:if>
                             <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${a.createddate}" /></td>
@@ -195,7 +200,8 @@
                             <td>${r.userId.name}</td>
                             <td>${r.userId.phone}</td>
                             <td>${r.seatId.name}</td>
-                            <c:if test="${r.paymentmethod == 'Tiền mặt'}">
+                            <c:if test="${r.paymentmethod == 'Đã thanh toán'}">
+
                                 <td style="font-weight: bold; color: blue">${r.paymentmethod}</td>
                             </c:if>
                             <c:if test="${r.paymentmethod == 'Paypal'}">
@@ -204,7 +210,7 @@
                             <c:if test="${r.paymentmethod == 'Trả sau'}">
                                 <td class="text-danger"><a onclick="changeStatusPayment(${r.id})" style="cursor: pointer; font-weight: bold">
                                         ${r.paymentmethod}</a></td>
-                                    </c:if>
+                            </c:if>
                             <td>${r.passengercarId.name}</td>
                             <td>${r.tripId.coachname}</td>
                             <c:if test="${r.active==0}">

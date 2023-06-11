@@ -45,10 +45,25 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
+    public List<Route> getRoutesName(Map<String, String> params, int start, int limit) {
+        return this.routeRepository.getRoutesName(params, start, limit);
+    }
+    
+    @Override
+    public List<Route> getRoutesStart(Map<String, String> params, int start, int limit) {
+        return this.routeRepository.getRoutesStart(params, start, limit);
+    }
+    
+    @Override
+    public List<Route> getRoutesEnd(Map<String, String> params, int start, int limit) {
+        return this.routeRepository.getRoutesEnd(params, start, limit);
+    }
+    
+    @Override
     public List<Route> getRoutes(Map<String, String> params, int start, int limit) {
         return this.routeRepository.getRoutes(params, start, limit);
     }
-
+    
     @Override
     public boolean addRoute(Route route) {
         try {

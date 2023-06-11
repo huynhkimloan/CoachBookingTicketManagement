@@ -16,11 +16,11 @@
         <form:input type="text" class="form-control" path="id" readonly="true"/>
     </div>
     <div class="mb-3">
-        <label class="form-label">Mã tuyến</label>
+        <label class="form-label">Mã chuyến</label>
         <form:input type="text" class="form-control" path="tripId.id" readonly="true"/>
     </div>
     <div class="mb-3">
-        <label class="form-label">Tên tuyến</label>
+        <label class="form-label">Tên chuyến</label>
         <form:input type="text" class="form-control" path="tripId.coachname" readonly="true"/>
     </div>
     <div class="mb-3">

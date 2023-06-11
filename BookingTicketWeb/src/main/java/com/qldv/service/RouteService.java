@@ -17,7 +17,13 @@ import java.util.Map;
  */
 public interface RouteService {
 
+    List<Route> getRoutesName(Map<String, String> params, int start, int limit);
+    
     List<Route> getRoutes(Map<String, String> params, int start, int limit);
+    
+    List<Route> getRoutesStart(Map<String, String> params, int start, int limit);
+    
+    List<Route> getRoutesEnd(Map<String, String> params, int start, int limit);
 
     List<Route> getListNav(int start, int limit);
 

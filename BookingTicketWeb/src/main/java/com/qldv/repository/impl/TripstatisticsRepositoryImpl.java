@@ -65,15 +65,16 @@ public class TripstatisticsRepositoryImpl implements TripstatisticsRepository {
         
         Root rootT = query.from(Trip.class);
         Root rootTick = query.from(Ticketdetail.class);
+        Root rootR = query.from(Route.class);
         
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(builder.equal(rootTick.get("tripId"), rootT.get("id")));
-        
+        predicates.add(builder.equal(rootT.get("routeId"), rootR.get("id")));
 
-        query.multiselect(rootT.get("id"), rootT.get("coachname"),builder.sum(rootTick.get("totalprice")));
+        query.multiselect(rootR.get("id"), rootR.get("routename"),builder.sum(rootTick.get("totalprice")));
         
         if(kw != null && !kw.isEmpty()) {
-            predicates.add(builder.like(rootT.get("coachname"), String.format("%%%s%%", kw)));
+            predicates.add(builder.like(rootR.get("routename"), String.format("%%%s%%", kw)));
         }
         if(fromDate != null) {
             predicates.add(builder.greaterThanOrEqualTo(rootTick.get("createddate"), fromDate));
@@ -82,8 +83,8 @@ public class TripstatisticsRepositoryImpl implements TripstatisticsRepository {
             predicates.add(builder.lessThanOrEqualTo(rootTick.get("createddate"), toDate));
         }
         query.where(predicates.toArray(new Predicate[] {}));
-        query.groupBy(rootT.get("id"), rootT.get("coachname"));
-        query.orderBy(builder.asc(rootT.get("id")));
+        query.groupBy(rootR.get("id"), rootR.get("routename"));
+        query.orderBy(builder.asc(rootR.get("id")));
         Query q = session.createQuery(query);
         return q.getResultList();
     }

@@ -12,7 +12,7 @@
 <c:url value="/ad/driverdetails/savedriver" var="save" />
 <form:form action="${save}" style="width: 70%; margin: 10px auto" modelAttribute="driver" method="post">
     <div class="mb-3">
-        <label class="form-label">Tên tuyến</label>
+        <label class="form-label">Tên chuyến</label>
         <form:select path="tripId" class="form-select">
             <c:forEach items="${trips}" var="r">
                 <option value="${r.id}">${r.coachname}</option>

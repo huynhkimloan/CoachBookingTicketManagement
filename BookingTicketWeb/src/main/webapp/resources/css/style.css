@@ -11,7 +11,7 @@ and open the template in the editor.
     /*    font-family: 'Open Sans Condensed', sans-serif;*/
     font-family: 'Raleway', sans-serif;
     font-size: 13.5px;
-    
+
 }
 
 #item_index h5{
@@ -649,7 +649,9 @@ div.infomation > div {
 }
 
 #search-button{
+
     width: 100%;
+    margin-left: 15px;
 }
 
 /*COMMENT*/
@@ -1676,3 +1678,65 @@ input:checked + .slider:before {
     color: #ff9c1a;
 }
 
+.rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    margin-bottom: 50px;
+}
+
+.rating-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.rating-label {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.progress-bar {
+    width: 400px;
+    height: 20px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    background-color: #28a745;
+}
+
+.star-icon {
+    font-size: 20px;
+    color: yellow;
+    margin-left: 5px;
+}
+
+.overall-rating .star-icon {
+    display: inline-block;
+    font-size: 20px;
+    color: gray;
+}
+
+.overall-rating .star-icon.filled {
+    color: yellow;
+}
+
+.overall-rating .star-icon.partial-fill {
+    position: relative;
+    overflow: hidden;
+}
+
+.overall-rating .star-icon.partial-fill:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--rating-percent);
+    height: 100%;
+    background-color: yellow;
+}
