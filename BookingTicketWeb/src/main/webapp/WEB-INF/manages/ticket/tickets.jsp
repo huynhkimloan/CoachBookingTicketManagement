@@ -86,20 +86,22 @@
                                     </c:if>
                             <td>${r.passengercarId.name}</td>
                             <td>${r.tripId.coachname}</td>
-                           
-                                <c:if test="${r.active==1}">
+
+                            <c:if test="${r.active==1}">
                                 <td class="text-center"><i class="fas fa-window-close" style="color: red"></i></td>
                                 </c:if>
-                                
+
 
                             <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${r.createddate}" /></td>
                             <td><fmt:formatNumber value="${r.totalprice}" maxFractionDigits="3" type = "number" /></td>
-                            <td class="text-center">
-                                <a style="color: #7c4c02; cursor: pointer" title="Xuất"
-                                   onclick="exportPdf('${r.id}', '${r.userId.name}', '${r.tripId.coachname}', '${r.seatId.name}', '${r.totalprice}')">
-                                    <i class="fas fa-file-export"></i>
-                                </a>
-                            </td>
+                            <c:if test="${r.paymentmethod != 'Trả sau'}">
+                                <td class="text-center">
+                                    <a style="color: #7c4c02; cursor: pointer" title="Xuất"
+                                       onclick="exportPdf('${r.id}', '${r.userId.name}', '${r.tripId.coachname}', '${r.seatId.name}', '${r.totalprice}')">
+                                        <i class="fas fa-file-export"></i>
+                                    </a>
+                                </td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -147,7 +149,7 @@
 
                                 <td class="text-danger"><a onclick="changeStatusPayment(${a.id})" style="cursor: pointer; font-weight: bold">
                                         ${a.paymentmethod}</a></td>
-                            </c:if>
+                                    </c:if>
 
                             <td>${a.passengercarId.name}</td>
                             <td>${a.tripId.coachname}</td>
@@ -158,12 +160,14 @@
                                     </c:if>
                             <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${a.createddate}" /></td>
                             <td><fmt:formatNumber value="${a.totalprice}" maxFractionDigits="3" type = "number" /></td>
-                            <td class="text-center">
-                                <a style="color: #7c4c02; cursor: pointer" title="Xuất"
-                                   onclick="exportPdf('${a.id}', '${a.userId.name}', '${a.tripId.coachname}', '${a.seatId.name}', '${a.totalprice}')">
-                                    <i class="fas fa-file-export"></i>
-                                </a>
-                            </td>
+                            <c:if test="${r.paymentmethod != 'Trả sau'}">
+                                <td class="text-center">
+                                    <a style="color: #7c4c02; cursor: pointer" title="Xuất"
+                                       onclick="exportPdf('${a.id}', '${a.userId.name}', '${a.tripId.coachname}', '${a.seatId.name}', '${a.totalprice}')">
+                                        <i class="fas fa-file-export"></i>
+                                    </a>
+                                </td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -218,12 +222,14 @@
 
                             <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${r.createddate}" /></td>
                             <td><fmt:formatNumber value="${r.totalprice}" maxFractionDigits="3" type = "number" /></td>
-                            <td class="text-center">
-                                <a style="color: #7c4c02; cursor: pointer" title="Xuất"
-                                   onclick="exportPdf('${r.id}', '${r.userId.name}', '${r.tripId.coachname}', '${r.seatId.name}', '${r.totalprice}')">
-                                    <i class="fas fa-file-export"></i>
-                                </a>
-                            </td>
+                            <c:if test="${r.paymentmethod != 'Trả sau'}">
+                                <td class="text-center">
+                                    <a style="color: #7c4c02; cursor: pointer" title="Xuất"
+                                       onclick="exportPdf('${r.id}', '${r.userId.name}', '${r.tripId.coachname}', '${r.seatId.name}', '${r.totalprice}')">
+                                        <i class="fas fa-file-export"></i>
+                                    </a>
+                                </td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                 </tbody>

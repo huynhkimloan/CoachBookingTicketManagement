@@ -13,6 +13,7 @@ let coachname = document.getElementById('coachname');
 let departureday = document.getElementById('departureday');
 let departuretime = document.getElementById('departuretime');
 let arrivaltime = document.getElementById('arrivaltime');
+let arrivalday = document.getElementById('arrivalday');
 
 let textValidateCoach = document.getElementById('invalid-feedback-coach');
 let textValidateDepartD = document.getElementById('invalid-feedback-day');
@@ -150,6 +151,7 @@ function submitTrip() {
                     body: JSON.stringify({
                         "coachname": form.elements.coachname.value,
                         "departureday": form.elements.departureday.value,
+                        "arrivalday": form.elements.arrivalday.value,
                         "departuretime": form.elements.departuretime.value,
                         "arrivaltime": form.elements.arrivaltime.value,
                         "routeId": form.elements.routeId.value,
@@ -188,6 +190,7 @@ function updateTrip() {
             body: JSON.stringify({
                 "coachname": formUT.elements.coachname.value,
                 "departureday": formUT.elements.departureday.value,
+                "arrivalday": form.elements.arrivalday.value,
                 "departuretime": formUT.elements.departuretime.value,
                 "arrivaltime": formUT.elements.arrivaltime.value,
                 "routeId": formUT.elements.routeId.value,

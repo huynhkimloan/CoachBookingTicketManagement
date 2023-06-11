@@ -165,7 +165,7 @@
             </div>
 
         </div>
-        <div>
+                <div style="">
             <c:if test="${user.active==true}">
                 <a onclick="showLock(${user.id})" style="cursor: pointer" class="btn btn-danger">Khóa tài khoản</a>
                 </c:if>

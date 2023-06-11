@@ -127,5 +127,7 @@ public class RouteManageController {
         mm.addAttribute("totalItem", routeService.countItem(result)/ 8);
         return "routes";
     }
+    
+    
 
 }

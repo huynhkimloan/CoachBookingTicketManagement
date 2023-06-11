@@ -14,19 +14,19 @@
 <c:url value="/admin/routes/search" var="search" />
 <form:form action="${search}" method="get">
     <div class="input-group" style="margin-top: 20px;">
-        
+
         <div class="form-group">
-            
+
             <select id="search-criteria" class="form-control" name="criteria">
-                <option value="all">Chọn tiêu chí...</option>
+                <option value="">Chọn tiêu chí...</option>
                 <option value="all">Tất cả</option>
-                <option value="trip_name">Tên chuyến</option>
+                <option value="trip_name">Tên tuyến</option>
                 <option value="start_point">Điểm đi</option>
                 <option value="end_point">Điểm đến</option>
             </select>
         </div>
         <div class="form-group" style="margin-left: 5px; ">
-            
+
             <input id="search-input" type="search" class="form-control" name="kw" placeholder="Nhập thông tin cần tìm..." />
         </div>
         <div class="form-group">
@@ -38,7 +38,7 @@
 
 
 
-    
+
 </form:form>
 
 <c:if test="${listRoutes.size()==0}">

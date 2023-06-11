@@ -74,6 +74,8 @@ public class ApiTripManageController {
             String coachname = params.get("coachname");
             String departureday = params.get("departureday");
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(departureday);
+            String arrivalday = params.get("arrivalday");
+            Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(arrivalday);
             String departuretime = params.get("departuretime");
             Date time1 = new SimpleDateFormat("HH:mm:ss").parse(departuretime);
             String arrivaltime = params.get("arrivaltime");
@@ -86,6 +88,7 @@ public class ApiTripManageController {
             Trip newTrip = new Trip();
             newTrip.setCoachname(coachname);
             newTrip.setDepartureday(date);
+            newTrip.setArrivalday(date1);
             newTrip.setDeparturetime(time1);
             newTrip.setArrivaltime(time2);
             newTrip.setRouteId(this.routeService.findById(Integer.parseInt(routeId)));
@@ -111,6 +114,8 @@ public class ApiTripManageController {
             String coachname = params.get("coachname");
             String departureday = params.get("departureday");
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(departureday);
+            String arrivalday = params.get("arrivalday");
+            Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(arrivalday);
             String departuretime = params.get("departuretime");
             Date time1 = new SimpleDateFormat("HH:mm:ss").parse(departuretime);
             String arrivaltime = params.get("arrivaltime");
@@ -125,6 +130,7 @@ public class ApiTripManageController {
             Trip updateTrip = this.tripService.tripById(Integer.parseInt(id));
             updateTrip.setCoachname(coachname);
             updateTrip.setDepartureday(date);
+            updateTrip.setArrivalday(date1);
             updateTrip.setDeparturetime(time1);
             updateTrip.setArrivaltime(time2);
             updateTrip.setImage(urlImage);

@@ -23,6 +23,11 @@
     <div class="invalid-feedback" id="invalid-feedback-day"> </div>
     </div>
     <div class="mb-3">
+        <label class="form-label" for="departureday">Ngày đến<span class="asterisc">*</span></label>
+        <input type="date" class="form-control" id="arrivalday" required name="arrivalday" placeholder="Nhập ngày đến..."/>
+    <div class="invalid-feedback" id="invalid-feedback-day"> </div>
+    </div>
+    <div class="mb-3">
         <label class="form-label" for="departuretime">Giờ khởi hành<span class="asterisc">*</span></label>
         <input type="text" class="form-control" id="departuretime" required name="departuretime" placeholder="Nhập giờ khởi hành..."/>
     <div id="invalid-feedback-departT" class="invalid-feedback"></div>
