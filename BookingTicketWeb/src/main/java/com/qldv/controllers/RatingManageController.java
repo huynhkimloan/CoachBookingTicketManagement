@@ -5,10 +5,13 @@
  */
 package com.qldv.controllers;
 
+import com.qldv.service.EmployeeService;
 import com.qldv.service.RatingService;
 import com.qldv.service.UserService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,7 +31,16 @@ public class RatingManageController {
     private RatingService ratingService;
     
     @Autowired
+    private EmployeeService employeeService;
+
+    @Autowired
+    private UserService userService;
+    
+    @Autowired
     private UserService userDetailService;
+    
+    @Autowired
+    private MailSender mailSender;
 
     @RequestMapping("/list")
     public String viewRatingList(@RequestParam Map<String, String> params, ModelMap mm) {
@@ -54,5 +66,32 @@ public class RatingManageController {
         model.addAttribute("five", ratingService.getFiveStar(userId));
         model.addAttribute("user", userDetailService.getById(userId));
         return "detailratings";
+    }
+    
+    @GetMapping("/lockRatingDriver/{driverId}")
+    public String lockDriver(@RequestParam Map<String, String> params, ModelMap mm, @PathVariable("driverId") int driverId) {
+        employeeService.lockEmployee(userService.getById(driverId));
+        sendMail("1951052049hien@ou.edu.vn", userService.getById(driverId).getEmail(), "KHÓA TÀI KHOẢN", "Xin chào " + userService.getById(driverId).getName()
+                + "\nTài khoản của bạn đã bị khóa. Bạn không thể đăng nhập vào website LoHiBusLine. Vui lòng liên hệ admin để mở khóa tài khoản."
+                + "\nTrân trọng.");
+        viewRatingList(params, mm);
+        return "ratings";
+    }
+
+    @GetMapping("/openRatingDriver/{driverId}")
+    public String openDriver(@RequestParam Map<String, String> params, ModelMap mm, @PathVariable("driverId") int driverId) {
+        employeeService.openEmployee(userService.getById(driverId));
+        viewRatingList(params, mm);
+        return "ratings";
+    }
+    
+    public void sendMail(String from, String to, String subject, String content) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom(from);
+        mailMessage.setTo(to);
+        mailMessage.setSubject(subject);
+        mailMessage.setText(content);
+
+        mailSender.send(mailMessage);
     }
 }

@@ -57,7 +57,7 @@
                         <th style="width: 150px">Người mua</th>
                         <th style="width: 5px">SĐT</th>
                         <th style="width: 30px">Vị trí ngồi</th>
-                        <th style="width: 80px">Phương thức trả</th>
+                        <th style="width: 120px">Phương thức trả</th>
                         <th style="width: 90px">Xe</th>
                         <th style="width: 150px">Chuyến</th>
                         <th style="width: 40px">Trạng thái</th>
@@ -83,15 +83,12 @@
                             <c:if test="${r.paymentmethod == 'Trả sau'}">
                                 <td class="text-danger"><a onclick="changeStatusPayment(${r.id})" style="cursor: pointer; font-weight: bold">
                                         ${r.paymentmethod}</a></td>
-                            </c:if>
+                                    </c:if>
                             <td>${r.passengercarId.name}</td>
                             <td>${r.tripId.coachname}</td>
-                            <c:if test="${r.active==0}">
-                                <td class="text-center"><i class="fas fa-check-square" style="color: #2196F3"></i></td>
-                                </c:if>
-                                <c:if test="${r.active==1}">
+                            <c:if test="${r.active==1}">
                                 <td class="text-center"><i class="fas fa-window-close" style="color: red"></i></td>
-                                </c:if>
+                            </c:if>
 
                             <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${r.createddate}" /></td>
                             <td><fmt:formatNumber value="${r.totalprice}" maxFractionDigits="3" type = "number" /></td>
@@ -119,7 +116,7 @@
                         <th style="width: 150px">Người mua</th>
                         <th style="width: 5px">SĐT</th>
                         <th style="width: 30px">Vị trí ngồi</th>
-                        <th style="width: 80px">Phương thức trả</th>
+                        <th style="width: 120px">Phương thức trả</th>
                         <th style="width: 90px">Xe</th>
                         <th style="width: 150px">Chuyến</th>
                         <th style="width: 40px">Trạng thái</th>
@@ -136,24 +133,22 @@
                             <td>${a.userId.name}</td>
                             <td>${a.userId.phone}</td>
                             <td>${a.seatId.name}</td>
-                            <c:if test="${r.paymentmethod == 'Đã thanh toán'}">
-                                <td style="font-weight: bold; color: blue">${r.paymentmethod}</td>
-                            </c:if>
-                            <c:if test="${r.paymentmethod == 'Paypal'}">
-                                <td style="font-weight: bold; color: #e6de08">${r.paymentmethod}</td>
-                            </c:if>
-                            <c:if test="${r.paymentmethod == 'Trả sau'}">
-                                <td class="text-danger"><a onclick="changeStatusPayment(${r.id})" style="cursor: pointer; font-weight: bold">
-                                        ${r.paymentmethod}</a></td>
-                            </c:if>
 
+                            <c:if test="${a.paymentmethod == 'Đã thanh toán'}">
+                                <td style="font-weight: bold; color: blue">${a.paymentmethod}</td>
+                            </c:if>
+                            <c:if test="${a.paymentmethod == 'Paypal'}">
+                                <td style="font-weight: bold; color: #e6de08">${a.paymentmethod}</td>
+                            </c:if>
+                            <c:if test="${a.paymentmethod == 'Trả sau'}">
+                                <td class="text-danger"><a onclick="changeStatusPayment(${r.id})" style="cursor: pointer; font-weight: bold">
+                                        ${a.paymentmethod}</a></td>
+                                    </c:if>
                             <td>${a.passengercarId.name}</td>
                             <td>${a.tripId.coachname}</td>
 
                             <c:if test="${a.active==2}">
-
                                 <td class="text-center"><a onclick="changeActive(${a.id})" style="cursor: pointer">
-
                                         <i class="fa-solid fa-pause" style="color: #e6de08"></i></a></td>
                                     </c:if>
                             <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${a.createddate}" /></td>
@@ -183,7 +178,7 @@
                         <th style="width: 150px">Người mua</th>
                         <th style="width: 5px">SĐT</th>
                         <th style="width: 30px">Vị trí ngồi</th>
-                        <th style="width: 80px">Phương thức trả</th>
+                        <th style="width: 120px">Phương thức trả</th>
                         <th style="width: 90px">Xe</th>
                         <th style="width: 150px">Chuyến</th>
                         <th style="width: 40px">Trạng thái</th>
@@ -201,7 +196,6 @@
                             <td>${r.userId.phone}</td>
                             <td>${r.seatId.name}</td>
                             <c:if test="${r.paymentmethod == 'Đã thanh toán'}">
-
                                 <td style="font-weight: bold; color: blue">${r.paymentmethod}</td>
                             </c:if>
                             <c:if test="${r.paymentmethod == 'Paypal'}">
@@ -210,7 +204,7 @@
                             <c:if test="${r.paymentmethod == 'Trả sau'}">
                                 <td class="text-danger"><a onclick="changeStatusPayment(${r.id})" style="cursor: pointer; font-weight: bold">
                                         ${r.paymentmethod}</a></td>
-                            </c:if>
+                                    </c:if>
                             <td>${r.passengercarId.name}</td>
                             <td>${r.tripId.coachname}</td>
                             <c:if test="${r.active==0}">
@@ -233,6 +227,8 @@
         </div>
     </div>
 </div>
+
+
 
 <nav aria-label="Page navigation example" style="float: right">
     <ul class="pagination">

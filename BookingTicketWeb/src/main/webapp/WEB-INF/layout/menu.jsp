@@ -66,7 +66,7 @@
             <li>
                 <c:url value="/admin/rating/list" var="rating" />
                 <a href="${rating}" class="nav-link px-0 align-middle">
-                    <i class="fas fa-ticket"></i> <span class="ms-1 d-none d-sm-inline">Quản lý đánh giá tài xế</span></a>
+                    <i class="fa-solid fa-star"></i> <span class="ms-1 d-none d-sm-inline">Quản lý đánh giá tài xế</span></a>
             </li>
         </ul>
         <hr>

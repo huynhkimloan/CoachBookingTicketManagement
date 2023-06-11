@@ -30,7 +30,7 @@
             <input id="search-input" type="search" class="form-control" name="kw" placeholder="Nhập thông tin cần tìm..." />
         </div>
         <div class="form-group">
-            <button id="search-button" type="submit" class="btn btn-primary" style="background: #7c4c02">
+            <button id="search-button1" type="submit" class="btn btn-primary" style="background: #7c4c02">
                 <i class="fas fa-search"></i> Tìm kiếm
             </button>
         </div>

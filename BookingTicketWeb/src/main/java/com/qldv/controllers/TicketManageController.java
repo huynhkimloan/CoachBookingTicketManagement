@@ -70,7 +70,6 @@ public class TicketManageController {
     }
     
     @GetMapping("/changeActive/{ticketId}")
-
     public String changeActive(ModelMap mm, @PathVariable("ticketId") int ticketId, @RequestParam Map<String, String> params) {
         ticketDetailService.changeActive(ticketDetailService.getTicketById(ticketId));
         viewTicketList(mm, params);
