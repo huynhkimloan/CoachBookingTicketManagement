@@ -17,7 +17,7 @@
             </h5>
         </c:if>
     </div>
-    
+
     <c:if test="${price != 0}">
         <c:forEach var="trip" items="${trips}">
             <div id="blocktrip">  
@@ -31,7 +31,7 @@
                             <fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.departureday}" /></h9>
                         <h9 style="margin-left: 10px; margin-top: 10px; font-size: 17px; color: #a4a4a4; font-weight: bold">-</h9>
                         <h9 style="margin-left: 13px; margin-top: 10px; font-size: 17px; color: #a4a4a4; font-weight: bold">      
-<!--                            <i class="fa-solid fa-calendar-check"> </i> -->
+                            <!--                            <i class="fa-solid fa-calendar-check"> </i> -->
                             <fmt:formatDate pattern = "dd/MM/yyyy" value = "${trip.arrivalday}" /></h9>
                     </div>
                     <hr>                   
@@ -57,7 +57,7 @@
 
                     <div id="trip-a" >                        
                         <c:if test="${pageContext.request.userPrincipal.name == null}">
-                            <a href="<c:url value="/login"/>" id="priceInfo" style="margin-left: 145px"
+                            <a href="<c:url value="/login"/>" id="priceInfo2" style="margin-left: 145px"
                                class="btn text-white action">Đặt vé</a>
                         </c:if>
                         <c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -66,7 +66,7 @@
                                    class="btn text-white action">Đặt vé</a>
                             </c:if>
                             <c:if test="${trip.passengercarId.categoryId.id == 2}">
-                                <a href="<c:url value="/reservation/passengerCarVIP/${trip.id}"/>" id="priceInfo" style="margin-left: 145px"
+                                <a href="<c:url value="/reservation/passengerCarVIP/${trip.id}"/>" id="priceInfo1" style="margin-left: 145px"
                                    class="btn text-white action">Đặt vé</a>
                             </c:if>
                         </c:if>        
@@ -78,7 +78,7 @@
     <c:if test="${trips.size() == 0 || price == 0}">
         <div class="alert alert-danger" style="margin-left: 27%; width: 50%; font-size: 15px; text-align: center">Hôm nay không có chuyến xe nào khởi hành hoặc bạn chưa nhập từ khóa tìm kiếm!!!</div>  
     </c:if>
-    
+
     <c:if test="${trips.size() != 0}">
         <div>
             <ul class="pagination" style="float: right">
@@ -92,3 +92,34 @@
 </div>
 
 <script src="<c:url value="/js/trip.js"/>"></script>
+<script> 
+document.addEventListener("DOMContentLoaded", function () {
+    var buttons = document.querySelectorAll("#priceInfo, #priceInfo1");
+
+    buttons.forEach(function (button) {
+        button.addEventListener("click", function (event) {
+            // Ngăn chặn hành vi mặc định của thẻ <a>
+            event.preventDefault();
+
+            // Thực hiện yêu cầu POST
+            fetch("/BookingTicketWeb/removeCounter", {
+                method: "POST"
+            })
+                    .then(function (response) {
+                        // Kiểm tra xem response có phải là "OK" không
+                        if (response.ok) {
+                            sessionStorage.clear();
+                            var url = event.target.href;
+                            window.location.href = url;
+                        } else {
+                            throw new Error('Response not OK');
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error('There has been a problem with your fetch operation: ', error);
+                    });
+        });
+    });
+});
+</script>
+

@@ -36,7 +36,7 @@
 </c:if> 
 
 
-<table class="table table-bordered">
+    <table class="table table-bordered" style="margin-top: 20px">
     <thead class="admin-table text-center">
         <tr>
             <th>Tên tài xế</th>

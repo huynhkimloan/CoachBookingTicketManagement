@@ -9,7 +9,6 @@ import com.qldv.pojo.Route;
 import com.qldv.pojo.Seat;
 import com.qldv.pojo.Trip;
 import com.qldv.pojo.User;
-import com.qldv.service.PassengerService;
 import com.qldv.service.TicketDetailService;
 import com.qldv.service.TripService;
 import com.qldv.service.UserService;
@@ -20,8 +19,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,15 +41,17 @@ public class BookingTicketController {
     @Autowired
     private UserService userDetailService;
     
-
+    
     @RequestMapping("/reservation/{tripId}")
-    public String BookingTicket(Model model, @PathVariable("tripId") int tripId) {
+    public String BookingTicket(Model model, @PathVariable("tripId") int tripId, HttpSession session) {
+        Map<Integer, Seat> seat = (Map<Integer, Seat>) session.getAttribute("seat");
         Trip t = tripService.tripById(tripId);
         Route r = t.getRouteId();
         long price = (long)Utils.sumMoney(new Date(), r);
         List<Seat> newSeatA = ticketDetailService.getSeat("A");
         List<Seat> newSeatB = ticketDetailService.getSeat("B");
         List<Object[]> occupiedSeats = ticketDetailService.findTicketsByTripId(tripId);
+        
         for (Seat a : newSeatA) {
             for (Object o : occupiedSeats) {
                 if (a.getId() == Integer.parseInt(o.toString())) {
@@ -72,12 +71,11 @@ public class BookingTicketController {
         model.addAttribute("tripId", tripId);
         model.addAttribute("pasCar", t.getPassengercarId());
         model.addAttribute("price", price);
-        model.addAttribute("counter", 0);
         return "reservation";
     }
     
     @RequestMapping("/reservation/passengerCarVIP/{tripId}")
-    public String BookingTicketVIP(Model model, @PathVariable("tripId") int tripId) {
+    public String BookingTicketVIP(Model model, @PathVariable("tripId") int tripId, HttpSession session) {
         Trip t = tripService.tripById(tripId);
         Route r = t.getRouteId();
         long price = (long)Utils.sumMoney(new Date(), r);
@@ -102,7 +100,7 @@ public class BookingTicketController {
         model.addAttribute("listSeatB", newSeatB);
         model.addAttribute("tripId", tripId);
         model.addAttribute("pasCar", t.getPassengercarId());
-        model.addAttribute("price", price);
+        model.addAttribute("price", price);  
         return "reservationVIP";
     }
 

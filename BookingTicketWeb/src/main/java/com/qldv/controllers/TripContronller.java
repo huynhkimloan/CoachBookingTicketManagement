@@ -6,10 +6,7 @@
 package com.qldv.controllers;
 
 import com.qldv.pojo.Route;
-import com.qldv.pojo.Trip;
-import com.qldv.service.PassengerService;
 import com.qldv.service.RouteService;
-import com.qldv.service.TicketDetailService;
 import com.qldv.service.TripService;
 import com.qldv.utils.Utils;
 import java.util.Date;
@@ -64,7 +61,7 @@ public class TripContronller {
         model.addAttribute("price", price);
         return "trip";
     }
-  
+
     @RequestMapping("/trip/{routeId}")
     public String trip1(Model model, @PathVariable("routeId") int routeId, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
@@ -76,6 +73,5 @@ public class TripContronller {
         model.addAttribute("price", price);
         return "trip";
     }
-
 //     
 }
