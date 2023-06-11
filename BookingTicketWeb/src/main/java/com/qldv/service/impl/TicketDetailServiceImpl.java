@@ -117,6 +117,9 @@ public class TicketDetailServiceImpl implements TicketDetailService {
     @Override
     public List<Ticketdetail> getTicketsProcess(Map<String, String> params, int start, int limit) {
         return this.ticketDetailRepository.getTicketsProcess(params, start, limit);
+    }
+    
+    @Override
     public boolean changeStatusPayment(Ticketdetail ticket) {
         return this.ticketDetailRepository.changeStatusPayment(ticket);
     }

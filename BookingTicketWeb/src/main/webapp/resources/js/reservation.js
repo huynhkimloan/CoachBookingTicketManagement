@@ -8,9 +8,21 @@
 
 function addToPay(id, name, price, pasCarId, tripId) {
     event.preventDefault();
-    let btn = document.getElementById(`seat-${id}`);
-    btn.style.background = "#f8beab";
-    btn.disabled = "true";
+//    let btn = document.getElementById(`seat-${id}`);
+//    btn.style.background = "#f8beab";
+//    btn.disabled = "true";
+//    sessionStorage.setItem(`seat-${id}`, 'selected');
+     let btn = document.getElementById(`seat-${id}`);
+
+    if (sessionStorage.getItem(`seat-${id}`) === 'selected') {
+        btn.style.background = "#fafad2"; 
+        btn.disabled = false;
+        sessionStorage.removeItem(`seat-${id}`);
+    } else {
+        btn.style.background = "#f8beab";
+        btn.disabled = true;
+        sessionStorage.setItem(`seat-${id}`, 'selected');
+    }
 
     fetch("/BookingTicketWeb/api/reservation", {
         method: 'post',
@@ -30,8 +42,29 @@ function addToPay(id, name, price, pasCarId, tripId) {
     }).then(function (data) {
         let counter = document.getElementById("count");
         counter.innerHTML = data;
+        restoreSeatStates();
     });
 }
+
+function restoreSeatStates() {
+    const seatElements = document.querySelectorAll('[id^="seat-"]');
+
+    seatElements.forEach(seatElement => {
+        const id = seatElement.id;
+        const seatState = sessionStorage.getItem(id);
+        if (seatState === 'selected') {
+            seatElement.style.background = "#f8beab";
+            seatElement.disabled = true;
+        } else {
+            seatElement.style.background = "#fafad2";
+            seatElement.disabled = false;
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    restoreSeatStates();
+});
 
 function deleteSeat(seatId) {
     var option = confirm('Bạn có chắc chắn muốn xóa không?');
@@ -41,6 +74,7 @@ function deleteSeat(seatId) {
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
+            sessionStorage.removeItem(`seat-${seatId}`);
             location.reload();
             let counter = document.getElementById("count");
             counter.innerHTML = data.counter;
@@ -50,8 +84,6 @@ function deleteSeat(seatId) {
     }
 
 }
-
-
 
 function pay(tripId, method) {
     var option = confirm('Bạn có chắc chắn muốn thanh toán không?');

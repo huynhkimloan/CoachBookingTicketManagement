@@ -250,7 +250,7 @@ public class TicketDetailRepositoryImpl implements TicketDetailRepository {
     public List<Ticketdetail> getListNav(int start, int limit) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            javax.persistence.Query query = session.createQuery("FROM Ticketdetail");
+            javax.persistence.Query query = session.createQuery("FROM Ticketdetail WHERE active =: 1");
             query.setFirstResult(start);
             query.setMaxResults(limit);
             return query.getResultList();
@@ -428,7 +428,9 @@ Session session = this.sessionFactory.getObject().getCurrentSession();
         q.setFirstResult(start);
         q.setMaxResults(limit);
         return q.getResultList();
-      
+    }
+    
+    @Override
     public boolean changeStatusPayment(Ticketdetail ticket) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
 

@@ -5,6 +5,7 @@
  */
 package com.qldv.controllers;
 
+import com.qldv.pojo.Seat;
 import com.qldv.pojo.Trip;
 import com.qldv.service.EmployeeService;
 import com.qldv.service.PassengerService;
@@ -43,10 +44,10 @@ public class ApiTripManageController {
 
     @Autowired
     private PassengerService passengerService;
-    
+
     @Autowired
     private TicketDetailService ticketDetailService;
-    
+
     @PutMapping(path = "/api/admin/update-image-trip")
     @ResponseStatus(HttpStatus.OK)
     public void updateImageRoute(@RequestBody Map<String, String> params) {
@@ -102,7 +103,7 @@ public class ApiTripManageController {
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-    
+
     @PutMapping(path = "/api/admin/update-trip")
     @ResponseStatus(HttpStatus.OK)
     public void updateTrip(@RequestBody Map<String, String> params) {
@@ -138,22 +139,37 @@ public class ApiTripManageController {
             ex.printStackTrace();
         }
     }
+
     @PostMapping("/api/trip/countRemain")
     public int countRemainSeat(@RequestBody Map<String, String> params, HttpSession session) {
         String tripId = params.get("tripId");
-        
-        int count = Math.abs((this.passengerService.getNumberSeat
-        (Integer.parseInt(tripId)))-(this.ticketDetailService.countTicketsByTripId(Integer.parseInt(tripId))));
+
+        int count = Math.abs((this.passengerService.getNumberSeat(Integer.parseInt(tripId))) - (this.ticketDetailService.countTicketsByTripId(Integer.parseInt(tripId))));
 
         return count;
     }
-    
+
     @PostMapping("/api/trip/countRemainVIP")
     public int countRemainSeatVIP(@RequestBody Map<String, String> params, HttpSession session) {
         String tripId = params.get("tripId");
-        
-        int count = Math.abs(22 -(this.ticketDetailService.countTicketsByTripId(Integer.parseInt(tripId))));
+
+        int count = Math.abs(22 - (this.ticketDetailService.countTicketsByTripId(Integer.parseInt(tripId))));
 
         return count;
+    }
+
+    @PostMapping("/removeCounter")
+    public HttpStatus removeCounter(HttpSession session) {
+        try {
+            Map<Integer, Seat> seat = (Map<Integer, Seat>) session.getAttribute("seat");
+            if (seat != null) {
+                session.removeAttribute("seat");
+                session.removeAttribute("counter");
+                return HttpStatus.OK;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return HttpStatus.OK;
     }
 }
