@@ -13,16 +13,32 @@
 
 <c:url value="/admin/routes/search" var="search" />
 <form:form action="${search}" method="get">
-    <div class="input-group">
-        <div class="form-outline">
-            <input id="search-input" type="search" class="form-control" name="kw" placeholder="Nhập từ khóa cần tìm..." />
+    <div class="input-group" style="margin-top: 20px;">
+        
+        <div class="form-group">
+            
+            <select id="search-criteria" class="form-control" name="criteria">
+                <option value="all">Chọn tiêu chí...</option>
+                <option value="all">Tất cả</option>
+                <option value="trip_name">Tên chuyến</option>
+                <option value="start_point">Điểm đi</option>
+                <option value="end_point">Điểm đến</option>
+            </select>
         </div>
-        <div>
-            <button id="search-button" type="submit" class="btn btn-default">
-                <i class="fas fa-search"></i>
+        <div class="form-group" style="margin-left: 5px; ">
+            
+            <input id="search-input" type="search" class="form-control" name="kw" placeholder="Nhập thông tin cần tìm..." />
+        </div>
+        <div class="form-group">
+            <button id="search-button" type="submit" class="btn btn-primary" style="background: #7c4c02">
+                <i class="fas fa-search"></i> Tìm kiếm
             </button>
         </div>
     </div>
+
+
+
+    
 </form:form>
 
 <c:if test="${listRoutes.size()==0}">
@@ -48,7 +64,7 @@
             <th>Điểm đi</th>
             <th>Điểm đến</th>
             <th>Giá tiền</th>
-            <th>Giá tăng</th>
+            <th>Giá tăng tối thiểu</th>
             <th colspan="3" style="width: 20px">Chức năng</th>
         </tr>
     </thead>
@@ -67,11 +83,11 @@
                     <a href="${edit}" style="color: #7c4c02"
                        title="Sửa" style="margin-right: 5px"><i class="fa fa-edit"></i></a>
                 </td>
-                 <td>
+                <td>
                     <c:url value="/admin/routes/deleteroute/${r.id}" var="delete" />
                     <a href="#" onclick="showMess(${r.id})" style="color: tomato"
                        title="Xóa"><i class="bi bi-trash"></i></a>
-   
+
                 </td>
                 <td>
                     <c:url value="/admin/routes/editroute/image/${r.id}" var="edit" />
@@ -88,14 +104,14 @@
         <c:forEach var="i" begin="0" end="${totalItem}">
             <c:url value="/admin/routes/list/${i+1}" var="action" />
             <li class="page-item"><a class="page-link" href="${action}"><c:out value="${i+1}"/></a></li>
-        </c:forEach>
+            </c:forEach>
     </ul>
 </nav>
 <script>
-    function showMess(id){
+    function showMess(id) {
         var option = confirm('Bạn có chắc chắn muốn xóa không?');
-        if(option === true){
-            window.location.href='/BookingTicketWeb/admin/routes/deleteroute/'+id;
+        if (option === true) {
+            window.location.href = '/BookingTicketWeb/admin/routes/deleteroute/' + id;
         }
     }
 </script>

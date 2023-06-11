@@ -50,7 +50,7 @@ public class RouteRepositoryImpl implements RouteRepository {
         Query q = session.createQuery(query);
         return q.getResultList();
     }
-
+    
     @Override
     public List<Route> getRoutes(Map<String, String> params, int start, int limit) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -71,6 +71,8 @@ public class RouteRepositoryImpl implements RouteRepository {
                 query.where(builder.or(p1, p2, p3));
             }
             
+        
+            
         }
 
         Query q = session.createQuery(query);
@@ -79,6 +81,82 @@ public class RouteRepositoryImpl implements RouteRepository {
         return q.getResultList();
     }
 
+    @Override
+    public List<Route> getRoutesName(Map<String, String> params, int start, int limit) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Route> query = builder.createQuery(Route.class);
+        Root root = query.from(Route.class);
+        query = query.select(root);
+
+        if (params != null) {
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+      
+                Predicate p3 = builder.like(root.get("routename").as(String.class),
+                        String.format("%%%s%%", kw));
+                query.where(p3);
+            }
+            
+        }
+
+        Query q = session.createQuery(query);
+        q.setFirstResult(start);
+        q.setMaxResults(limit);
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<Route> getRoutesStart(Map<String, String> params, int start, int limit) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Route> query = builder.createQuery(Route.class);
+        Root root = query.from(Route.class);
+        query = query.select(root);
+
+        if (params != null) {
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                Predicate p1 = builder.like(root.get("startingpoint").as(String.class),
+                        String.format("%%%s%%", kw));
+               
+                query.where(p1);
+            }
+            
+        }
+
+        Query q = session.createQuery(query);
+        q.setFirstResult(start);
+        q.setMaxResults(limit);
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<Route> getRoutesEnd(Map<String, String> params, int start, int limit) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Route> query = builder.createQuery(Route.class);
+        Root root = query.from(Route.class);
+        query = query.select(root);
+
+        if (params != null) {
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                
+                Predicate p2 = builder.like(root.get("destination").as(String.class),
+                        String.format("%%%s%%", kw));
+                
+                query.where( p2);
+            }
+            
+        }
+
+        Query q = session.createQuery(query);
+        q.setFirstResult(start);
+        q.setMaxResults(limit);
+        return q.getResultList();
+    }
+    
     @Override
     public List<Route> getListNav(int start, int limit) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
